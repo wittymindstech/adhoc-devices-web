@@ -50,47 +50,11 @@
 		</div>
 	</div>
 	<!--============= PRELOADER END =============-->
+=======
+{% extends 'nav.html' %}
+{% load static %}
+{%  block body %}
 
-	<!--=============== HEADER ===============-->
-	<header class="header">
-		<div class="container">
-			<a href="#" class="nav-btn">
-				<span></span>
-				<span></span>
-				<span></span>
-			</a>
-			<div class="row align-items-center">
-				<!--=============== LOGO ===============-->
-				<div class="col-12 col-sm-6 col-lg-3 logo-item">
-					<a href="index.html" class="logo"><img src="img/logo.svg" alt="logo"></a>
-				</div>
-				<!--============= LOGO END =============-->
-				<div class="col-6 nav-menu-cover">
-					<!--============= NAV MENU =============-->
-					<nav class="nav-menu">
-						<ul class="nav-list">
-							<li>
-								<a href="index.html">Home</a>
-							</li>
-							<li>
-								<a href="about.html">About us</a>
-							</li>
-							<li class="dropdown">
-								<a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-								<ul>
-									<li><a href="services.html">Services</a></li>
-									<li><a href="blog.html">News</a></li>
-									<li><a href="pravicy-policy.html">Pravicy policy</a></li>
-									<li><a href="404.html">404</a></li>
-								</ul>
-							</li>
-							<li class="active"><a href="shop.html">Shop</a></li>
-							<li><a href="gallery.html">Gallery</a></li>
-							<li><a href="contacts.html">Contacts</a></li>
-						</ul>
-					</nav>
-					<!--=========== NAV MENU END ===========-->
-				</div>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<!--============ HEADER ICON ============-->
 					<ul class="header-icon">
@@ -155,7 +119,7 @@
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="img/prod-1.jpg" alt="img">
+								<img src="{% static 'img/prod-1.jpg' %}" alt="img">
 								<ul class="prod-link-cover">
 									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -183,7 +147,7 @@
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="img/prod-2.jpg" alt="img">
+								<img src="{% static 'img/prod-2.jpg' %}" alt="img">
 								<ul class="prod-link-cover">
 									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -211,7 +175,7 @@
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="img/prod-3.jpg" alt="img">
+								<img src="{% static 'img/prod-3.jpg' %}" alt="img">
 								<ul class="prod-link-cover">
 									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -239,7 +203,7 @@
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="img/prod-4.jpg" alt="img">
+								<img src="{% static 'img/prod-4.jpg' %}" alt="img">
 								<ul class="prod-link-cover">
 									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -267,7 +231,7 @@
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="img/prod-5.jpg" alt="img">
+								<img src="{% static 'img/prod-5.jpg' %}" alt="img">
 								<ul class="prod-link-cover">
 									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -298,7 +262,7 @@
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<div class="baner-item">
-						<img src="img/banner-1.jpg" alt="img">
+						<img src="{% static 'img/banner-1.jpg' %}" alt="img">
 						<div class="baner-item-content">
 							<h2>our discount program</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua.</p>
@@ -312,7 +276,7 @@
 				</div>
 				<div class="col-12 col-sm-6">
 					<div class="baner-item">
-						<img src="img/banner-2.jpg" alt="img">
+						<img src="{% static 'img/banner-2.jpg' %}" alt="img">
 						<div class="baner-item-content">
 							<h2>discount program</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua.</p>
@@ -341,7 +305,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-1.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-1.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -366,7 +330,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-2.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-2.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -390,7 +354,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-3.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-3.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -414,7 +378,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-4.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-4.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -438,7 +402,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-5.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-5.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -463,7 +427,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-6.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-6.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -487,7 +451,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-7.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-7.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -511,7 +475,7 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="img/prod-shop-8.jpg" alt="img">
+							<img src="{% static 'img/prod-shop-8.jpg' %}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -546,98 +510,26 @@
 	</section>
 	<!--========== S-PRODUCT END ==========-->
 
-	<!--=============== FOOTER ===============-->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-sm-6 col-lg-3 footer-info">
-					<h5>about us</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-				</div>
-				<div class="col-6 col-sm-4 col-lg-2 blok-link">
-					<h5>Shop</h5>
-					<ul>
-						<li><a href="#">DJI</a></li>
-						<li><a href="#">Parrot</a></li>
-						<li><a href="#">Hubsan</a></li>
-						<li><a href="#">Mi</a></li>
-					</ul>
-				</div>
-				<div class="col-6 col-sm-4 col-lg-2 blok-link">
-					<h5>discount</h5>
-					<ul>
-						<li><a href="#">lorem ipsum</a></li>
-						<li><a href="#">dolor sit amet</a></li>
-						<li><a href="#">tempor incididunt</a></li>
-						<li><a href="#">enim ad minim</a></li>
-					</ul>
-				</div>
-				<div class="col-12 col-sm-4 col-lg-2 blok-link">
-					<h5>support</h5>
-					<ul>
-						<li><a href="#">Help</a></li>
-						<li><a href="#">Documentation</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-					</ul>
-				</div>
-				<div class="col-12 col-sm-6 col-lg-3 footer-subscribe">
-					<h5>subscribe</h5>
-					<form action="/" class="subscribe-form">
-						<input type="email" name="subscribe" placeholder="E-mail">
-						<input type="submit" value="send">
-					</form>
-				</div>
-			</div>
-			<div class="footer-bottom">
-				<div class="row align-items-center">
-					<div class="col-12 col-md-3">
-						<a href="index.html" class="logo footer-logo"><img src="img/logo.svg" alt="logo"></a>
-					</div>
-					<div class="col-12 col-md-6">
-						<ul class="footer-menu">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About Us</a></li>
-							<li><a href="services.html">Sevices</a></li>
-							<li><a href="shop.html">Shop</a></li>
-							<li><a href="gallery.html">Gallery</a></li>
-							<li><a href="contacts.html">Contacts</a></li>
-						</ul>
-					</div>
-					<div class="col-12 col-md-3">
-						<ul class="soc-link">
-							<li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a target="_blank" href="https://www.instagram.com/rovadex"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							<li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-							<li><a target="_blank" href="https://vimeo.com/"><i class="fa fa-vimeo-square" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="copyright">
-				<p><a class="rovadex" href="https://rovadex.com" target="_blank">Rovadex</a> © 2019. <a href="pravicy-policy.html" target="_blank">All Rights Reserved.</a></p>
-			</div>
-		</div>
-	</footer>
-	<!--============= FOOTER END =============-->
+
 
 	<!--=============== TO TOP ===============-->
 	<a class="to-top" href="#home">
 		<i class="fa fa-chevron-up" aria-hidden="true"></i>
 		<span>
-			<img src="img/icon-tab-1.svg" alt="">
+			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
 		</span>
 	</a>
 	<!--============= TO TOP END =============-->
 
 	<!-- =============== STYLE =============== -->
-	<link rel="stylesheet" href="css/bootstrap-grid.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/slick.min.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 	<!--=============== TEMPLATE SCRIPT ===============-->
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	<script src="js/slick.min.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="{% static 'js/slick.min.js' %}"></script>
+	<script src="{% static 'js/scripts.js' %}"></script>
 </body>
-</html>
+{% endblock %}
