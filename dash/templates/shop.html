@@ -1,3 +1,56 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<meta charset="UTF-8">
+	<title>Ad-hoc- Shop</title>
+	<!-- =============== META =============== -->
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="img/favicon.png">
+	<!-- =============== STYLE =============== -->
+	<link rel="stylesheet" href="css/critical.css">
+	<style>
+		.preloader-active .preloader-cover{
+			height: 4000px;
+			transform: translate(-50%,-50%) rotate(45deg);
+		}
+		.preloader-cover{
+			height: 0;
+			width: 4000px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%) rotate(45deg);
+			background: #131213;
+			position: fixed;
+			z-index: 999;
+			overflow: hidden;
+			transition: .8s cubic-bezier(0.65, 0.05, 0.36, 1) .3s;
+			overflow: hidden;
+			will-change: top, left;
+		}
+	</style>
+</head>
+
+<body id="home" class="home preloader-active" style="background-image: url(img/bg-body.svg);">
+	<!--=============== PRELOADER ===============-->
+	<div class="preloader-cover">
+		<div class="preloader">
+			<div class="ajax-loader">
+				<div class="ajax-loader-logo">
+					<div class="ajax-loader-circle">
+						<svg class="ajax-loader-circle-spinner" viewBox="0 0 500 500" xml:space="preserve">
+							<circle cx="250" cy="250" r="239" />
+						</svg>
+					</div>
+					<div class="ajax-loader-letters">Q</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--============= PRELOADER END =============-->
+=======
 {% extends 'nav.html' %}
 {% load static %}
 {%  block body %}
