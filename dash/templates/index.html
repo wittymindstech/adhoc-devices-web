@@ -69,7 +69,7 @@
 							<div class="slide-info">
 								<h3>Unique digital experiences</h3>
 								<p>“The truth is, homes change over time — and technology has to adapt, not try to do everything at once.” — Tony Fadell, Founder & CEO, Nest Labs</p>
-								<a href="gallery.html">read more</a>
+								<a href="{% url 'gallery' %}">read more</a>
 							</div>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 							<div class="slide-info">
 								<h3>will change your world!</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque eaque ut ad aliquam, alias voluptatem!</p>
-								<a href="gallery.html">read more</a>
+								<a href="{% url 'gallery' %}">read more</a>
 							</div>
 						</div>
 					</div>
@@ -174,7 +174,7 @@
 			</a>
 			<a href="services.html" class="serv-block-item">
 				<span class="border-item"></span>
-				<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/menvs7.webp' %}" alt="img">
+				<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/boyvr.jpg' %}" alt="img">
 				<div class="serv-block-info">
 					<h4>360 VR equipment</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
@@ -193,7 +193,7 @@
 					<!--=============== POST-ITEM ===============-->
 					<div class="col-12 col-md-4 post-item">
 						<div class="prod-thumbnail">
-							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone3.jpg' %}" alt="img"></a>
+							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/blog-img-1.jpg' %}" alt="img"></a>
 						</div>
 						<div class="post-content">
 							<div class="meta top">
@@ -214,7 +214,7 @@
 					<!--=============== POST-ITEM ===============-->
 					<div class="col-12 col-md-4 post-item">
 						<div class="prod-thumbnail">
-							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone4.jpg' %}" alt="img"></a>
+							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/blog-img-2.jpg' %}" alt="img"></a>
 						</div>
 						<div class="post-content">
 							<div class="meta top">
@@ -235,7 +235,7 @@
 					<!--=============== POST-ITEM ===============-->
 					<div class="col-12 col-md-4 post-item">
 						<div class="prod-thumbnail">
-							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone5.jpg' %}" alt="img"></a>
+							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/blog-img-3.jpg' %}" alt="img"></a>
 						</div>
 						<div class="post-content">
 							<div class="meta top">
@@ -290,7 +290,7 @@
 							</a>
 						</div>
 					</div>
-					<a href="shop.html" class="btn">view more</a>
+					<a href="{% url 'product' %}" class="btn">view more</a>
 				</div>
 			</div>
 		</section>
@@ -346,12 +346,13 @@
 						<div class="tab tab1">
 							<div class="row prod-cover">
 								<!-- prod-item -->
+								{% for p in items %}
 								<div class="col-12 col-sm-6 col-md-4 prod-item">
 									<div class="prod-thumbnail">
 										<div class="prod-img">
 											<div class="lable lable-new">new</div>
 											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/back5.webp' %}" alt="img">
+											<img class="lazy" src="{{p.Image.url}}" data-src="{{p.Image.url}}" alt="img">
 											<ul class="prod-link-cover">
 												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -360,136 +361,20 @@
 										</div>
 									</div>
 									<div class="prod-content">
-										<h5 class="title"><a href="shop-single.html">Inspire pro Camera</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
+										<h5 class="title"><a href="shop-single.html">{{p.name}}</a></h5>
+										<p>{{p.description}}</p>
 										<div class="price">
-											<span class="old-price">399$</span>
-											<span class="new-price">299$</span>
+											<span class="old-price">{{p.price}}$</span>
+
 										</div>
 										<a href="shop-single.html" class="btn">buy now</a>
 									</div>
 								</div>
+								{% endfor %}
 								<!-- prod-item end -->
+
 								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone7.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="shop-single.html">Mavic 2 Pro with</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="new-price">599$</span>
-										</div>
-										<a href="shop-single.html" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/boyvr.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="shop-single.html">Mavic 2 Hasselblad</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="new-price">499$</span>
-										</div>
-										<a href="shop-single.html" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone5.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="shop-single.html">Mavic 2 zoom</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="old-price">399$</span>
-											<span class="new-price">299$</span>
-										</div>
-										<a href="shop-single.html" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/camera1.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="shop-single.html">Mavic pro Camera</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="new-price">599$</span>
-										</div>
-										<a href="shop-single.html" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/robots.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="shop-single.html">Phantom 4 Pro</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="new-price">499$</span>
-										</div>
-										<a href="shop-single.html" class="btn">buy now</a>
-									</div>
-								</div>
+
 								<!-- prod-item end -->
 							</div>
 						</div>
@@ -503,7 +388,7 @@
 										<div class="prod-img">
 											<div class="lable lable-new">new</div>
 											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/robot-eye.jpg' %}" alt="img">
+											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-4.jpg' %}" alt="img">
 											<ul class="prod-link-cover">
 												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -528,7 +413,7 @@
 										<div class="prod-img">
 											<div class="lable lable-new">new</div>
 											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/childvr.jpg' %}" alt="img">
+											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-5.jpg' %}" alt="img">
 											<ul class="prod-link-cover">
 												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -552,7 +437,7 @@
 										<div class="prod-img">
 											<div class="lable lable-new">new</div>
 											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/vrvector.png' %}" alt="img">
+											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-6.jpg' %}" alt="img">
 											<ul class="prod-link-cover">
 												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -655,7 +540,7 @@
 										<div class="prod-img">
 											<div class="lable lable-new">new</div>
 											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/back4.jpg' %}" alt="img">
+											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-1.jpg' %}" alt="img">
 											<ul class="prod-link-cover">
 												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -1233,7 +1118,7 @@
 										<div class="prod-img">
 											<div class="lable lable-new">new</div>
 											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/vrvector.png' %}" alt="img">
+											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-3.jpg' %}" alt="img">
 											<ul class="prod-link-cover">
 												<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>

@@ -1,56 +1,3 @@
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-	<meta charset="UTF-8">
-	<title>Ad-hoc- Shop</title>
-	<!-- =============== META =============== -->
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="img/favicon.png">
-	<!-- =============== STYLE =============== -->
-	<link rel="stylesheet" href="css/critical.css">
-	<style>
-		.preloader-active .preloader-cover{
-			height: 4000px;
-			transform: translate(-50%,-50%) rotate(45deg);
-		}
-		.preloader-cover{
-			height: 0;
-			width: 4000px;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%,-50%) rotate(45deg);
-			background: #131213;
-			position: fixed;
-			z-index: 999;
-			overflow: hidden;
-			transition: .8s cubic-bezier(0.65, 0.05, 0.36, 1) .3s;
-			overflow: hidden;
-			will-change: top, left;
-		}
-	</style>
-</head>
-
-<body id="home" class="home preloader-active" style="background-image: url(img/bg-body.svg);">
-	<!--=============== PRELOADER ===============-->
-	<div class="preloader-cover">
-		<div class="preloader">
-			<div class="ajax-loader">
-				<div class="ajax-loader-logo">
-					<div class="ajax-loader-circle">
-						<svg class="ajax-loader-circle-spinner" viewBox="0 0 500 500" xml:space="preserve">
-							<circle cx="250" cy="250" r="239" />
-						</svg>
-					</div>
-					<div class="ajax-loader-letters">Q</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--============= PRELOADER END =============-->
-=======
 {% extends 'nav.html' %}
 {% load static %}
 {%  block body %}
@@ -97,7 +44,7 @@
 			<h1 class="title">Shop</h1>
 			<div class="breadcrumbs">
 				<ul>
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{% url 'home' %}">Home</a></li>
 					<li>Shop</li>
 				</ul>
 			</div>
@@ -112,70 +59,21 @@
 			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
 			<div class="slider-new-product">
 				<!--========== SLIDE-NEW-PRODUCT ==========-->
-				<div class="slide-new-product">
-					<!--============= PROD-ITEM =============-->
-					<div class="prod-item new">
-						<div class="prod-thumbnail">
-							<div class="prod-img">
-								<div class="lable lable-new">new</div>
-								<div class="lable lable-sale">sale</div>
-								<img src="{% static 'img/prod-1.jpg' %}" alt="img">
-								<ul class="prod-link-cover">
-									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="prod-content">
-							<h5 class="title"><a href="shop-single.html">Mavic 2 Pro</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-							<div class="price">
-								<span class="new-price">299$</span>
-							</div>
-							<a href="shop-single.html" class="btn">buy now</a>
-						</div>
-					</div>
-					<!--=========== PROD-ITEM END ===========-->
-				</div>
+
 				<!--======== SLIDE-NEW-PRODUCT END ========-->
 				<!--========== SLIDE-NEW-PRODUCT ==========-->
-				<div class="slide-new-product">
-					<!--============= PROD-ITEM =============-->
-					<div class="prod-item new">
-						<div class="prod-thumbnail">
-							<div class="prod-img">
-								<div class="lable lable-new">new</div>
-								<div class="lable lable-sale">sale</div>
-								<img src="{% static 'img/prod-2.jpg' %}" alt="img">
-								<ul class="prod-link-cover">
-									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="prod-content">
-							<h5 class="title"><a href="shop-single.html">Inspire pro Camera</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-							<div class="price">
-								<span class="new-price">699$</span>
-							</div>
-							<a href="shop-single.html" class="btn">buy now</a>
-						</div>
-					</div>
-					<!--=========== PROD-ITEM END ===========-->
-				</div>
+
 				<!--======== SLIDE-NEW-PRODUCT END ========-->
 				<!--========== SLIDE-NEW-PRODUCT ==========-->
+				{% for product in new_product %}
 				<div class="slide-new-product">
-					<!--============= PROD-ITEM =============-->
+
 					<div class="prod-item new">
 						<div class="prod-thumbnail">
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="{% static 'img/prod-3.jpg' %}" alt="img">
+								<img src="{{product.Image.url}}" alt="img">
 								<ul class="prod-link-cover">
 									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -184,72 +82,23 @@
 							</div>
 						</div>
 						<div class="prod-content">
-							<h5 class="title"><a href="shop-single.html">phantom 3</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
+							<h5 class="title"><a href="shop-single.html">{{product.name}}</a></h5>
+							<p>{{product.description}}</p>
 							<div class="price">
-								<span class="new-price">499$</span>
+								<span class="new-price">{{product.price}}$</span>
 							</div>
 							<a href="shop-single.html" class="btn">buy now</a>
 						</div>
 					</div>
 					<!--=========== PROD-ITEM END ===========-->
-				</div>
+				</div>{% endfor %}
 				<!--======== SLIDE-NEW-PRODUCT END ========-->
 				<!--========== SLIDE-NEW-PRODUCT ==========-->
-				<div class="slide-new-product">
-					<!--============= PROD-ITEM =============-->
-					<div class="prod-item new">
-						<div class="prod-thumbnail">
-							<div class="prod-img">
-								<div class="lable lable-new">new</div>
-								<div class="lable lable-sale">sale</div>
-								<img src="{% static 'img/prod-4.jpg' %}" alt="img">
-								<ul class="prod-link-cover">
-									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="prod-content">
-							<h5 class="title"><a href="shop-single.html">phantom 4</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-							<div class="price">
-								<span class="new-price">979$</span>
-							</div>
-							<a href="shop-single.html" class="btn">buy now</a>
-						</div>
-					</div>
-					<!--=========== PROD-ITEM END ===========-->
-				</div>
+
+
 				<!--======== SLIDE-NEW-PRODUCT END ========-->
 				<!--========== SLIDE-NEW-PRODUCT ==========-->
-				<div class="slide-new-product">
-					<!--============= PROD-ITEM =============-->
-					<div class="prod-item new">
-						<div class="prod-thumbnail">
-							<div class="prod-img">
-								<div class="lable lable-new">new</div>
-								<div class="lable lable-sale">sale</div>
-								<img src="{% static 'img/prod-5.jpg' %}" alt="img">
-								<ul class="prod-link-cover">
-									<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="prod-content">
-							<h5 class="title"><a href="shop-single.html">Mavic pro Camera</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-							<div class="price">
-								<span class="new-price">599$</span>
-							</div>
-							<a href="shop-single.html" class="btn">buy now</a>
-						</div>
-					</div>
-					<!--=========== PROD-ITEM END ===========-->
-				</div>
+
 				<!--======== SLIDE-NEW-PRODUCT END ========-->
 			</div>
 		</div>
@@ -300,37 +149,16 @@
 			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
 			<div class="row">
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item sale">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-1.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">spark</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="old-price">399$</span>
-							<span class="new-price">299$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
+				{% for product in items %}
 				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
 					<div class="prod-thumbnail">
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-2.jpg' %}" alt="img">
+							<img src="{{product.Image.url}}" alt="img">
 							<ul class="prod-link-cover">
 								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
@@ -339,160 +167,33 @@
 						</div>
 					</div>
 					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">phantom 3</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
+						<h5 class="title"><a href="shop-single.html">{{product.name}}</a></h5>
+						<p>{{product.description}}</p>
 						<div class="price">
-							<span class="new-price">699$</span>
+							<span class="new-price">{{product.price}}$</span>
 						</div>
 						<a href="shop-single.html" class="btn">buy now</a>
 					</div>
 				</div>
+				{% endfor %}
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-3.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">Inspire pro Camera</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="new-price">499$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-4.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">Mavic 2 zoom</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="new-price">979$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-5.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">spark 2</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="old-price">399$</span>
-							<span class="new-price">299$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-6.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">Mavic black</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="new-price">699$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-7.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">spark white</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="new-price">499$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 				<!--========= PROD-ITEM =========-->
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item sale">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{% static 'img/prod-shop-8.jpg' %}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="shop-single.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="shop-single.html">Mavic pro</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-						<div class="price">
-							<span class="old-price">999$</span>
-							<span class="new-price">979$</span>
-						</div>
-						<a href="shop-single.html" class="btn">buy now</a>
-					</div>
-				</div>
+
 				<!--======= PROD-ITEM END =======-->
 			</div>
 			<div class="pagination-cover">
