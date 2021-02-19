@@ -445,3 +445,451 @@
 	<script src="{% static 'js/scripts.js' %}"></script>
 </body>
 {% endblock %}
+=======
+{% extends 'nav.html' %}
+{% load static %}
+{% block body %}
+
+				<div class="col-12 col-sm-6 col-lg-3">
+					<!--============ HEADER ICON ============-->
+					<ul class="header-icon">
+						<li class="search">
+							<a class="icon" href="#">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</a>
+							<form action="#">
+								<input type="search" name="search" placeholder="Search">
+								<button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</form>
+						</li>
+						<li class="favorites">
+							<a class="icon" href="#">
+								<i class="fa fa-heart" aria-hidden="true"></i>
+								<span>2</span>
+							</a>
+						</li>
+						<li>
+							<a class="icon" href="#">
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</a>
+						</li>
+						<li>
+							<a class="icon" href="#">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							</a>
+						</li>
+					</ul>
+					<!--========== HEADER ICON END ==========-->
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--============= HEADER END =============-->
+
+	<!--============== PAGE-TITLE ==============-->
+	<div class="page-title" style="background-image: url(img/bg-page.jpg);">
+		<div class="container">
+			<h1 class="title">Gallery</h1>
+			<div class="breadcrumbs">
+				<ul>
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li>Gallery</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--============ PAGE-TITLE END ============-->
+
+	<!--=============== S-VIDEO ===============-->
+	<section class="s-video">
+		<div class="container">
+			<h2>Video</h2>
+			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+		</div>
+		<div class="slider-video">
+			<div class="slide-video">
+				<video  autoplay loop muted>
+					<source src="https://assets.mixkit.co/videos/56/56-720.mp4" type="video/mp4" />
+				</video>
+			</div>
+			<div class="slide-video">
+				<video autoplay loop muted>
+					<source src="https://assets.mixkit.co/videos/11/11-720.mp4" type="video/mp4" />
+				</video>
+			</div>
+			<div class="slide-video">
+				<video autoplay loop muted>
+					<source src="https://assets.mixkit.co/videos/558/558-720.mp4" type="video/mp4" />
+				</video>
+			</div>
+		</div>
+	</section>
+	<!--============= S-VIDEO END =============-->
+
+	<!--============== S-GALLERY ==============-->
+	<section class="s-gallery">
+		<div class="container">
+			<h2>Gallery</h2>
+			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+			<!--============ TAB-WRAP ============-->
+			<div class="tab-wrap">
+				<ul class="tab-nav gallery-tabs">
+					<li class="item" rel="tab1">all</li>
+					<li class="item" rel="tab2">Pricing</li>
+					<li class="item" rel="tab3">Design</li>
+					<li class="item" rel="tab4">Website</li>
+					<li class="item" rel="tab5">Photography</li>
+				</ul>
+				<!--========= TABS-CONTENT =========-->
+				<div class="tabs-content">
+					<div class="tab tab1">
+						<div class="gallery-cover">
+							<div class="gallery-item">
+								<a href="{% static ' img/gal-1.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-1.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#1</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-2.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-2.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#2</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-3.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-3.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#3</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-6.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-6.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#4</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-5.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-5.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#5</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-4.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-4.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#6</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-9.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-9.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#7</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-8.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-8.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#8</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-7.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-7.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#9</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="tab tab2">
+						<div class="gallery-cover">
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-1.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-1.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#1</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-2.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-2.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#2</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-3.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-3.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#3</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-6.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-6.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#4</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-5.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-5.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#5</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-4.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-4.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#6</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-9.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-9.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#7</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							
+
+						</div>
+					</div>
+					<div class="tab tab3">
+						<div class="gallery-cover">
+
+
+
+
+
+						</div>
+					</div>
+					<div class="tab tab4">
+						<div class="gallery-cover">
+
+
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-3.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-3.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#3</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-6.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-6.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#4</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-5.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-5.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#5</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-4.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-4.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#6</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-9.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-9.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#7</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-8.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-8.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#8</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-7.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-7.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#9</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="tab tab5">
+						<div class="gallery-cover">
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-1.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-1.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#1</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-2.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-2.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#2</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-3.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-3.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#3</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-6.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-6.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#4</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-5.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-5.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#5</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-4.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-4.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#6</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-9.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-9.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#7</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-8.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-8.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#8</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+							<div class="gallery-item">
+								<a href="{% static 'img/gal-7.jpg' %}" data-fancybox="gallery1">
+									<img src="{% static 'img/gal-7.jpg' %}" alt="img">
+									<div class="gal-item">
+										<h5 class="title">photo#9</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--======= TABS-CONTENT END =======-->
+			</div>
+			<!--========== TAB-WRAP END ==========-->
+		</div>
+	</section>
+	<!--============= S-GALLERY END =============-->
+
+
+
+	<!--================= TO TOP =================-->
+	<a class="to-top" href="#home">
+		<i class="fa fa-chevron-up" aria-hidden="true"></i>
+		<span>
+			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
+		</span>
+	</a>
+	<!--=============== TO TOP END ===============-->
+
+	<!-- =============== STYLE =============== -->
+	<link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!--=============== TEMPLATE SCRIPT ===============-->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	<script src="{% static 'js/slick.min.js' %}"></script>
+	<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+{% endblock %}
