@@ -39,13 +39,13 @@
 	<!--============= HEADER END =============-->
 
 	<!--============= PAGE-TITLE =============-->
-	<div class="page-title" style="background-image: url(img/bg-page.jpg);">
+	<div class="page-title" style="background-image: url(/static/img1/back6.jpg);">
 		<div class="container">
-			<h1 class="title">Shop</h1>
+			<h1 class="title">Products</h1>
 			<div class="breadcrumbs">
 				<ul>
 					<li><a href="{% url 'home' %}">Home</a></li>
-					<li>Shop</li>
+					<li>Products</li>
 				</ul>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 	<section class="new-product">
 		<div class="container">
 			<h2>new products</h2>
-			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+			<p class="slogan">We serve latest gadget in affordable prices as per Indian Coustomer demands ,These products make you future ready and brings finest technology in very affordable prices </p>
 			<div class="slider-new-product">
 				<!--========== SLIDE-NEW-PRODUCT ==========-->
 
@@ -85,7 +85,7 @@
 							<h5 class="title"><a href="shop-single.html">{{product.name}}</a></h5>
 							<p>{{product.description}}</p>
 							<div class="price">
-								<span class="new-price">{{product.price}}$</span>
+								<span class="new-price">Rs-{{product.price}}/-</span>
 							</div>
 							<a href="shop-single.html" class="btn">buy now</a>
 						</div>
@@ -111,28 +111,28 @@
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<div class="baner-item">
-						<img src="{% static 'img/banner-1.jpg' %}" alt="img">
+						<img src="{% static 'img1/discount1.jpg' %}" alt="img">
 						<div class="baner-item-content">
 							<h2>our discount program</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua.</p>
+							<p>We Offer several discount to our new users , so what are you waiting for start shopping</p>
 							<a href="shop-single.html" class="btn">read more</a>
 							<div class="banner-sale-cover">
 								<div class="banner-sale">30% off</div>
-								<p>Lorem ipsum dolor sit amet</p>
+								<p>flat 30 off on first purchase</p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-12 col-sm-6">
 					<div class="baner-item">
-						<img src="{% static 'img/banner-2.jpg' %}" alt="img">
+						<img src="{% static 'img1/discount2.jfif' %}" alt="img">
 						<div class="baner-item-content">
 							<h2>discount program</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua.</p>
+							<p>We Offer several discount to our new users , so what are you waiting for start shopping</p>
 							<a href="shop-single.html" class="btn">read more</a>
 							<div class="banner-sale-cover">
 								<div class="banner-sale">50% off</div>
-								<p>Lorem ipsum dolor sit amet</p>
+								<p>flat 50 off for our coustomers<br> (alredy shopped with us)</p>
 							</div>
 						</div>
 					</div>
@@ -146,7 +146,7 @@
 	<section class="s-product">
 		<div class="container">
 			<h2>products</h2>
-			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+			<p class="slogan">We serve latest gadget in affordable prices as per Indian Coustomer demands ,These products make you future ready and brings finest technology in very affordable prices </p>
 			<div class="row">
 				<!--========= PROD-ITEM =========-->
 
@@ -170,7 +170,7 @@
 						<h5 class="title"><a href="shop-single.html">{{product.name}}</a></h5>
 						<p>{{product.description}}</p>
 						<div class="price">
-							<span class="new-price">{{product.price}}$</span>
+							<span class="new-price">Rs-{{product.price}}/-</span>
 						</div>
 						<a href="shop-single.html" class="btn">buy now</a>
 					</div>
