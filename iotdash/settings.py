@@ -25,7 +25,7 @@ SECRET_KEY = 'fsfs@4%mskd%s9sec1qf1$v*ix1_6lo-1iyapjahausdh3n2a3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['206.189.128.29','adhocdevices.com']
+ALLOWED_HOSTS = ['206.189.128.29','adhocdevices.com','127.0.0.1']
 
 
 # Application definition
