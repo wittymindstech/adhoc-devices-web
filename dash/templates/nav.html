@@ -82,9 +82,9 @@
                         <li class="dropdown">
                             <a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul>
-                                <li><a href="services.html">Services</a></li>
+                                <li><a href="{% url 'service' %}">Services</a></li>
                                 <li><a href="blog.html">News</a></li>
-                                <li><a href="pravicy-policy.html">Pravicy policy</a></li>
+                                <li><a href="{% url 'privacypolicy' %}">Pravicy policy</a></li>
                                 <li><a href="404.html">404</a></li>
                             </ul>
                         </li>
@@ -143,15 +143,15 @@
                     <div class="footer-bottom">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-3">
-                                <a href="index.html" class="logo footer-logo"><img src="{%  static 'img1/icon/logo1.svg' %}" alt="logo"></a>
+                                <a href="{% url 'home' %}" class="logo footer-logo"><img src="{%  static 'img1/icon/logo1.svg' %}" alt="logo"></a>
                             </div>
                             <div class="col-12 col-md-6">
                                 <ul class="footer-menu">
                                     <li><a href="{% url 'home' %}">Home</a></li>
                                     <li><a href="{% url 'about' %}">About Us</a></li>
-                                    <li><a href="services.html">Sevices</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="{% url 'service' %}">Sevices</a></li>
+                                    <li><a href="{% url 'product' %}">Shop</a></li>
+                                    <li><a href="{% url 'gallery' %}">Gallery</a></li>
                                     <li><a href="{% url 'contact' %}">Contacts</a></li>
                                 </ul>
                             </div>
