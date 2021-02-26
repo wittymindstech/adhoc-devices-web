@@ -55,7 +55,7 @@ ROOT_URLCONF = 'iotdash.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "dash/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,15 +76,15 @@ WSGI_APPLICATION = 'iotdash.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'adhoc',  # Your AWS DB name
+        'USER': 'adhocdb',  # Your AWS Username
+        'PASSWORD': 'redhat123',  # Your AWS Password
+        'HOST': 'adhoc-db.cssgwjlhiewv.ap-south-1.rds.amazonaws.com',  # Your AWS Hostname
+        'PORT': '5432',
     }
 }
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
-
-LOGOUT_REDIRECT_URL = '/'
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -125,36 +125,29 @@ USE_TZ = True
 #STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'dash/static'),
-)
+#STATICFILES_DIRS = (
+ #   os.path.join(BASE_DIR, 'static'),
+#)
 
 #MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
+AWS_LOCATION = 'static'
 AWS_ACCESS_KEY_ID = 'AKIA2QMUNTD5AWTLFVHU'  # Your AWS Access Key ID
 AWS_SECRET_ACCESS_KEY = 'wdwR7QR3j1flRiN2FlvqonweRnaLJ9fN8Hjj4CJu'  # Your AWS Secret Access Key
 AWS_STORAGE_BUCKET_NAME = 'adhoc-devices'  # Your AWS Bucket name
-
-
-#AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_CLOUDFRONT_DOMAIN = 'd5t9gpjcr1j5s.cloudfront.net'
 AWS_S3_OBJECT_PARAMETERS = {
-     'CacheControl': 'max-age=86400',
+    'CacheControl': 'max-age=86400',
 }
-
-#STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-#STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
-
-STATICFILES_LOCATION = 'static'
-STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
-#STATIC_URL = 'https://%s/static/' % (AWS_S3_CLOUDFRONT_DOMAIN)
-
-MEDIAFILES_LOCATION = '/media/static/img1'
-MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CLOUDFRONT_DOMAIN, MEDIAFILES_LOCATION)
-MEDIA_ROOT= MEDIA_URL
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'iotdash.storage_backends.MediaStorage'
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'dash/static'),
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+AWS_DEFAULT_ACL = None
