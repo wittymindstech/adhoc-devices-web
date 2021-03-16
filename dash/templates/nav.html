@@ -83,18 +83,49 @@
                             <a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul>
                                 <li><a href="{% url 'service' %}">Services</a></li>
-                                <li><a href="blog.html">News</a></li>
+                                <li><a href="{% url 'singleblog' %}">Feedbacks</a></li>
                                 <li><a href="{% url 'privacypolicy' %}">Pravicy policy</a></li>
-                                <li><a href="404.html">404</a></li>
+
                             </ul>
                         </li>
                         <li><a href="{% url 'product' %}">Product</a></li>
-                        <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% endif %}
                         <li><a href="{% url 'contact' %}">Contacts</a></li>
                     </ul>
                 </nav>
                 <!--=========== NAV MENU END ===========-->
             </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <!--============ HEADER ICON ============-->
+                <ul class="header-icon">
+                    <li class="search">
+                        <a class="icon" href="#">
+                            <i  class="fa fa-search" aria-hidden="true"></i>
+                        </a>
+                        <form action="#">
+                            <input type="search" name="search" placeholder="Search">
+                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                    </li>
+
+                    <li>
+                        <a class="icon" href="{% url 'login' %}">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="icon"  href="#">
+                            <i id="cart" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!--========== HEADER ICON END ==========-->
+            </div>
+        </div>
+    </div>
+</header>
             {% endblock %}
             {% block body %}
             {% endblock %}
@@ -127,18 +158,12 @@
                         <div class="col-12 col-sm-4 col-lg-2 blok-link">
                             <h5>support</h5>
                             <ul>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Documentation</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+
+
+                                <li><a href="{% url 'privacypolicy' %}">Privacy Policy</a></li>
                             </ul>
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-3 footer-subscribe">
-                            <h5>subscribe</h5>
-                            <form action="/" class="subscribe-form">
-                                <input type="email" name="subscribe" placeholder="E-mail">
-                                <input type="submit" value="send">
-                            </form>
-                        </div>
+
                     </div>
                     <div class="footer-bottom">
                         <div class="row align-items-center">
@@ -151,7 +176,7 @@
                                     <li><a href="{% url 'about' %}">About Us</a></li>
                                     <li><a href="{% url 'service' %}">Sevices</a></li>
                                     <li><a href="{% url 'product' %}">Shop</a></li>
-                                    <li><a href="{% url 'gallery' %}">Gallery</a></li>
+
                                     <li><a href="{% url 'contact' %}">Contacts</a></li>
                                 </ul>
                             </div>

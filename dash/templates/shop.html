@@ -2,41 +2,7 @@
 {% load static %}
 {%  block body %}
 
-				<div class="col-12 col-sm-6 col-lg-3">
-					<!--============ HEADER ICON ============-->
-					<ul class="header-icon">
-						<li class="search">
-							<a class="icon" href="#">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</a>
-							<form action="#">
-								<input type="search" name="search" placeholder="Search">
-								<button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-							</form>
-						</li>
-						<li class="favorites">
-							<a class="icon" href="#">
-								<i class="fa fa-heart" aria-hidden="true"></i>
-								<span>2</span>
-							</a>
-						</li>
-						<li>
-							<a class="icon" href="#">
-								<i class="fa fa-user" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a class="icon" href="#">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-							</a>
-						</li>
-					</ul>
-					<!--========== HEADER ICON END ==========-->
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--============= HEADER END =============-->
+
 
 	<!--============= PAGE-TITLE =============-->
 	<div class="page-title" style="background-image: url(/static/img1/back6.jpg);">
@@ -75,19 +41,19 @@
 								<div class="lable lable-sale">sale</div>
 								<img src="{{product.Image.url}}" alt="img">
 								<ul class="prod-link-cover">
-									<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+									<li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 								</ul>
 							</div>
 						</div>
 						<div class="prod-content">
-							<h5 class="title"><a href="{% url 'shopsingle'  %}">{{product.name}}</a></h5>
+							<h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
 							<p>{{product.description}}</p>
 							<div class="price">
 								<span class="new-price">Rs-{{product.price}}/-</span>
 							</div>
-							<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
+							<a href="/shopsingle/{{product.id}}" class="btn">buy now</a>
 						</div>
 					</div>
 					<!--=========== PROD-ITEM END ===========-->
@@ -115,7 +81,7 @@
 						<div class="baner-item-content">
 							<h2>our discount program</h2>
 							<p>We Offer several discount to our new users , so what are you waiting for start shopping</p>
-							<a href="{% url 'shopsingle' %}" class="btn">read more</a>
+							<a href="#" class="btn">read more</a>
 							<div class="banner-sale-cover">
 								<div class="banner-sale">30% off</div>
 								<p>flat 30 off on first purchase</p>
@@ -129,7 +95,7 @@
 						<div class="baner-item-content">
 							<h2>discount program</h2>
 							<p>We Offer several discount to our new users , so what are you waiting for start shopping</p>
-							<a href="{% url 'shopsingle'  %}" class="btn">read more</a>
+							<a href="#" class="btn">read more</a>
 							<div class="banner-sale-cover">
 								<div class="banner-sale">50% off</div>
 								<p>flat 50 off for our coustomers<br> (alredy shopped with us)</p>
@@ -160,19 +126,19 @@
 							<div class="lable lable-sale">sale</div>
 							<img src="{{product.Image.url}}" alt="img">
 							<ul class="prod-link-cover">
-								<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+								<li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="prod-content">
-						<h5 class="title"><a href="{% url  'shopsingle' %}">{{product.name}}</a></h5>
+						<h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
 						<p>{{product.description}}</p>
 						<div class="price">
 							<span class="new-price">Rs-{{product.price}}/-</span>
 						</div>
-						<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
+						<a class="btn btn-primary" href="/shopsingle/{{product.id}}">Buy Now</a>
 					</div>
 				</div>
 				{% endfor %}
@@ -234,3 +200,6 @@
 	<script src="{% static 'js/scripts.js' %}"></script>
 </body>
 {% endblock %}
+<script>
+
+</script>

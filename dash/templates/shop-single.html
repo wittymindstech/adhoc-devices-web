@@ -1,51 +1,18 @@
 {% extends 'nav.html' %}
 {% load static %}
 {%  block body %}
-				<div class="col-12 col-sm-6 col-lg-3">
-					<!--============ HEADER ICON ============-->
-					<ul class="header-icon">
-						<li class="search">
-							<a class="icon" href="#">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</a>
-							<form action="#">
-								<input type="search" name="search" placeholder="Search">
-								<button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-							</form>
-						</li>
-						<li class="favorites">
-							<a class="icon" href="#">
-								<i class="fa fa-heart" aria-hidden="true"></i>
-								<span>2</span>
-							</a>
-						</li>
-						<li>
-							<a class="icon" href="#">
-								<i class="fa fa-user" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a class="icon" href="#">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-							</a>
-						</li>
-					</ul>
-					<!--========== HEADER ICON END ==========-->
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--============= HEADER END =============-->
+
 
 	<!--============= PAGE-TITLE =============-->
+{% for product in product %}
 	<div class="page-title" style="background-image: url(img/bg-page.jpg);">
 		<div class="container">
-			<h1 class="title">Mavic 2 Pro</h1>
+			<h1 class="title" id="pname{{product.id}}">{{product.name}}</h1>
 			<div class="breadcrumbs">
 				<ul>
 					<li><a href="{% url 'home' %}">Home</a></li>
-					<li><a href="{% url 'product' %}">Shop</a></li>
-					<li>Mavic 2 Pro</li>
+					<li><a href="{% url 'product' %}">Product</a></li>
+					<li>{{product.name}}</li>
 				</ul>
 			</div>
 		</div>
@@ -60,86 +27,40 @@
 					<!--===== SLIDER-SINGLE-FOR =====-->
 					<div class="slider-single-for">
 						<div class="slide-single-for">
-							<a href="{% static 'img/prod-1.jpg' %}" class="single-for-img" data-fancybox="prod1">
-								<img src="{% static 'img/prod-1.jpg' %}" alt="img">
+							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
+								<img src="{{product.Image.url}}" alt="img">
 							</a>
 						</div>
 						<div class="slide-single-for">
-							<a href="{% static 'img/bg-3.jpg' %}" class="single-for-img" data-fancybox="prod1">
-								<img src="{% static 'img/bg-3.jpg' %}" alt="img">
+							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
+								<img src="{{product.Image.url}}" alt="img">
 							</a>
 						</div>
 						<div class="slide-single-for">
-							<a href="{% static 'img/prod-shop-3.jpg' %}" class="single-for-img" data-fancybox="prod1">
-								<img src="{% static 'img/prod-shop-3.jpg' %}" alt="img">
+							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
+								<img src="{{product.Image.url}}" alt="img">
 							</a>
 						</div>
 						<div class="slide-single-for">
-							<a href="{% static 'img/prod-shop-8.jpg' %}" class="single-for-img" data-fancybox="prod1">
-								<img src="{% static 'img/prod-shop-8.jpg' %}" alt="img">
+							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
+								<img src="{{product.Image.url}}" alt="img">
 							</a>
 						</div>
 					</div>
 					<!--=== SLIDER-SINGLE-FOR END ===-->
 					<!--===== SLIDER-SINGLE-NAV =====-->
-					<div class="slider-single-nav">
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{% static 'img/prod-1.jpg' %}" alt="img">
-							</div>
-						</div>
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{% static 'img/bg-3.jpg' %}" alt="img">
-							</div>
-						</div>
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{% static 'img/prod-shop-3.jpg' %}" alt="img">
-							</div>
-						</div>
-						<div class="slide-single-nav">
-							<div class="single-nav-img">
-								<img src="{% static 'img/prod-shop-8.jpg' %}" alt="img">
-							</div>
-						</div>
-					</div>
-					<!--=== SLIDER-SINGLE-NAV END ===-->
+
 				</div>
 				<div class="col-12 col-md-7 single-left">
-					<div class="single-price">979$</div>
+					<div class="single-price" id="pprice{{product.id}}">{{product.price}}</div>
 					<div class="single-text">
-						<p>The Mavic 2 offers iconic Hasselblad image quality on the Pro and a high-performance zoom lens on the Zoom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque necessitatibus praesentium tempora amet, voluptatem minima nesciunt neque autem nobis, id veniam, in quisquam. Cum illum dolores nesciunt consequatur qui vel quidem eaque accusamus autem, fugiat, ullam ipsa voluptatibus ex minus itaque nihil hic ab, porro laboriosam! Delectus quam maxime vel.</p>
+						<p>{{product.description}}</p>
 					</div>
-					<ul class="single-info">
-						<li>
-							<div class="single-img"><img src="{% static 'img/icon-tab-4.svg' %}" alt=""></div>
-							<p>Hasselblad Camera</p>
-						</li>
-						<li>
-							<div class="single-img"><img src="{% static 'img/icon-tab-6.svg' %}" alt=""></div>
-							<p>1" CMOS Sensor</p>
-						</li>
-						<li>
-							<div class="single-img"><img src="{% static 'img/icon-tab-1.svg' %}" alt=""></div>
-							<p>Adjustable Aperture</p>
-						</li>
-						<li>
-							<div class="single-img"><img src="{% static 'img/icon-tab-2.svg' %}" alt=""></div>
-							<p>10-bit Dlog-M</p>
-						</li>
-						<li>
-							<div class="single-img"><img src="{% static 'img/icon-tab-3.svg' %}" alt=""></div>
-							<p>10-bit HDR Video</p>
-						</li>
-						<li>
-							<div class="single-img"><img src="{% static 'img/icon-tab-5.svg' %}" alt=""></div>
-							<p>Hyperlapse</p>
-						</li>
-					</ul>
-					<a href="#" class="btn">buy now</a>
+
+					<a id="{{product.id}}" onclick="addToCart({{product.id}});" class="btn btn-primary">Add To Cart</a>
 				</div>
 			</div>
+			{% endfor %}
 			<!--=========== SINGLE-TAB ===========-->
 			<div class="single-tab">
 				<div class="tab-wrap">
@@ -238,7 +159,7 @@
 			<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
 			<div class="row">
 
-				{% for product in products %}
+				{% for p in products %}
 
 				<!--=========== PROD-ITEM ===========-->
 				<div class="col-12 col-sm-6 col-xl-3 prod-item">
@@ -246,21 +167,21 @@
 						<div class="prod-img">
 							<div class="lable lable-new">new</div>
 							<div class="lable lable-sale">sale</div>
-							<img src="{{product.Image.url}}" alt="img">
+							<img src="{{p.Image.url}}" alt="img">
 							<ul class="prod-link-cover">
-								<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+								<li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="prod-content">
-						<h5 class="title"><a href="{% url 'shopsingle' %}">spark white</a></h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
+						<h5 class="title"><a href="/shopsingle/{{p.id}}/">spark white</a></h5>
+						<p>{{p.description}}</p>
 						<div class="price">
-							<span class="new-price">499$</span>
+							<span class="new-price">{{p.price}}</span>
 						</div>
-						<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
+						<a  href="/shopsingle/{{p.id}}" class="btn">buy now</a>
 					</div>
 				</div>
 				<!--========= PROD-ITEM END =========-->
@@ -294,5 +215,35 @@
 	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>
+<script>
+    if(localStorage.getItem('cart')==null){
+var cart={};
+
+}else{
+cart=JSON.parse(localStorage.getItem('cart'));
+console.log(cart);
+
+console.log(Object.keys(cart).length);
+for(item in cart){
+document.getElementById(item).innerHTML="Already in cart";
+
+}
+}
+function addToCart(id){
+	console.log(id);
+	let idstr=id.toString();
+	if(cart[idstr]==undefined){
+qty=1;
+name=document.getElementById("pname"+idstr).innerHTML;
+price=document.getElementById("pprice"+idstr).innerHTML;
+console.log(name,price);
+cart[idstr]=[qty,name,price];
+
+console.log(cart);
+localStorage.setItem('cart',JSON.stringify(cart));
+
+document.getElementById(idstr).innerHTML="Already in cart";
+	}}
+</script>
 {% endblock %}
 

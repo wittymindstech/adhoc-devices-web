@@ -1,40 +1,7 @@
 {% extends 'nav.html' %}
 {% load static %}
 {% block body %}
-				<div class="col-12 col-sm-6 col-lg-3">
-					<!--============ HEADER ICON ============-->
-					<ul class="header-icon">
-						<li class="search">
-							<a class="icon" href="#">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</a>
-							<form action="#">
-								<input type="search" name="search" placeholder="Search">
-								<button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-							</form>
-						</li>
-						<li class="favorites">
-							<a class="icon" href="#">
-								<i class="fa fa-heart" aria-hidden="true"></i>
-								<span>2</span>
-							</a>
-						</li>
-						<li>
-							<a class="icon" href="#">
-								<i class="fa fa-user" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a class="icon" href="#">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-							</a>
-						</li>
-					</ul>
-					<!--========== HEADER ICON END ==========-->
-				</div>
-			</div>
-		</div>
-	</header>
+
 	<!--============= HEADER END =============-->
 
 	<!--=============== MAIN CONTENT ===============-->
@@ -49,7 +16,7 @@
 							<div class="slide-info">
 								<h3>will change your world!</h3>
 								<p>“The IoT is big news because it ups the ante: ‘Reach out and touch somebody’ is becoming ‘reach out and touch everything’.” — Parker Trewin, Senior Director of Content and Communications, Aria Systems</p>
-								<a href="{% url 'gallery' %}">read more</a>
+								<a href="{% url 'product' %}">read more</a>
 							</div>
 						</div>
 					</div>
@@ -59,7 +26,7 @@
 							<div class="slide-info">
 								<h3>Let's start creating photos</h3>
 								<p>“IoT will stump IT until clouds and big data come aboard.” — Stephen Lawson, EMC</p>
-								<a href="{% url 'gallery' %}">read more</a>
+								<a href="{% url 'product' %}">read more</a>
 							</div>
 						</div>
 					</div>
@@ -69,7 +36,7 @@
 							<div class="slide-info">
 								<h3>Unique digital experiences</h3>
 								<p>“The truth is, homes change over time — and technology has to adapt, not try to do everything at once.” — Tony Fadell, Founder & CEO, Nest Labs</p>
-								<a href="{% url 'gallery' %}">read more</a>
+								<a href="{% url 'product' %}">read more</a>
 							</div>
 						</div>
 					</div>
@@ -79,7 +46,7 @@
 							<div class="slide-info">
 								<h3>will change your world!</h3>
 								<p>"Leadership in telecommunicatio ns is also essential, since we are now in the age of e-commerce.”</p>
-								<a href="{% url 'gallery' %}">read more</a>
+								<a href="{% url 'product' %}">read more</a>
 							</div>
 						</div>
 					</div>
@@ -116,31 +83,7 @@
 		<!--=============== MAIN SLIDER END ===============-->
 
 		<!--================= BEST PRICES =================-->
-		<section class="best-prices">
-			<div class="container s-anim">
-				<div class="row align-items-center">
-					<div class="price-img-block col-md-6">
-						<div class="price-img-cover">
-							<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/map.png' %}" alt="img">
-							<img class="price-drone lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone2.png' %}" alt="img">
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="price-info">
-							<h2 class="title-left">DJI Mavic 2 Pro Drone with Smart Controller - With 64GB MicroSDXC Card</h2>
-							<p>Want to know more about drone delivery? Learn how drones are changing eCommerce and what companies are already using it as a way to drive sales.</p>
-							<ul>
-								<li>12MP Camera</li>
-								<li>1/2.3" Sensor</li>
-								<li>Powerful Lens</li>
-							</ul>
-							<div class="price">Rs-36,999</div>
-							<a href="#" class="btn">buy now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+
 		<!--=============== BEST PRICES AND ===============-->
 
 		<!--================ GALLERY BLOCK ================-->
@@ -185,78 +128,7 @@
 		<!--============== GALLERY BLOCK END ==============-->
 
 		<!--==================== S-BLOG ====================-->
-		<section class="s-blog">
-			<div class="container s-anim">
-				<h2>latest news</h2>
-				<p class="slogan">
-					Smart City add digital intelligence to existing urban systems creating a pervasive, integrated, and intelligent city environment where IoT solutions are used to seamlessly interconnect, interact, control, and provide insights about the various silos of fragmented systems within cities.</p>
-				<div class="row">
-					<!--=============== POST-ITEM ===============-->
-					<div class="col-12 col-md-4 post-item">
-						<div class="prod-thumbnail">
-							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone3.jpg' %}" alt="img"></a>
-						</div>
-						<div class="post-content">
-							<div class="meta top">
-								<span class="post-by">By <a href="#">Rajneesh</a>  /</span>
-								<span class="post-date">March 2021</span>
-							</div>
-							<h5 class="title"><a href="blog.html">Now Drones Deliver masks in bhopal to people without mask </a></h5>
-							<div class="meta bottom">
-								<span class="post-comments">
-									<a href="#">Comments 35</a>
-								</span>
-								<span class="post-tags">Tags: <a href="#">Amar,Viram,kiran </a><a href="#">Drones</a></span>
-							</div>
-							<a href="blog.html" class="btn">more</a>
-						</div>
-					</div>
-					<!--============= POST-ITEM END =============-->
-					<!--=============== POST-ITEM ===============-->
-					<div class="col-12 col-md-4 post-item">
-						<div class="prod-thumbnail">
-							<a href="blog.html"><img class="lazy" src="{%  static 'img1/drone4.jpg' %}" data-src="{%  static 'img1/drone4.jpg' %}" alt="img"></a>
-						</div>
-						<div class="post-content">
-							<div class="meta top">
-								<span class="post-by">By <a href="#">Amar Agarwal</a>  /</span>
-								<span class="post-date">January 2021</span>
-							</div>
-							<h5 class="title"><a href="blog.html">Drones are now available ultra HD 4k pictures </a></h5>
-							<div class="meta bottom">
-								<span class="post-comments">
-									<a href="#">Comments 2</a>
-								</span>
-								<span class="post-tags">Tags: <a href="#">viram, </a><a href="#">Drones</a></span>
-							</div>
-							<a href="blog.html" class="btn">more</a>
-						</div>
-					</div>
-					<!--============= POST-ITEM END =============-->
-					<!--=============== POST-ITEM ===============-->
-					<div class="col-12 col-md-4 post-item">
-						<div class="prod-thumbnail">
-							<a href="blog.html"><img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img1/drone5.jpg' %}" alt="img"></a>
-						</div>
-						<div class="post-content">
-							<div class="meta top">
-								<span class="post-by">By <a href="#">Gaurav</a>  /</span>
-								<span class="post-date">September 2019</span>
-							</div>
-							<h5 class="title"><a href="blog.html">Latest Drones camera with laser,ultra magnifying camera capturing ants on land</a></h5>
-							<div class="meta bottom">
-								<span class="post-comments">
-									<a href="#">Comments 7</a>
-								</span>
-								<span class="post-tags">Tags: <a href="#">Amar, </a><a href="#">Drones</a></span>
-							</div>
-							<a href="blog.html" class="btn">more</a>
-						</div>
-					</div>
-					<!--============= POST-ITEM END =============-->
-				</div>
-			</div>
-		</section>
+
 		<!--================== S-BLOG END ==================-->
 
 		<!--=================== S-INFO-BG ===================-->
@@ -267,25 +139,25 @@
 					<p class="slogan">"If I had six hours to chop down a tree, I'd spend the first four hours sharpening the axe."</p>
 					<div class="block-icon-cover row">
 						<div class="col-6 col-md-3">
-							<a href="{% url 'shopsingle' %}" class="block-icon">
+							<a href="#" class="block-icon">
 								<img src="{%  static 'img/icon-1.svg' %}" alt="img">
 								<h6>QuickShot</h6>
 							</a>
 						</div>
 						<div class="col-6 col-md-3">
-							<a href="{% url 'shopsingle' %}" class="block-icon">
+							<a href="#" class="block-icon">
 								<img src="{%  static 'img/icon-2.svg' %}" alt="img">
 								<h6>TapFly</h6>
 							</a>
 						</div>
 						<div class="col-6 col-md-3">
-							<a href="{% url 'shopsingle' %}" class="block-icon">
+							<a href="#" class="block-icon">
 								<img src="{%  static 'img/icon-3.png' %}" alt="img">
 								<h6>ActiveTrack</h6>
 							</a>
 						</div>
 						<div class="col-6 col-md-3">
-							<a href="{% url 'shopsingle' %}" class="block-icon">
+							<a href="#" class="block-icon">
 								<img src="{%  static 'img/icon-4.svg' %}" alt="img">
 								<h6>Gesture</h6>
 							</a>
@@ -355,20 +227,20 @@
 											<div class="lable lable-sale">sale</div>
 											<img class="lazy" src="{{p.Image.url}}" data-src="{{p.Image.url}}" alt="img">
 											<ul class="prod-link-cover">
-												<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+												<li><a href="/shopsingle/{{p.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 											</ul>
 										</div>
 									</div>
 									<div class="prod-content">
-										<h5 class="title"><a href="{% url 'shopsingle' %}">{{p.name}}</a></h5>
+										<h5 class="title"><a href="/shopsingle/{{p.id}}">{{p.name}}</a></h5>
 										<p>{{p.description}}</p>
 										<div class="price">
 											<span class="new-price">Rs-{{p.price}}/-</span>
 
 										</div>
-										<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
+										<a href="/shopsingle/{{p.id}}" class="btn">buy now</a>
 									</div>
 								</div>
 								{% endfor %}
@@ -381,211 +253,19 @@
 						</div>
 						<!--================ TAB1 END ================-->
 						<!--================== TAB2 ==================-->
-						<div class="tab tab2">
-							<div class="row prod-cover">
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-4.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="{% url 'shopsingle'  %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="{% url 'shopsingle' %}">Mavic 2 zoom</a></h5>
-										<p>Smart City add digital intelligence to existing urban systems creating a pervasive, integrated, and intelligent city environment where IoT solutions are used to seamlessly interconnect, interact, control, and provide insights about the various silos of fragmented systems within cities.</p>
-										<div class="price">
-											<span class="old-price">399$(Rs-37906)</span>
-											<span class="new-price">299$(Rs-28672)</span>
-										</div>
-										<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
 
-								<!-- prod-item -->
-
-
-								<!-- prod-item end -->
-
-
-								<!-- prod-item end -->
-							</div>
-						</div>
 						<!--================ TAB2 END ================-->
 						<!--================== TAB3 ==================-->
-						<div class="tab tab3">
-							<div class="row prod-cover">
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-1.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="{% url 'shopsingle' %}">Inspire pro Camera</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="old-price">399$</span>
-											<span class="new-price">299$</span>
-										</div>
-										<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
 
-								<!-- prod-item end -->
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-
-								<!-- prod-item end -->
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-							</div>
-						</div>
 						<!--================ TAB3 END ================-->
 						<!--================== TAB4================== -->
-						<div class="tab tab4">
-							<div class="row prod-cover">
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-4.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="{% url 'shopsingle' %}">Mavic 2 zoom</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="old-price">399$</span>
-											<span class="new-price">299$</span>
-										</div>
-										<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
-								<!-- prod-item -->
 
-								<!-- prod-item end -->
-
-
-
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-							</div>
-						</div>
 						<!--================ TAB4 END ================-->
 						<!--================== TAB5 ==================-->
-						<div class="tab tab5">
-							<div class="row prod-cover">
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-1.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="{% url 'shopsingle' %}">Inspire pro Camera</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="old-price">399$</span>
-											<span class="new-price">299$</span>
-										</div>
-										<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
-								<!-- prod-item -->
 
-								<!-- prod-item end -->
-
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-								<!-- prod-item -->
-
-
-								<!-- prod-item end -->
-							</div>
-						</div>
 						<!--================ TAB5 END ================-->
 						<!--================== TAB6 ==================-->
-						<div class="tab tab6">
-							<div class="row prod-cover">
-								<!-- prod-item -->
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{%  static 'img/placeholder-all.png' %}" data-src="{%  static 'img/prod-4.jpg' %}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="{% url 'shopsingle' %}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="{% url 'shopsingle' %}">Mavic 2 zoom</a></h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et</p>
-										<div class="price">
-											<span class="old-price">399$</span>
-											<span class="new-price">299$</span>
-										</div>
-										<a href="{% url 'shopsingle' %}" class="btn">buy now</a>
-									</div>
-								</div>
-								<!-- prod-item end -->
 
-
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-							</div>
-						</div>
 						<!--================ TAB6 END ================-->
 					</div>
 				</div>
@@ -642,7 +322,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="{% url 'shopsingle' %}" class="btn">view more</a>
+						<a href="#" class="btn">view more</a>
 					</div>
 					<!--========== SLIDE-OPPORTUNITIE END ==========-->
 					<!--============ SLIDE-OPPORTUNITIE ============-->
@@ -686,7 +366,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="{% url 'shopsingle' %}" class="btn">view more</a>
+						<a href="#" class="btn">view more</a>
 					</div>
 					<!--========== SLIDE-OPPORTUNITIE END ==========-->
 				</div>
