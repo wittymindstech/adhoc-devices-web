@@ -104,7 +104,7 @@
                         <a class="icon" href="#">
                             <i  class="fa fa-search" aria-hidden="true"></i>
                         </a>
-                        <form action="#">
+                        <form action="{% url 'search' %}" method="get">
                             <input type="search" name="search" placeholder="Search">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
