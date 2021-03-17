@@ -58,6 +58,87 @@
                 </div>
                 <!--=========== PROD-ITEM END ===========-->
             </div>{% endfor %}
+            {% for product in search_des %}
+            <div class="slide-new-product">
+
+                <div class="prod-item new">
+                    <div class="prod-thumbnail">
+                        <div class="prod-img">
+                            <div class="lable lable-new">new</div>
+                            <div class="lable lable-sale">sale</div>
+                            <img src="{{product.Image.url}}" alt="img">
+                            <ul class="prod-link-cover">
+                                <li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prod-content">
+                        <h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
+                        <p>{{product.description}}</p>
+                        <div class="price">
+                            <span class="new-price">Rs-{{product.price}}/-</span>
+                        </div>
+                        <a href="/shopsingle/{{product.id}}" class="btn">buy now</a>
+                    </div>
+                </div>
+                <!--=========== PROD-ITEM END ===========-->
+            </div>{% endfor %}
+            {% for product in search_price %}
+            <div class="slide-new-product">
+
+                <div class="prod-item new">
+                    <div class="prod-thumbnail">
+                        <div class="prod-img">
+                            <div class="lable lable-new">new</div>
+                            <div class="lable lable-sale">sale</div>
+                            <img src="{{product.Image.url}}" alt="img">
+                            <ul class="prod-link-cover">
+                                <li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prod-content">
+                        <h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
+                        <p>{{product.description}}</p>
+                        <div class="price">
+                            <span class="new-price">Rs-{{product.price}}/-</span>
+                        </div>
+                        <a href="/shopsingle/{{product.id}}" class="btn">buy now</a>
+                    </div>
+                </div>
+                <!--=========== PROD-ITEM END ===========-->
+            </div>{% endfor %}
+            {% for product in search_cat_des %}
+            <div class="slide-new-product">
+
+                <div class="prod-item new">
+                    <div class="prod-thumbnail">
+                        <div class="prod-img">
+                            <div class="lable lable-new">new</div>
+                            <div class="lable lable-sale">sale</div>
+                            <img src="{{product.Image.url}}" alt="img">
+                            <ul class="prod-link-cover">
+                                <li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prod-content">
+                        <h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
+                        <p>{{product.description}}</p>
+                        <div class="price">
+                            <span class="new-price">Rs-{{product.price}}/-</span>
+                        </div>
+                        <a href="/shopsingle/{{product.id}}" class="btn">buy now</a>
+                    </div>
+                </div>
+                <!--=========== PROD-ITEM END ===========-->
+            </div>{% endfor %}
             <!--======== SLIDE-NEW-PRODUCT END ========-->
             <!--========== SLIDE-NEW-PRODUCT ==========-->
 
