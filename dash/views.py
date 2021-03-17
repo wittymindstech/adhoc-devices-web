@@ -1,19 +1,39 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from .models import  Product,Category
+from django.http import HttpResponse,JsonResponse
+from .models import  Product,Category,ContactUs
 from .models import SignUp
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
 from django.core.paginator import Paginator
 # Create your views here.
 def home(req):
     items=Product.objects.all()
+    items=list(items)
+    if len(items)>10:
+        items=items[:10]
     d={'items':items}
     return render(req,'index.html' , d)
 def about(req):
     return render(req,'about.html')
 def contact(req):
     return render(req,'contacts.html')
+@csrf_exempt
+def contactUs(req):
+    if req.method=='POST':
+        name=req.POST.get('name')
+        phone=req.POST.get('phone')
+        message=req.POST.get('message')
+        email=req.POST.get('email')
+        print(name,email,phone,message)
+        if email is not None and message is not None and phone is not None and name is not None:
+
+            ContactUs(name=name,email=email,number=phone,message=message).save()
+            print("inside contact us")
+            return JsonResponse({'success':True})
+    print("else part")
+
+    return JsonResponse({'success':False})
 def SignUplogin(req):
     if req.method=='POST':
         if 'signup' in req.POST:
@@ -22,11 +42,13 @@ def SignUplogin(req):
             password=req.POST['password']
             try:
                 print(email,username,password)
-                user=User.objects.create_user(email=email,password=password,username=email)
-                print('user created')
-                SignUp.objects.create(user=user)
-                auth.login(req,user)
-                return redirect('home')
+                if email not in User.objects.filter(email__contains=email):
+
+                    user=User.objects.create_user(email=email,password=password,username=email)
+                    print('user created')
+                    SignUp.objects.create(user=user)
+                    auth.login(req,user)
+                    return redirect('home')
             except :
 
                 print("something went wrong")
@@ -75,6 +97,7 @@ def logout(req):
     return redirect('home')
 def blogSingle(req):
     return  render(req,'sindle-blog.html')
+@login_required()
 def gallery(req):
     return render(req,'gallery.html'),
 def services(req):
