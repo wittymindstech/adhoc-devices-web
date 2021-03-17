@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import  Product
+from .models import  Product,Category
 from .models import SignUp
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
@@ -46,7 +46,10 @@ def search(req):
     if req.method=='GET':
         query=req.GET.get('search')
         search_result=Product.objects.filter(name__contains=query)
-        return render(req,'search.html',{'search_result':search_result})
+        search_des=Product.objects.filter(description__contains=query)
+        search_price=Product.objects.filter(price__contains=query)
+        search_cat_des=Category.objects.filter(description__contains=query)
+        return render(req,'search.html',{'search_result':search_result,'search_des':search_des,'search_price':search_price,'search_cat_des':search_cat_des})
     return  render(req,'index.html')
 def shopSingle(req,pk):
     product=Product.objects.filter(pk=pk)
