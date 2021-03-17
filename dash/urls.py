@@ -28,4 +28,5 @@ urlpatterns = [
     path('privacypolicy/',views.privacyPolicy,name='privacypolicy'),
     path('signupLogin/',views.SignUplogin,name='login'),
     path('logout/',views.logout,name='logout'),
+    path('search/',views.search,name='search'),
 ]
