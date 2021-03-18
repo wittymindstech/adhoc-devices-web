@@ -67,6 +67,8 @@ def SignUplogin(req):
 def search(req):
     if req.method=='GET':
         query=req.GET.get('search')
+        if query is None:
+            return  render(req,'index.html')
         search_result=Product.objects.filter(name__contains=query)
         search_des=Product.objects.filter(description__contains=query)
         search_price=Product.objects.filter(price__contains=query)
