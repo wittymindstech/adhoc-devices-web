@@ -80,13 +80,14 @@
                             <a href="{% url 'about' %}">About us</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                            <a href="#">Services <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul>
-                                <li><a href="{% url 'service' %}">Services</a></li>
-                                <li><a href="{% url 'singleblog' %}">Feedbacks</a></li>
-                                <li><a href="{% url 'privacypolicy' %}">Pravicy policy</a></li>
-
+                                <li><a href="{% url 'service' %}">Web Services</a></li>
+                                <li><a href="{% url 'service' %}">Web Services</a></li>
+                                <li><a href="{% url 'service' %}">Web Services</a></li>
                             </ul>
+
+
                         </li>
                         <li><a href="{% url 'product' %}">Product</a></li>
                         {% if user.is_authenticated %}
@@ -116,7 +117,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="icon"  href="#">
+                        <a class="icon"  href="{% url 'checkout' %}"   >
                             <i id="cart" class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                     </li>
@@ -196,4 +197,7 @@
                 </div>
             </footer>
             <!--===================== FOOTER END =====================-->
+<script>
+
+</script>
 {% endblock %}

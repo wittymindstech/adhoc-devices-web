@@ -56,8 +56,19 @@
 					<div class="single-text">
 						<p>{{product.description}}</p>
 					</div>
-
-					<a id="{{product.id}}" onclick="addToCart({{product.id}});" class="btn btn-primary">Add To Cart</a>
+					{% if user.is_authenticated %}
+						{% if cartItems %}
+						<button    class="btn btn-primary">Already In Cart</button>
+						{% endif %}
+					{% endif %}
+					{% if user.is_authenticated %}
+					{% if not  cartItems %}
+					<button id="{{product.id}}" onclick="addToCart({{product.id}});"  class="btn btn-primary">Add To Cart</button>
+					{% endif %}
+					{% endif %}
+					{% if not user.is_authenticated %}
+					<button type="submit" class="btn btn-primary">Log In To add To Cart</button>
+					{% endif %}
 				</div>
 			</div>
 			{% endfor %}
@@ -215,35 +226,28 @@
 	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>
+
 <script>
-    if(localStorage.getItem('cart')==null){
-var cart={};
-
-}else{
-cart=JSON.parse(localStorage.getItem('cart'));
-console.log(cart);
-
-console.log(Object.keys(cart).length);
-for(item in cart){
-document.getElementById(item).innerHTML="Already in cart";
-
-}
-}
 function addToCart(id){
-	console.log(id);
-	let idstr=id.toString();
-	if(cart[idstr]==undefined){
-qty=1;
-name=document.getElementById("pname"+idstr).innerHTML;
-price=document.getElementById("pprice"+idstr).innerHTML;
-console.log(name,price);
-cart[idstr]=[qty,name,price];
+console.log("add to cart");
+$.ajax({
+url:"{% url 'addtocart' %}",
+method:"POST",
+async:true,
+data:{'id':id},
+dataType:'json',
+success:function(data){
+console.log(data);
+console.log("success");
+document.getElementById(id).innerHTML="Already in cart "
 
-console.log(cart);
-localStorage.setItem('cart',JSON.stringify(cart));
+},
+}
+);
+}
 
-document.getElementById(idstr).innerHTML="Already in cart";
-	}}
+
+
 </script>
 {% endblock %}
 

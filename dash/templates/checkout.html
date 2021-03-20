@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout page</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+	
+</head>
+<body>
+    <main>
+         <a style="color:red" href="{% url 'home' %}">Go To Home Page</a>
+        <h1 class="checkout">Checkout</h1>
+        <section class="contactInformation">
+            <div class="contentInformation">
+                <h2 class="titleInformation">Contact information</h2>
+        
+                    <form  method="post" action="{% url 'thankyou' %}">
+                        {% csrf_token %}
+                        <label class="infoLabel" >E-mail</label><br>
+                            <i class="fas fa-envelope iconMove"></i><input class="infoInput" required type="email" name="email" placeholder="Enter your email..."><br>
+                        <label class="infoLabel" >Phone</label><br>
+                            <i class="fas fa-phone-alt iconMove"></i><input class="infoInput" required type="tel" name="tel" placeholder="Enter your phone...">
+                        <h2 class="titleInformation">Shipping address</h2>
+                        <label class="infoLabel" >Full name</label><br>
+                            <i class="fas fa-user-circle iconMove"></i><input class="infoInput" required type="text" name="name" placeholder="Your name..." ><br>
+                            <label class="infoLabel" >Address</label><br>
+                            <i class="fas fa-home iconMove"></i><input class="infoInput" required type="text" name="address" placeholder="Your address..." ><br>
+                        <label class="infoLabel" >City</label><br>
+                            <i class="fas fa-city iconMove"></i><input class="infoInput" required type="text" name="city" placeholder="Your city..." ><br>
+                         <label class="infoLabel" >State</label><br>
+							<i class="fas fa-city iconMove"></i><input class="infoInput" required type="text" name="state" placeholder="Your State..." ><br>
+                         <label class="infoLabel" >Country</label><br>
+							<i class="fas fa-city iconMove"></i><input class="infoInput" type="text" required name="country" placeholder="Your Country..." ><br>
+                                <label class="infoLabel" >Postal code</label>
+                                <input class="selectCountries" type="text" name="postal" required pattern="[0-9]{4}" placeholder="Your postal code..."><br>
+                            <button class="submitButton" type="submit">Continue To Pay</button>
+
+                    </form>
+            </div>
+        </section>
+
+        <section class="totalCheckout">
+
+           <div class="storeCheckout">
+               {% for product in products %}
+
+                <div id="product{{product.id}}" class="payCheckout">
+                    <img src="{{product.Image.url}}" alt="">
+                    <div class="infoPay">
+                        <p class="parrafoClothes">{{product.name}}</p>
+                        <span class="spanOrange">Rs-{{product.price}}</span>
+                        <div class="RemoveProduct">
+                            <button class="RemoveProduct" onclick="RemoveCart({{product.id}});">Remove</button>
+                        </div>
+                    </div>
+                    
+                </div>
+
+               {% endfor %}
+                <div class="shipping">
+                    <p class="parrafoNormal">Shipping/Delivery</p>
+                    <p class="parrafoNormal">+50</p>
+                </div>
+                <div class="shipping">
+                    <p class="parrafoNormal">Total</p>
+                    <p id="total" class="parrafoNormal">Rs-{{total}}</p>
+                </div>
+           </div> 
+        </section>
+
+    </main>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+
+function RemoveCart(id){
+console.log("remove cart");
+$.ajax({
+url:"{% url 'removeitems' %}",
+method:"POST",
+async:true,
+data:{'id':id},
+dataType:'json',
+success:function(data){
+console.log(data);
+console.log("success");
+$("#product"+id).hide();
+document.getElementById('total').innerHTML=data['total'];
+},
+}
+);
+}
+
+</script>
+</body>
+</html>
