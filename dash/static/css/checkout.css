@@ -1,0 +1,218 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+main{
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.contactInformation{
+    width: 50%;
+}
+.checkout{
+    flex-basis: 100%;
+    margin: 40px 0;
+    font-size: 36px;
+    font-weight: 600;
+    color: #99E600;
+}
+.CartButton{
+    text-align: right;
+    padding: 15px 30px;
+    border-radius: 12px;
+    background-color: #1E90FF;
+    color: #fff;
+    border: 1px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+.CartButton:hover{
+    background-color: #77b300;
+}
+.titleInformation{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 15px 0;
+    color: #1E90FF;
+}
+.infoLabel{
+    font-size: 12px;
+    font-weight: 600;
+    color: #99E600;
+}
+.iconMove{
+    position: absolute;
+    margin: 15px 0 0 15px;
+    font-size: 20px;
+    color: #1E90FF;
+}
+.infoInput{
+    width: 81%;
+    border-radius: 12px;
+    border: 1px solid #828282;
+    padding: 15px 45px;
+    margin-bottom: 20px;
+    outline: none;
+}
+.RemoveProduct{
+    text-align: right;
+    padding: 1px 5px;
+    border-radius: 20px;
+    background-color: #99E600;
+    color: #fff;
+    border: 1px;
+    cursor: pointer;
+    margin: 10px 0;
+
+}
+.RemoveProduct:hover{
+    background-color: #77b300;
+}
+.selectCountry{
+    margin: 0 0 20px 0;
+    padding: 15px 25px;
+    outline: none;
+    border-radius: 12px;
+    border: 1px solid #828282;
+}
+.selectState{
+    margin: 0 0 20px 0;
+    padding: 15px 25px;
+    outline: none;
+    border-radius: 12px;
+    border: 1px solid #828282;
+}
+.fa-globe-americas{
+    position: absolute;
+    margin: 17px 0 0 10px;
+    color: #828282;
+}
+.selectCountries{
+    border-radius: 12px;
+    border: 1px solid #828282;
+    padding: 15px 10px;
+    outline: none;
+}
+.submitButton{
+    text-align: right;
+    float: right;
+    padding: 15px 30px;
+    border-radius: 12px;
+    background-color: #99E600;
+    color: #fff;
+    border: 1px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+.submitButton:hover{
+    background-color: #77b300;
+}
+.totalCheckout{
+    margin: 0 auto;
+    width: 40%;
+}
+.storeCheckout{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    border-radius: 12px;
+}
+.payCheckout img{
+    width: 155px;
+    border-radius: 12px;
+}
+.payCheckout{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 50px 40px 0px;
+	margin-left: 10px;
+}
+.payCheckout2{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 50px 40px 0px;
+	margin-left: 10px;
+}
+.payCheckout2 img{
+    width: 155px;
+    border-radius: 12px;
+	
+}
+.payCheckout p{
+    margin: 0;
+}
+.payCheckout span{
+    width: 20%;
+
+}
+.infoPay{
+    margin-left: 15px;
+}
+.parrafoClothes{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 25px;
+    color: #1E90FF;
+}
+.spanOrange{
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 10px;
+    color: #F2994A;
+}
+.spanSmall{
+   font-size: 12px;
+   font-weight: 600;
+   color: #4E5150;
+   text-decoration: line-through;
+}
+.countPay{
+    margin-top: 50px;
+    padding: 15px 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #828282;
+    border-radius: 12px;
+	
+}
+.more{
+    font-size: 23px;
+    background-color: #E0E0E0;
+    padding: 0px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #828282;
+}
+.parrafoNormal{
+    font-weight: 600;
+    font-size: 16px;
+    color: #1E90FF;
+}
+.shipping{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #BDBDBD;
+}
+
+@media screen and (max-width: 700px) {
+    .contactInformation{
+        width: 100%;
+        order: 2;
+    }
+    .totalCheckout{
+        width: 100%;
+        order: 1;
+    }
+}
