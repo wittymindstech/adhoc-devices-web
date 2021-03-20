@@ -30,4 +30,8 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
     path('search/',views.search,name='search'),
     path('contactUs/',views.contactUs,name='contactUs'),
+    path('checkout/',views.checkout,name='checkout'),
+    path('thankyou/',views.thankyou,name='thankyou'),
+    path('removeitems/',views.removecartItems,name='removeitems'),
+    path('addtocart/',views.AddToCart,name='addtocart'),
 ]

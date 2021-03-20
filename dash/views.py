@@ -1,11 +1,13 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,JsonResponse
-from .models import  Product,Category,ContactUs
+from .models import  Product,Category,ContactUs,Cart
 from .models import SignUp
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
 from django.core.paginator import Paginator
+
+import json
 # Create your views here.
 def home(req):
     items=Product.objects.all()
@@ -18,6 +20,80 @@ def about(req):
     return render(req,'about.html')
 def contact(req):
     return render(req,'contacts.html')
+@login_required()
+@csrf_exempt
+def AddToCart(req):
+    print("inside add to cart")
+    if req.user.is_authenticated:
+        if req.method=='POST':
+            pid=req.POST.get('id')
+            if pid is None:
+                return JsonResponse({'success':False})
+            pid=int(pid)
+            print("pid = {}".format(pid))
+            is_exist=Cart.objects.filter(product__id=pid,user__id=req.user.id,status=False)
+            if len(is_exist)>0:
+                return JsonResponse({'success':True})
+            else:
+                product=get_object_or_404(Product,id=pid)
+                user=get_object_or_404(User,id=req.user.id)
+                cart=Cart(user=user,product=product)
+                cart.save()
+                return JsonResponse({'success':True})
+    return JsonResponse({'sucess':False})
+@csrf_exempt
+
+def checkout(req):
+    if not req.user.is_authenticated:
+        return render(req,'SignUp-login.html')
+
+    order_list=[]
+    cartItems=Cart.objects.filter(user__id=req.user.id)
+    for product in cartItems:
+        order_list.append(product.product)
+    total=50
+    for product in order_list:
+        total+=int(product.price)
+    return render(req,'checkout.html',{'products':order_list,'total':total})
+@csrf_exempt
+@login_required()
+def removecartItems(req):
+    print("inside removecartItems")
+    if req.method=='POST':
+
+        if req.user.is_authenticated:
+            id=req.POST['id']
+            print(id)
+            cart=get_object_or_404(Cart,product__id=id)
+            print(cart)
+            if cart is not None:
+
+                cart.delete()
+                print('object deleted')
+                order_list=[]
+                cartItems=Cart.objects.filter(user__id=req.user.id)
+                for product in cartItems:
+                    order_list.append(product.product)
+                total=50
+                for product in order_list:
+                    total+=int(product.price)
+                return JsonResponse({'success':True,'total':total})
+
+
+    return JsonResponse({'success':False})
+def thankyou(req):
+    if req.method=='POST':
+        email=req.POST['email']
+        tel=req.POST['tel']
+        full_name=req.POST['name']
+        address=req.POST['address']
+        city=req.POST['city']
+        state=req.POST['state']
+        country=req.POST['country']
+        poster_code=req.POST['postal']
+        print(email,tel,full_name,address,country,city,state,poster_code)
+        return  render(req,'ThankYou.html')
+    return render(req,'index.html')
 @csrf_exempt
 def contactUs(req):
     if req.method=='POST':
@@ -75,13 +151,18 @@ def search(req):
         search_cat_des=Category.objects.filter(description__contains=query)
         return render(req,'search.html',{'search_result':search_result,'search_des':search_des,'search_price':search_price,'search_cat_des':search_cat_des})
     return  render(req,'index.html')
+
 def shopSingle(req,pk):
-    product=Product.objects.filter(pk=pk)
-    items=Product.objects.all()
-    for p in product:
-        print(p.price)
-    d = {'products': items , 'product': product}
-    return render(req,'shop-single.html', d)
+    if req.user.is_authenticated:
+
+        product=Product.objects.filter(pk=pk)
+        items=Product.objects.all()
+
+        cartItems=Cart.objects.filter(product__id=pk)
+
+        d = {'products': items , 'product': product,'cartItems':cartItems}
+        return render(req,'shop-single.html', d)
+    return render(req,'SignUp-login.html')
 def product(req):
     items=Product.objects.all().order_by('id')
     l=list(items)
