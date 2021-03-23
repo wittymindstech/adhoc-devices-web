@@ -41,11 +41,9 @@ def AddToCart(req):
                 cart.save()
                 return JsonResponse({'success':True})
     return JsonResponse({'sucess':False})
-@csrf_exempt
-
+@login_required(login_url='/signupLogin/')
 def checkout(req):
-    if not req.user.is_authenticated:
-        return render(req,'SignUp-login.html')
+
 
     order_list=[]
     cartItems=Cart.objects.filter(user__id=req.user.id)
@@ -55,8 +53,8 @@ def checkout(req):
     for product in order_list:
         total+=int(product.price)
     return render(req,'checkout.html',{'products':order_list,'total':total})
+    #return render(req,'SignUp-login.html')
 @csrf_exempt
-@login_required()
 def removecartItems(req):
     print("inside removecartItems")
     if req.method=='POST':
@@ -130,9 +128,12 @@ def SignUplogin(req):
                 print("something went wrong")
             return render(req,'index.html')
         elif 'login' in req.POST:
+            print('inside login')
             username=req.POST['Username']
             password=req.POST['Password']
             user = auth.authenticate(username=username,password=password)
+            print(user)
+            print('inside login')
             if user is not None:
                 auth.login(req, user)
         return redirect('home')
@@ -174,7 +175,7 @@ def product(req):
 
     d={'items':page_obj,'new_product':date_wise_sorted_list}
     return render(req,'shop.html',d)
-@login_required()
+
 def logout(req):
     auth.logout(req)
     return redirect('home')
