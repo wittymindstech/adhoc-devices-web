@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'dash',
 ]
 
@@ -154,3 +155,5 @@ AWS_DEFAULT_ACL = None
 
 LOGIN_URL = '/signupLogin/'
 LOGIN_REDIRECT_URL = '/'
+PAYPAL_RECEIVER_EMAIL = 'wittytechminds@gmail.com'
+PAYPAL_TEST = True
