@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404,reverse
 from django.http import HttpResponse,JsonResponse
-from .models import  Product,Category,ContactUs,Cart,OrderTable,Information,Reviews,FAQ
+from .models import  Product,Category,ContactUs,Cart,OrderTable,Information,Reviews,FAQ,ProductImage
 from .models import SignUp
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -251,8 +251,8 @@ def shopSingle(req,pk):
     information=Information.objects.filter(product__id=pk)
     faq=FAQ.objects.filter(product__id=pk)
     reviews=Reviews.objects.filter(product__id=pk)
-
-    d = {'products': items , 'product': product,'cartItems':cartItems,'information':information,'faq':faq,'review':reviews}
+    images=ProductImage.objects.filter(product__id=pk)
+    d = {'products': items , 'product': product,'cartItems':cartItems,'information':information,'faq':faq,'review':reviews,'images':images}
     return render(req,'shop-single.html', d)
     #return render(req,'SignUp-login.html')
 def product(req):

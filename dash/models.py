@@ -19,6 +19,12 @@ class Product(models.Model):
     Image=models.ImageField(upload_to='images',blank=True,null=True)
     def __str__(self):
         return  self.name
+class ProductImage(models.Model):
+
+    image=models.ImageField(upload_to='images',blank=True,null=True)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.product.name
 class ContactUs(models.Model):
     name=models.CharField(max_length=100)
     number=models.CharField(max_length=10)
