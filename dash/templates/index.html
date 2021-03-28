@@ -143,42 +143,17 @@
 				<!--================== TAB-WRAP ==================-->
 				<div class="tab-wrap">
 					<ul class="tab-nav prod-tabs">
+<!--						category-->
+						{% for category in cat %}
 						<li class="item" rel="tab1">
 							<div class="block-icon">
-								<img src="{%  static 'img/icon-tab-4.svg' %}" alt="img">
-								<h6>Virtual Reality</h6>
+								<a href="/category/{{category.pk}}"><img src="{{category.Image.url}}" alt="img">
+									<h6>{{category.title}}</h6></a>
 							</div>
 						</li>
-						<li class="item" rel="tab2">
-							<div class="block-icon">
-								<img src="{%  static 'img/icon-tab-2.svg' %}" alt="img">
-								<h6>Voice Analysis</h6>
-							</div>
-						</li>
-						<li class="item" rel="tab3">
-							<div class="block-icon">
-								<img src="{%  static 'img/icon-tab-3.svg' %}" alt="img">
-								<h6>Smart Home Apps</h6>
-							</div>
-						</li>
-						<li class="item" rel="tab4">
-							<div class="block-icon">
-								<img src="{%  static 'img/icon-tab-1.svg' %}" alt="img">
-								<h6>Smart Drones</h6>
-							</div>
-						</li>
-						<li class="item" rel="tab5">
-							<div class="block-icon">
-								<img src="{%  static 'img/icon-tab-5.svg' %}" alt="img">
-								<h6>Smart Websites</h6>
-							</div>
-						</li>
-						<li class="item" rel="tab6">
-							<div class="block-icon">
-								<img src="{% static 'img/icon-tab-6.svg' %}" alt="img">
-								<h6>Smart Mobile App </h6>
-							</div>
-						</li>
+						{% endfor %}
+
+
 					</ul>
 					<div class="tabs-content">
 						<!--================== TAB1 ==================-->

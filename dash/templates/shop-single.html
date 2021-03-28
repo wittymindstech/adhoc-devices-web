@@ -82,63 +82,43 @@
 					</ul>
 					<div class="tabs-content">
 						<div class="tab tab1">
+							{% for information in information %}
 							<div class="tab-information">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad harum, rem? A corporis itaque dolores nam quo vitae tenetur laboriosam illo suscipit pariatur officia eius similique, harum ducimus, architecto consequatur aperiam. Doloribus tenetur earum a illum! Laborum repudiandae molestiae, molestias quasi natus quos, temporibus officia asperiores, autem laboriosam aliquid, accusantium!</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam animi consequuntur cupiditate obcaecati, modi nisi minus deleniti minima delectus, culpa, eum ipsum nobis quo! Doloremque voluptatibus quia quidem velit tempore, omnis dolore architecto inventore minus alias aut impedit numquam quae est praesentium esse neque nobis distinctio minima corporis voluptatem repellendus sint rerum. Quis, voluptate incidunt eos saepe cumque ipsum, culpa eveniet illum ad dolorem excepturi reiciendis qui nam similique aperiam doloribus, earum, iste ea unde adipisci officia impedit. Expedita fugiat voluptas, maiores magnam libero neque assumenda hic deleniti laboriosam reiciendis voluptatibus a, voluptatem itaque provident earum quod, vel doloremque!</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed ipsa tenetur repellendus explicabo aspernatur iusto alias deleniti expedita nulla suscipit. Ipsa doloribus ab totam rem soluta debitis reiciendis praesentium ratione.</p>
+								<p>{{information.information}}</p>
+
 							</div>
+							{% endfor %}
 						</div>
 						<div class="tab tab2">
 							<ul class="reviews-list">
+								{% for reviews in review %}
 								<li class="item">
 									<div class="review-item">
 										<div class="review-avatar"><img src="{% static 'img/testimonials-1.png' %}" alt="img"></div>
 										<div class="review-content">
-											<div class="name">Sam Piters</div>
-											<div class="date">Dec 26, 2019</div>
-											<p class="review-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis cupiditate vel dicta animi nostrum delectus at doloremque nam eligendi unde! Nulla temporibus ut, libero, architecto tempora impedit ipsa mollitia unde.</p>
-											<a href="#" class="review-btn"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
+											<div class="name">{{reviews.user.username}}</div>
+											<div class="date">{{reviews.date}}</div>
+											<p class="review-comment">{{reviews.reviews}}</p>
+
 										</div>
 									</div>
-									<ul class="child">
-										<li class="item">
-											<div class="review-item">
-												<div class="review-avatar"><img src="{% static 'img/testimonials-2.png' %}" alt="img"></div>
-												<div class="review-content">
-													<div class="name">Anna Smith</div>
-													<div class="date">Dec 26, 2019</div>
-													<p class="review-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla eligendi a cum corporis, minus reprehenderit quo aut at, quas quisquam?</p>
-													<a href="#" class="review-btn"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
-												</div>
-											</div>
-										</li>
-									</ul>
+
+
 								</li>
+								{% endfor %}
 							</ul>
 						</div>
 						<div class="tab tab3">
 							<ul class="faq-cover">
+
+									{% for question_answer in faq %}
 								<li>
-									<h6 class="title-line-left">What are the main differences between the Mavic 2 Pro and Mavic 2 Zoom?</h6>
-									<p>The only difference between both editions is their respective gimbal cameras. However, by purchasing the Mavic 2 Gimbal Camera Replacement Service in ONLINE REPAIR REQUEST page, you have the option to replace your gimbal camera with the other version by sending it to the DJI After-Sales Team.</p>
+									<h6 class="title-line-left">{{question_answer.question}}</h6>
+									<p>{{question_answer.answer}}</p>
 								</li>
-								<li>
-									<h6 class="title-line-left">Compared to the Mavic Pro, how has the Mavic 2 been improved?</h6>
-									<p>The Mavic 2 is an improvement in almost all aspects over the Mavic Pro including camera performance, video transmission, fight time, flight speed, low-noise, omnidirectional obstacle sensing, intelligent functions, and its unique Hyperlapse feature.</p>
-								</li>
-								<li>
-									<h6 class="title-line-left">What are the main advantages of the cameras on both the Mavic 2 Pro and Mavic 2 Zoom?</h6>
-									<p>The Mavic 2 Pro comes equipped with the all-new Hasselblad L1D-20c camera. The brand new 1-inch CMOS sensor has an active sensing area four times more effective than the original Mavic Pro. The large sensor also means better performance in low-light environments with a more extensive ISO range, and max ISO lifted from 3200 to 12800.</p>
-									<p>The Mavic 2 Zoom is all about dynamic perspectives and is powered by a 1/2.3 inch 12-megapixel sensor with up to four-times zoom, including a two-times optical zoom (24mm–48mm) for more creative aerial photography options.</p>
-								</li>
-								<li>
-									<h6 class="title-line-left">What advantages does the Mavic 2 Pro have when recording video?</h6>
-									<p>The Mavic 2 Pro is capable of recording 3840×2160 10-bit 4K Dlog-M and 4K HDR 10-bit videos at 100 Mbps.</p>
-								</li>
-								<li>
-									<h6 class="title-line-left">Can I use the remote controller to move the Mavic 2's gimbal 75° from left to right?</h6>
-									<p>No. However, you can do this in Head Tracking mode with the DJI Goggles series.</p>
-								</li>
+								{% endfor %}
+
+
 							</ul>
 						</div>
 					</div>
