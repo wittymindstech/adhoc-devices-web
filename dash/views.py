@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404,reverse
 from django.http import HttpResponse,JsonResponse
-from .models import  Product,Category,ContactUs,Cart,OrderTable
+from .models import  Product,Category,ContactUs,Cart,OrderTable,Information,Reviews,FAQ
 from .models import SignUp
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,7 @@ from decimal import Decimal
 import json
 # Create your views here.
 def home(req):
-    items=Product.objects.all()
+    items=Product.objects.filter(cat=1)
     product_list=[]
     for item in items:
         if not item.purchase_or_not:
@@ -20,8 +20,13 @@ def home(req):
 
     if len(product_list)>10:
         items=product_list[:10]
-    d={'items':items}
+    d={'items':items,'cat':Category.objects.all()}
     return render(req,'index.html' , d)
+def CategoryShow(req,pk):
+    cat = Category.objects.get(pk=pk)
+    product=Product.objects.filter(cat=cat)
+
+    return render(req,'category.html',{'items':product,'cat':Category.objects.all()})
 def about(req):
     return render(req,'about.html')
 def contact(req):
@@ -134,6 +139,7 @@ def thankyou(req):
         return render(req, 'ThankYou.html', { 'form': form})
 
     return render(req,'index.html')
+@login_required(login_url='/signupLogin/')
 def payment_done(req):
     if 'order_id' in req.session:
         order_id=req.session['order_id']
@@ -148,6 +154,7 @@ def payment_done(req):
             product.purchase_or_not=True
             product.save()
     return  HttpResponse("Payment Sucessfull")
+@login_required(login_url='/signupLogin/')
 def payment_cancelled(req):
     return HttpResponse("Payment Cancel")
 
@@ -241,8 +248,11 @@ def shopSingle(req,pk):
     items=Product.objects.all()
 
     cartItems=Cart.objects.filter(product__id=pk)
+    information=Information.objects.filter(product__id=pk)
+    faq=FAQ.objects.filter(product__id=pk)
+    reviews=Reviews.objects.filter(product__id=pk)
 
-    d = {'products': items , 'product': product,'cartItems':cartItems}
+    d = {'products': items , 'product': product,'cartItems':cartItems,'information':information,'faq':faq,'review':reviews}
     return render(req,'shop-single.html', d)
     #return render(req,'SignUp-login.html')
 def product(req):

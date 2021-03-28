@@ -1,12 +1,12 @@
 from django.db import models
-import datetime
+
 from django.contrib.auth.models import User
 from django.db.models import CASCADE
 # Create your models here.
 class Category(models.Model):
     title=models.CharField(max_length=100)
     description=models.TextField()
-
+    Image=models.ImageField(upload_to='images',blank=True,null=True)
     def __str__(self):
         return self.title
 class Product(models.Model):
@@ -42,13 +42,32 @@ class OrderTable(models.Model):
     country=models.CharField(max_length=250,null=True)
     poster_code=models.CharField(max_length=10,null=True)
     def __str__(self):
-        return self.cart_ids.username
+        return self.cart_ids
 class SignUp(models.Model):
     user=models.ForeignKey(to=User,on_delete=CASCADE,null=True)
 
 
     def __str__(self):
         return self.user
+class Information(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    information=models.TextField(null=True)
+    def __str__(self):
+        return self.product.name
+
+class FAQ(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    question=models.CharField(max_length=500,null=True)
+    answer=models.CharField(max_length=500,null=True)
+    def __str__(self):
+        return self.product.name
+class Reviews(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    reviews=models.TextField(null=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    def __str__(self):
+        return self.product.name
 class Cart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -56,4 +75,4 @@ class Cart(models.Model):
     added_on=models.DateTimeField(auto_now_add=True,null=True)
     update_on=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.user.username
+        return self.user
