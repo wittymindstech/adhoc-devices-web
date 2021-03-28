@@ -26,26 +26,27 @@
 				<div class="col-12 col-md-5">
 					<!--===== SLIDER-SINGLE-FOR =====-->
 					<div class="slider-single-for">
+
+						{% for image in images %}
 						<div class="slide-single-for">
-							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{product.Image.url}}" alt="img">
+							<a href="{{image.image.url}}" class="single-for-img" data-fancybox="prod1">
+								<img src="{{image.image.url}}" alt="img">
 							</a>
 						</div>
-						<div class="slide-single-for">
-							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{product.Image.url}}" alt="img">
-							</a>
+						{% endfor %}
+
+					</div>
+					<div class="slider-single-nav">
+						{% for image in images %}
+						<div class="slide-single-nav">
+							<div class="single-nav-img">
+								<img src="{{image.image.url}}" alt="img">
+							</div>
 						</div>
-						<div class="slide-single-for">
-							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{product.Image.url}}" alt="img">
-							</a>
-						</div>
-						<div class="slide-single-for">
-							<a href="{{product.Image.url}}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{product.Image.url}}" alt="img">
-							</a>
-						</div>
+
+
+						{% endfor %}
+
 					</div>
 					<!--=== SLIDER-SINGLE-FOR END ===-->
 					<!--===== SLIDER-SINGLE-NAV =====-->
