@@ -1,45 +1,51 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404,reverse
 from django.http import HttpResponse,JsonResponse
-from .models import  Product,Category,ContactUs,Cart
+from .models import  Product,Category,ContactUs,Cart,OrderTable
 from .models import SignUp
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
 from django.core.paginator import Paginator
-
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+from decimal import Decimal
 import json
 # Create your views here.
 def home(req):
     items=Product.objects.all()
-    items=list(items)
-    if len(items)>10:
-        items=items[:10]
+    product_list=[]
+    for item in items:
+        if not item.purchase_or_not:
+            product_list.append(item)
+
+    if len(product_list)>10:
+        items=product_list[:10]
     d={'items':items}
     return render(req,'index.html' , d)
 def about(req):
     return render(req,'about.html')
 def contact(req):
     return render(req,'contacts.html')
-@login_required()
+@login_required(login_url='/signupLogin/')
 @csrf_exempt
 def AddToCart(req):
     print("inside add to cart")
-    if req.user.is_authenticated:
-        if req.method=='POST':
-            pid=req.POST.get('id')
-            if pid is None:
-                return JsonResponse({'success':False})
-            pid=int(pid)
-            print("pid = {}".format(pid))
-            is_exist=Cart.objects.filter(product__id=pid,user__id=req.user.id,status=False)
-            if len(is_exist)>0:
-                return JsonResponse({'success':True})
-            else:
-                product=get_object_or_404(Product,id=pid)
-                user=get_object_or_404(User,id=req.user.id)
-                cart=Cart(user=user,product=product)
-                cart.save()
-                return JsonResponse({'success':True})
+
+    if req.method=='POST':
+        pid=req.POST.get('id')
+        if pid is None:
+            return JsonResponse({'success':False})
+        pid=int(pid)
+        print("pid = {}".format(pid))
+        is_exist=Cart.objects.filter(product__id=pid,user__id=req.user.id,status=False)
+        if len(is_exist)>0:
+            return JsonResponse({'success':True})
+        else:
+            product=get_object_or_404(Product,id=pid)
+            user=get_object_or_404(User,id=req.user.id)
+            cart=Cart(user=user,product=product)
+            cart.save()
+            return JsonResponse({'success':True})
     return JsonResponse({'sucess':False})
 @login_required(login_url='/signupLogin/')
 def checkout(req):
@@ -55,6 +61,7 @@ def checkout(req):
     return render(req,'checkout.html',{'products':order_list,'total':total})
     #return render(req,'SignUp-login.html')
 @csrf_exempt
+@login_required(login_url='/signupLogin/')
 def removecartItems(req):
     print("inside removecartItems")
     if req.method=='POST':
@@ -79,6 +86,7 @@ def removecartItems(req):
 
 
     return JsonResponse({'success':False})
+@login_required(login_url='/signupLogin/')
 def thankyou(req):
     if req.method=='POST':
         email=req.POST['email']
@@ -89,9 +97,60 @@ def thankyou(req):
         state=req.POST['state']
         country=req.POST['country']
         poster_code=req.POST['postal']
+
+        items=Cart.objects.filter(user_id__id=req.user.id,status=False)
+        amount=50
+        products=""
+        inv="INV-"
+        cart_ids=''
+        product_ids=''
+        for j in items:
+            products+=str(j.product.name)+"\n"
+            amount+=int(j.product.price)
+            product_ids+=str(j.product.id)+"\n"
+            inv+=str(j.product.id)
+            cart_ids+=str(j.id)+','
+        paypal_dict = {
+            'business': settings.PAYPAL_RECEIVER_EMAIL,
+            'amount': str(amount),
+            'item_name': products,
+            'invoice': inv,
+
+            'notify_url': 'http://{}{}'.format('127.0.0.1:8000',reverse('paypal-ipn')),
+            'return_url': 'http://{}{}'.format('127.0.0.1:8000',
+                                               reverse('payment_done')),
+            'cancel_return': 'http://{}{}'.format('127.0.0.1:8000',
+                                                  reverse('payment_cancelled')),
+        }
         print(email,tel,full_name,address,country,city,state,poster_code)
-        return  render(req,'ThankYou.html')
+
+        user=User.objects.get(username=req.user.username)
+        order_table=OrderTable(customer_id=user,cart_ids=cart_ids,products_ids=product_ids,invoice_id=inv , email=email,tel=tel , full_name=full_name,address=address , country=country,city=city,state=state,poster_code=poster_code)
+        order_table.save()
+        order_table.invoice_id=str(order_table.id)+inv
+        order_table.save()
+        req.session['order_id']=order_table.id
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        return render(req, 'ThankYou.html', { 'form': form})
+
     return render(req,'index.html')
+def payment_done(req):
+    if 'order_id' in req.session:
+        order_id=req.session['order_id']
+        order_obj=get_object_or_404(OrderTable,id=order_id)
+        order_obj.status=True
+        order_obj.save()
+        for i in order_obj.cart_ids.split(',')[:-1]:
+            cart_object=Cart.objects.get(id=i)
+            cart_object.status=True
+            cart_object.save()
+            product=Product.objects.filter(id=i)
+            product.purchase_or_not=True
+            product.save()
+    return  HttpResponse("Payment Sucessfull")
+def payment_cancelled(req):
+    return HttpResponse("Payment Cancel")
+
 @csrf_exempt
 def contactUs(req):
     if req.method=='POST':
@@ -146,26 +205,26 @@ def search(req):
         query=req.GET.get('search')
         if query is None:
             return  render(req,'index.html')
-        search_result=Product.objects.filter(name__contains=query)
-        search_des=Product.objects.filter(description__contains=query)
-        search_price=Product.objects.filter(price__contains=query)
+        search_result=Product.objects.filter(name__contains=query,purchase_or_not=False)
+        search_des=Product.objects.filter(description__contains=query,purchase_or_not=False)
+        search_price=Product.objects.filter(price__contains=query,purchase_or_not=False)
         search_cat_des=Category.objects.filter(description__contains=query)
         return render(req,'search.html',{'search_result':search_result,'search_des':search_des,'search_price':search_price,'search_cat_des':search_cat_des})
     return  render(req,'index.html')
-
+@login_required(login_url='/signupLogin/')
 def shopSingle(req,pk):
-    if req.user.is_authenticated:
 
-        product=Product.objects.filter(pk=pk)
-        items=Product.objects.all()
 
-        cartItems=Cart.objects.filter(product__id=pk)
+    product=Product.objects.filter(pk=pk,purchase_or_not=False)
+    items=Product.objects.all()
 
-        d = {'products': items , 'product': product,'cartItems':cartItems}
-        return render(req,'shop-single.html', d)
-    return render(req,'SignUp-login.html')
+    cartItems=Cart.objects.filter(product__id=pk)
+
+    d = {'products': items , 'product': product,'cartItems':cartItems}
+    return render(req,'shop-single.html', d)
+    #return render(req,'SignUp-login.html')
 def product(req):
-    items=Product.objects.all().order_by('id')
+    items=Product.objects.filter(purchase_or_not=False).order_by('id')
     l=list(items)
     date_wise_sorted_list=sorted(l,key=lambda x:x.date,reverse=True)
     print(date_wise_sorted_list)
@@ -181,9 +240,7 @@ def logout(req):
     return redirect('home')
 def blogSingle(req):
     return  render(req,'sindle-blog.html')
-@login_required()
-def gallery(req):
-    return render(req,'gallery.html'),
+
 def services(req):
     return render(req,'services.html')
 def privacyPolicy(req):

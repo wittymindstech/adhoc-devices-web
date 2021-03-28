@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path
+from django.urls import path,include
 from . import views
 urlpatterns = [
     path('',views.home,name='home'),
     path('about/',views.about,name='about'),
     path('contact/',views.contact,name='contact'),
     path('product/',views.product,name='product'),
-    path('gallery/',views.gallery,name='gallery'),
+
     path('shopsingle/<int:pk>',views.shopSingle,name='shopsingle'),
     path('singleblog/',views.blogSingle,name='singleblog'),
     path('service/',views.services,name='service'),
@@ -34,4 +34,7 @@ urlpatterns = [
     path('thankyou/',views.thankyou,name='thankyou'),
     path('removeitems/',views.removecartItems,name='removeitems'),
     path('addtocart/',views.AddToCart,name='addtocart'),
+    path('paypal/', include('paypal.standard.ipn.urls')),
+    path('payment_done',views.payment_done,name='payment_done'),
+    path('payment_cancelled',views.payment_cancelled,name='payment_cancelled'),
 ]
