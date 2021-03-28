@@ -200,6 +200,28 @@ def SignUplogin(req):
 
 
     return render(req,'SignUp-login.html')
+def ux(req):
+    return render(req,'ux.html')
+def webservices(req):
+    return render(req,'WebServices.html')
+def iotdevices(req):
+    return render(req,'IotDevices.html')
+def devops(req):
+    return render(req,'Devops.html')
+def dataanalytics(req):
+    return render(req,'DataAnalytics.html')
+def digitaloceanhosting(req):
+    return render(req,'DigitalOceanHosting.html')
+def appsservices(req):
+    return render(req,'AppsServices.html')
+def awshosting(req):
+    return render(req,'AwsHosting.html')
+def awscloudservice(req):
+    return render(req,'AwsCloudService.html')
+def chatmessanger(req):
+    return render(req,'ChatMessanger.html')
+def azurecloudsupport(req):
+    return render(req,'AzureCloudSupport.html')
 def search(req):
     if req.method=='GET':
         query=req.GET.get('search')
