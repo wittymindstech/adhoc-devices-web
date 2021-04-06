@@ -245,9 +245,13 @@ def search(req):
         query=req.GET.get('search')
         if query is None:
             return  render(req,'index.html')
+        # search the name in product
         search_result=Product.objects.filter(name__contains=query,purchase_or_not=False)
+        # search by description
         search_des=Product.objects.filter(description__contains=query,purchase_or_not=False)
+        # search by price
         search_price=Product.objects.filter(price__contains=query,purchase_or_not=False)
+        # search in category description
         search_cat_des=Category.objects.filter(description__contains=query)
         return render(req,'search.html',{'search_result':search_result,'search_des':search_des,'search_price':search_price,'search_cat_des':search_cat_des})
     return  render(req,'index.html')
@@ -275,8 +279,10 @@ def shopSingle(req,pk):
 def product(req):
     items=Product.objects.filter(purchase_or_not=False).order_by('id')
     l=list(items)
+    # date wise sort the product
     date_wise_sorted_list=sorted(l,key=lambda x:x.date,reverse=True)
     print(date_wise_sorted_list)
+    # Pagination code only 4 item per page
     paginator=Paginator(items,4)
     page_number=req.GET.get('page')
     page_obj=paginator.get_page(page_number)
