@@ -16,7 +16,7 @@ class Product(models.Model):
     price=models.CharField(max_length=50)
     cat=models.ForeignKey(Category,on_delete=models.CASCADE)
     purchase_or_not=models.BooleanField(default=False)
-    Image=models.ImageField(upload_to='images',blank=True,null=True)
+    image=models.ImageField(upload_to='images',blank=True,null=True)
     def __str__(self):
         return  self.name
 class ProductImage(models.Model):

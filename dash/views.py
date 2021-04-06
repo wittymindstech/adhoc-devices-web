@@ -60,9 +60,11 @@ def checkout(req):
     cartItems=Cart.objects.filter(user__id=req.user.id)
     for product in cartItems:
         order_list.append(product.product)
-    total=50
+    total=0
     for product in order_list:
         total+=int(product.price)
+    if total!=0:
+        total+=50
     return render(req,'checkout.html',{'products':order_list,'total':total})
     #return render(req,'SignUp-login.html')
 @csrf_exempt
@@ -84,9 +86,11 @@ def removecartItems(req):
                 cartItems=Cart.objects.filter(user__id=req.user.id)
                 for product in cartItems:
                     order_list.append(product.product)
-                total=50
+                total=0
                 for product in order_list:
                     total+=int(product.price)
+                if total!=0:
+                    total+=50
                 return JsonResponse({'success':True,'total':total})
 
 
@@ -104,7 +108,7 @@ def thankyou(req):
         poster_code=req.POST['postal']
 
         items=Cart.objects.filter(user_id__id=req.user.id,status=False)
-        amount=50
+        amount=0
         products=""
         inv="INV-"
         cart_ids=''
@@ -115,6 +119,8 @@ def thankyou(req):
             product_ids+=str(j.product.id)+"\n"
             inv+=str(j.product.id)
             cart_ids+=str(j.id)+','
+        if amount!=0:
+            amount+=50
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
             'amount': str(amount),
@@ -252,6 +258,12 @@ def shopSingle(req,pk):
     faq=FAQ.objects.filter(product__id=pk)
     reviews=Reviews.objects.filter(product__id=pk)
     images=ProductImage.objects.filter(product__id=pk)
+    images=list(images)
+    image=Product.objects.filter(id=pk)
+    for i in image:
+        print(i)
+        images.append(i)
+
     d = {'products': items , 'product': product,'cartItems':cartItems,'information':information,'faq':faq,'review':reviews,'images':images}
     return render(req,'shop-single.html', d)
     #return render(req,'SignUp-login.html')
