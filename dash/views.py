@@ -12,17 +12,20 @@ from decimal import Decimal
 import json
 # Create your views here.
 def home(req):
+
     items=Product.objects.filter(cat=1)
     product_list=[]
     for item in items:
+        # check if product is already purchase_or not
         if not item.purchase_or_not:
             product_list.append(item)
-
+# only 10 product show in home page
     if len(product_list)>10:
         items=product_list[:10]
     d={'items':items,'cat':Category.objects.all()}
     return render(req,'index.html' , d)
 def CategoryShow(req,pk):
+    # category wise filter the product
     cat = Category.objects.get(pk=pk)
     product=Product.objects.filter(cat=cat)
 
@@ -35,7 +38,7 @@ def contact(req):
 @csrf_exempt
 def AddToCart(req):
     print("inside add to cart")
-
+# add to cart
     if req.method=='POST':
         pid=req.POST.get('id')
         if pid is None:
@@ -43,6 +46,7 @@ def AddToCart(req):
         pid=int(pid)
         print("pid = {}".format(pid))
         is_exist=Cart.objects.filter(product__id=pid,user__id=req.user.id,status=False)
+        # check if product is already exist in cart or not
         if len(is_exist)>0:
             return JsonResponse({'success':True})
         else:
@@ -54,8 +58,7 @@ def AddToCart(req):
     return JsonResponse({'sucess':False})
 @login_required(login_url='/signupLogin/')
 def checkout(req):
-
-
+    # list all items in cart and calculate total price
     order_list=[]
     cartItems=Cart.objects.filter(user__id=req.user.id)
     for product in cartItems:
@@ -70,6 +73,7 @@ def checkout(req):
 @csrf_exempt
 @login_required(login_url='/signupLogin/')
 def removecartItems(req):
+    # remove item from cart
     print("inside removecartItems")
     if req.method=='POST':
 
@@ -89,6 +93,7 @@ def removecartItems(req):
                 total=0
                 for product in order_list:
                     total+=int(product.price)
+                # add delivery charge
                 if total!=0:
                     total+=50
                 return JsonResponse({'success':True,'total':total})
@@ -120,7 +125,7 @@ def thankyou(req):
             inv+=str(j.product.id)
             cart_ids+=str(j.id)+','
         if amount!=0:
-            amount+=50
+            amount+=50 # add delivery charge
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
             'amount': str(amount),
@@ -279,14 +284,13 @@ def product(req):
     d={'items':page_obj,'new_product':date_wise_sorted_list}
     return render(req,'shop.html',d)
 
+@login_required(login_url='/signupLogin/')
 def logout(req):
     auth.logout(req)
     return redirect('home')
-def blogSingle(req):
-    return  render(req,'sindle-blog.html')
 
-def services(req):
-    return render(req,'services.html')
+
+
 def privacyPolicy(req):
     return render(req,'pravicy-policy.html')
 
