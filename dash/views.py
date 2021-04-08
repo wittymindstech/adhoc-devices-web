@@ -118,6 +118,7 @@ def thankyou(req):
         inv="INV-"
         cart_ids=''
         product_ids=''
+        host=req.get_host()
         for j in items:
             products+=str(j.product.name)+"\n"
             amount+=int(j.product.price)
@@ -132,10 +133,10 @@ def thankyou(req):
             'item_name': products,
             'invoice': inv,
 
-            'notify_url': 'http://{}{}'.format('127.0.0.1:8000',reverse('paypal-ipn')),
-            'return_url': 'http://{}{}'.format('127.0.0.1:8000',
+            'notify_url': 'http://{}{}'.format(host,reverse('paypal-ipn')),
+            'return_url': 'http://{}{}'.format(host,
                                                reverse('payment_done')),
-            'cancel_return': 'http://{}{}'.format('127.0.0.1:8000',
+            'cancel_return': 'http://{}{}'.format(host,
                                                   reverse('payment_cancelled')),
         }
         print(email,tel,full_name,address,country,city,state,poster_code)
@@ -149,7 +150,7 @@ def thankyou(req):
         form = PayPalPaymentsForm(initial=paypal_dict)
         return render(req, 'ThankYou.html', { 'form': form})
 
-    return render(req,'index.html')
+    return redirect('home')
 @login_required(login_url='/signupLogin/')
 def payment_done(req):
     if 'order_id' in req.session:
@@ -203,7 +204,7 @@ def SignUplogin(req):
             except :
 
                 print("something went wrong")
-            return render(req,'index.html')
+            return redirect('home')
         elif 'login' in req.POST:
             print('inside login')
             username=req.POST['Username']
