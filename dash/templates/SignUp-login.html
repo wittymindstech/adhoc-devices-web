@@ -27,6 +27,9 @@
               <input type="password" name="Password" required placeholder="Password" />
             </div>
             <input type="submit" value="Login" name="login" class="btn solid" />
+            {%  if message is not None %}
+            <p style="color:red">{{message}}</p>
+            {% endif %}
             <p class="social-text">Or Sign in with social platforms</p>
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <div class="social-media">
@@ -60,6 +63,9 @@
               <input type="password" name="password" required placeholder="Password" />
             </div>
             <input type="submit" name="signup" class="btn" value="Sign up" />
+            {%  if message is not None %}
+            <p style="color:red">{{message}}</p>
+            {% endif %}
             <p class="social-text">Or Sign up with social platforms</p>
             <div class="social-media">
               <a href="#" class="social-icon">
