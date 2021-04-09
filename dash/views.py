@@ -148,9 +148,9 @@ def thankyou(req):
         order_table.save()
         req.session['order_id']=order_table.id
         form = PayPalPaymentsForm(initial=paypal_dict)
-        print(form)
-        return  redirect('https://www.sandbox.paypal.com/webapps/hermes?token=85794313UL176235D&useraction=commit&mfid=1617882715069_b0a4ab53e3ed6')
-        #return render(req, 'ThankYou.html', { 'form': form})
+
+        #return  redirect('https://www.sandbox.paypal.com/webapps/hermes?token=85794313UL176235D&useraction=commit&mfid=1617882715069_b0a4ab53e3ed6')
+        return render(req, 'ThankYou.html', { 'form': form})
 
     return redirect('home')
 @login_required(login_url='/signupLogin/')
@@ -206,7 +206,8 @@ def SignUplogin(req):
             except :
 
                 print("something went wrong")
-            return redirect('home')
+                message='user alreday exists'
+            return render(req,'SignUp-login.html',{'message':message})
         elif 'login' in req.POST:
             print('inside login')
             username=req.POST['Username']
@@ -216,7 +217,9 @@ def SignUplogin(req):
             print('inside login')
             if user is not None:
                 auth.login(req, user)
-        return redirect('home')
+                return redirect('home')
+            message='invalid email or password'
+            return render(req,'SignUp-login.html',{'message':message})
 
 
 
