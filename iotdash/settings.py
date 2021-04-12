@@ -133,12 +133,12 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-PAYPAL_RECEIVER_EMAIL = 'wittytechminds@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'XXXXX@gmail.com'
 
 PAYPAL_TEST = True
 #
-# AWS_ACCESS_KEY_ID = 'AKIA2QMUNTD5AWTLFVHU'  # Your AWS Access Key ID
-# AWS_SECRET_ACCESS_KEY = 'wdwR7QR3j1flRiN2FlvqonweRnaLJ9fN8Hjj4CJu'  # Your AWS Secret Access Key
+# AWS_ACCESS_KEY_ID = 'XXXX'  # Your AWS Access Key ID
+# AWS_SECRET_ACCESS_KEY = 'XXXXXX'  # Your AWS Secret Access Key
 # AWS_STORAGE_BUCKET_NAME = 'adhoc-devices'  # Your AWS Bucket name
 #
 #
