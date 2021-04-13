@@ -435,29 +435,6 @@ $( window ).on( 'load', function(){
 
 	}).trigger( 'scroll.myTemplate' );
 
-	/**
-	 *------------------------ CURSOR -----------------------
-	*/
-	$( 'body' ).append( '<span class="cursor-secondary"></span><span class="cursor-primary"><span></span></span>' );
-	$( '*' ).css( 'cursor', 'none' );
-
-	var cursor = $( '.cursor-secondary, .cursor-primary' ),
-		interactiveElement = 'a, li.dropdown, a[href="#"], button, input[type="submit"], li.item, .main-slide-nav .img-cover, .slick-arrow, input[type="checkbox"]';
-
-	$( document )
-	.on( 'mousemove.myTemplate', function( event ){
-		if( $('body.isMobile')[0] ) return;
-		cursor.css( 'left', event.clientX + 'px' );
-		cursor.css( 'top', event.clientY + 'px' );
-	} )
-	.on( 'mouseenter', interactiveElement, function() {
-		if( $('body.isMobile')[0] ) return;
-		cursor.addClass( 'animateCursor' );
-	})
-	.on( 'mouseleave', interactiveElement, function() {
-		if( $('body.isMobile')[0] ) return;
-		cursor.removeClass( 'animateCursor' );
-	}).trigger( 'mousemove.myTemplate' );
 
 	/**
 	 *------------------------ PRELOADER -----------------------
