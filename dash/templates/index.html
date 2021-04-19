@@ -1,23 +1,5 @@
 {% extends 'nav.html' %}
 {% load static %}
-{% block nav-tab %}
-    <li class="dropdown">
-                            <a href="#">Services <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul>
-                                <li><a href="{% url 'ux' %}">UI/UX</a></li>
-                                <li><a href="{% url 'awscloudservice' %}">AWS Cloud Services</a></li>
-                                <li><a href="{% url 'azurecloudsupport' %}">Azure Cloud Support</a></li>
-                                <li><a href="{% url 'iotdevices' %}">Iot Devices</a></li>
-                                <li><a href="{% url 'webservices' %}">Web Services</a></li>
-                                <li><a href="{% url 'appsservices' %}">Apps Services</a></li>
-                                <li><a href="{% url 'digitaloceanhosting' %}">Digital Ocean Hosting</a></li>
-                                <li><a href="{% url 'awshosting' %}">AWS Hosting</a></li>
-                                <li><a href="{% url 'chatmessanger' %}">Chat Messanger</a></li>
-                                <li><a href="{% url 'devops' %}">Devops</a></li>
-                                <li><a href="{% url 'dataanalytics' %}">Data Analytics</a></li>
-                            </ul>
-                        </li>
-{% endblock %}
 {% block body %}
 	{#=============== MAIN CONTENT ===============#}
 	<main>
@@ -201,32 +183,8 @@
 		{#=============== S-TESTIMONIALS END ===============#}
 
 		{#=================== S-CONTACTS ===================#}
-		<section class="s-contacts s-main-contacts">
-			<div class="container s-anim">
-				<h2>Contact us</h2>
-				<p class="slogan">At ad-hoc, our goal is therefore to supply market participants in the IoT ecosystem with accurate information that enable them to go to market quicker and build safer and better IoT solutions.</p>
-				<form id="contactform" method="post" onsubmit="return false"  name="contactform">
-					{% csrf_token %}
-					<ul class="form-cover">
-						<li class="inp-name"><input id="name"  type="text" name="your-name" required placeholder="Name"></li>
-						<li class="inp-phone"><input id="phone"  type="tel" name="your-phone" required placeholder="Phone"></li>
-						<li class="inp-email"><input id="email" type="email" name="your-email" required placeholder="E-mail"></li>
-						<li class="inp-text"><textarea id="comments" name="your-text" required placeholder="Message"></textarea></li>
-					</ul>
-					<div class="checkbox-wrap">
-						<div class="checkbox-cover">
-							<input type="checkbox" required>
-							<p>By using this form you agree with the storage and handling of your data by this website.</p>
-						</div>
-					</div>
-					<div class="btn-form-cover">
-						<button id="#submit" type="submit" onclick="ContactUsFormData();" class="btn">submit comment</button>
-					</div>
-				</form>
-				<div id="message"></div>
-			</div>
-		</section>
-		{#================= S-CONTACTS END =================#}
+        {% include 'contactform.html' %}
+        {#================= S-CONTACTS END =================#}
 		{#=============== S-CLIENTS ===============#}
 		<div class="s-clients s-clients-home">
 			<div class="container">
@@ -279,29 +237,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 	<script src="{%  static 'js/scripts.js' %}"></script>
-<script>
-	function ContactUsFormData(){
-	console.log("inside form data");
-	var name=document.getElementById('name').value;
-	var email=document.getElementById('phone').value;
-	var phone=document.getElementById('email').value;
-	var message=document.getElementById('comments').value;
-	obj={'name':name,'email':email,'phone':phone,'message':message};
-	$.ajax({
-url:"{% url 'contactUs' %}",
-method:"POST",
-async:true,
-data:obj,
-dataType:'json',
-success:function(data){
-console.log(data);
-console.log("success");
-document.getElementById("contactform").reset();
+{% block scripts %}
 
-},
-}
-);
-	}
-</script>
+{% endblock %}
 </body>
 {% endblock %}

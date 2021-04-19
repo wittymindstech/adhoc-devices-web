@@ -185,7 +185,6 @@ header{
 	top: 0;
 	left: 0;
 	width:100%;
-	min-height:50px;
 	color: #fff;
 	display: flex;
 	align-items: center;
@@ -365,7 +364,6 @@ header.header-scroll .nav-menu{
 	top:50%;
 	width:60px;
 	padding:10px 15px;
-	display:block;
 	z-index:2;
 	overflow:hidden;
 	transform: translate(0,-50%);
@@ -403,7 +401,7 @@ header.header-scroll .nav-menu{
 }
 .header-icon{
 	display: flex;
-	justify-content: flex-end;
+	justify-content: start;
 }
 .header-icon li{
 	display: flex;
@@ -430,6 +428,7 @@ header.header-scroll .nav-menu{
 	font-size: 18px;
 	line-height: 21px;
 	position: relative;
+	/*margin: 20px;*/
 }
 .header-icon li:last-child .icon{
 	padding-right: 0;
@@ -438,23 +437,15 @@ header.header-scroll .nav-menu{
 	color: #45a7ef;
 }
 .header-icon li.search form{
-	position: absolute;
 	top: 100%;
-	right: 0;
-	width: 0;
-	opacity: 0;
-	overflow: hidden;
 	display: flex;
-	margin-top: 17px;
-	transition: .4s ease;
+	width: 245px;
+	opacity: 1;
 }
 .header-icon li.search.active form{
-	width: 290px;
-	opacity: 1;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 .header-icon li.search form input[type="search"]{
-	width: 260px;
 	padding: 0 10px 0 15px;
 	border-right: none;
 	background: #fff;
@@ -472,6 +463,7 @@ header.header-scroll .nav-menu{
 	font-size: 18px;
 	font-weight: 700;
 	color: #fff;
+	margin-right:10px;
 }
 .header-icon li.search form button:hover{
 	background-color: transparent;
@@ -575,7 +567,7 @@ header.header-scroll .logo-strong{
 	transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
 }
 .main-slide-for{
-	height: 900px;
+	height: 750px;
 	position: relative;
 	overflow: hidden;
 }
@@ -1140,7 +1132,7 @@ header.header-scroll .logo-strong{
 	padding: 166px 0 100px;
 }
 .s-shop{
-	padding: 166px 0 100px;
+	padding: 120px 0 80px;
 }
 .we-offer-bottom .block-icon,
 .s-shop .block-icon{
@@ -1280,7 +1272,7 @@ header.header-scroll .logo-strong{
 }
 /*------------------- NEW-PRODUCT -------------------*/
 .s-product{
-	padding-bottom: 180px;
+	padding-bottom: 90px;
 }
 .new-product{
 	padding: 166px 0 0;
@@ -1510,7 +1502,7 @@ header.header-scroll .logo-strong{
 	background-color: rgba(0, 0, 0, 0.6);
 }
 .s-testimonials{
-	padding: 166px 0;
+	padding: 120px 0;
 }
 .slider-testimonials{
 	margin-left: -15px;
@@ -1762,7 +1754,7 @@ header.header-scroll .logo-strong{
 
 /*------------------------ FOOTER ------------------------*/
 footer{
-	padding-top: 96px;
+	padding-top: 90px;
 	background-color: #0e0e0e;
 }
 footer h5{

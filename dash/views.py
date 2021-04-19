@@ -15,22 +15,13 @@ from django.conf import settings
 from decimal import Decimal
 import json
 from django.views.generic import TemplateView
-
+from django.core.mail import send_mail
 
 # Create your views here.
 
 
 def home(request):
-    items = Product.objects.filter(cat=1)
-    product_list = []
-    for item in items:
-        # check if product is already purchase_or not
-        if not item.purchase_or_not:
-            product_list.append(item)
-    # only 10 product show in home page
-    if len(product_list) > 10:
-        items = product_list[:10]
-    d = {'items': items, 'cat': Category.objects.all()}
+    d = {'cat': Category.objects.all()[0:6]}
     return render(request, 'index.html', d)
 
 
@@ -197,17 +188,22 @@ def payment_done(request):
     return HttpResponse("Payment Sucessfull")
 
 
-@csrf_exempt
 def contactUs(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        phone = request.POST.get('phone')
+        phone = request.POST.get('phone')[-10:]
         message = request.POST.get('message')
         email = request.POST.get('email')
+        subject = "Adhoc Devices Customer Request"
         print(name, email, phone, message)
-        if email is not None and message is not None and phone is not None and name is not None:
+        email_template = f"Hello,\n{message}\n From"
+        if name != '' and phone != '' \
+                and message != '' and email != '' \
+                and message != '':
             ContactUs(name=name, email=email, number=phone, message=message).save()
-            print("inside contact us")
+            # todo  "Add Email Sending"
+            email_from = settings.EMAIL_HOST_USER
+            send_mail(subject, message, email_from, [email])
             return JsonResponse({'success': True})
     print("else part")
 

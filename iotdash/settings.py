@@ -72,7 +72,7 @@ DATABASES = {
     }
 }
 
-LOGIN_URL = '/login/'
+# LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
@@ -111,12 +111,10 @@ USE_TZ = True
 
 LOGIN_URL = '/signupLogin/'
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Extra places for collectstatic to find static files.
@@ -130,6 +128,16 @@ PAYPAL_RECEIVER_EMAIL = 'XXXXX@gmail.com'
 
 PAYPAL_TEST = True
 
+# Email Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jeetu8halder@gmail.com'
+EMAIL_HOST_PASSWORD = 'mgxayhnynlwqbwox'
+
+# AWS Configuration
 # AWS_ACCESS_KEY_ID = ''  # Your AWS Access Key ID
 # AWS_SECRET_ACCESS_KEY = ''  # Your AWS Secret Access Key
 # AWS_STORAGE_BUCKET_NAME = 'adhoc-devices'  # Your AWS Bucket name

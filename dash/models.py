@@ -15,6 +15,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = "Categories"
+        verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.title
@@ -58,7 +59,7 @@ class ProductImage(models.Model):
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=100)
-    number = models.CharField(max_length=10)
+    number = models.IntegerField()
     email = models.EmailField()
     message = models.TextField()
 

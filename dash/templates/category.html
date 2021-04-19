@@ -1,6 +1,7 @@
 {% extends 'nav.html' %}
 {% load static %}
 {% block nav-tab %}
+    <!--suppress HtmlUnknownAnchorTarget -->
     <li class="dropdown">
         <a href="#">Category <i class="fa fa-angle-down" aria-hidden="true"></i></a>
     <ul>
@@ -14,7 +15,7 @@
 {%  block body %}
 
 	{#============= PAGE-TITLE =============#}
-	<div class="page-title" style="background-image: url(/static/img1/back6.jpg);">
+	<div class="page-title" style="background-image: url({% static 'img1/back6.jpg' %});">
 		<div class="container">
 			<h1 class="title">{{ cat.title }}</h1>
 			<div class="breadcrumbs">
@@ -30,7 +31,6 @@
 	{#=========== NEW-PRODUCT ===========#}
 	<section class="new-product">
 		<div class="container">
-
             {% for product in products %}
                 {% if forloop.first %}
                     <h2>new products</h2>
@@ -64,9 +64,9 @@
                     {#=========== PROD-ITEM END ===========#}
                 </div>
                 {% empty %}
-                    <h2>Please leave a Message what you need, We are here to serve!</h2>
+                    <h4 class="slogan">Products Comming Soon!</h4>
+                {% include 'contactform.html' %}
                 {% endfor %}
-
 				{#======== SLIDE-NEW-PRODUCT END ========#}
 			</div>
 		</div>
@@ -180,8 +180,4 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>
-</body>
 {% endblock %}
-<script>
-
-</script>

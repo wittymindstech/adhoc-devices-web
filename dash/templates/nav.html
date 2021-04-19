@@ -44,7 +44,7 @@
             <div class="ajax-loader-logo">
                 <div class="ajax-loader-circle">
                     <svg class="ajax-loader-circle-spinner" viewBox="0 0 500 500" xml:space="preserve">
-							<circle cx="250" cy="250" r="239" />
+							<circle cx="250" cy="250" r="239"></circle>
 						</svg>
                 </div>
                 <div class="ajax-loader-letters">a-h</div>
@@ -72,7 +72,7 @@
                 {#============= NAV MENU =============#}
                 <nav class="nav-menu">
                     <ul class="nav-list">
-                        <li class="active">
+                        <li>
                             <a href="{% url 'home' %}">Home</a>
                         </li>
                         <li>
@@ -109,9 +109,6 @@
                 {#============ HEADER ICON ============#}
                 <ul class="header-icon">
                     <li class="search">
-                        <a class="icon" href="#">
-                            <i  class="fa fa-search" aria-hidden="true"></i>
-                        </a>
                         <form action="{% url 'search' %}" method="get">
                             <input type="search" name="search" placeholder="Search">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -120,13 +117,13 @@
                     {% if not user.is_authenticated %}
                     <li>
                         <a class="icon" href="{% url 'login' %}">
-                            <i class="fa fa-user" aria-hidden="true"></i> &nbsp;Login
+                            <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                     </li>
                     {% else %}
                     <li>
                         <a class="icon" href="{% url 'logout' %}">
-                            Logout&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
                         </a>
                     </li>
                     {% endif %}
@@ -150,7 +147,8 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-3 footer-info">
                             <h5>about us</h5>
-                            <p>“The IoT is big news because it ups the ante: ‘Reach out and touch somebody’ is becoming ‘reach out and touch everything’.” — Parker Trewin, Senior Director of Content and Communications, Aria Systems</p>
+                            <p>We believe that technology plays a vital role in making the earth a better place. If implemented correctly it makes people healthier, safer and our environment less polluted. Smart devices and apps are one of the key technological advancements towards this vision and we want to play our role in helping achieve this vision.
+                                <br>At ad-hoc, our goal is therefore to provide an  ecosystem which will make everyone's life smoother.</p>
                         </div>
                         <div class="col-6 col-sm-4 col-lg-2 blok-link">
                             <h5>Shop</h5>
@@ -181,32 +179,18 @@
 
                     </div>
                     <div class="footer-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-3">
-                                <a href="{% url 'home' %}" class="logo footer-logo"><img src="{%  static 'img1/icon/logo1.svg' %}" alt="logo"></a>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <ul class="footer-menu">
-                                    <li><a href="{% url 'home' %}">Home</a></li>
-                                    <li><a href="{% url 'about' %}">About Us</a></li>
-                                    <li><a href="#">Sevices</a></li>
-                                    <li><a href="{% url 'product' %}">Shop</a></li>
-
-                                    <li><a href="{% url 'contact' %}">Contacts</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-md-3">
+                        <div class="row align-items-center justify-content-center">
                                 <ul class="soc-link">
-                                    <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a target="_blank" href="https://www.instagram.com/rovadex"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                                    <li><a target="_blank" href="https://vimeo.com/"><i class="fa fa-vimeo-square" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.facebook.com/adhocdevices"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com/adhoc_devices"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.youtube.com/channel/UC_qT_w4AFnK6oQvcpqU_N6w"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.linkedin.com/company/adhoc-devices/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://github.com/wittymindstech/"><i class="fa fa-github-alt" aria-hidden="true"></i></a></li>
                                 </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="copyright">
-                        <p><a class="rovadex" href="https://ad-hoc.com" target="_blank">ad-hoc</a> © 2021. <a href="pravicy-policy.html" target="_blank">All Rights Reserved.</a></p>
+                        <p><a class="rovadex" href="https://adhocdevices.com" target="_blank">Adhoc Devices</a> © 2021. Powered by wiTTyMinds Technologies  <a href="pravicy-policy.html" target="_blank">All Rights Reserved.</a></p>
                     </div>
                 </div>
             </footer>
