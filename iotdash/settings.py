@@ -135,7 +135,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'jeetu8halder@gmail.com'
-EMAIL_HOST_PASSWORD = 'mgxayhnynlwqbwox'
+EMAIL_HOST_PASSWORD = ''
 
 # AWS Configuration
 # AWS_ACCESS_KEY_ID = ''  # Your AWS Access Key ID
