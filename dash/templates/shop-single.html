@@ -3,7 +3,7 @@
 {%  block body %}
 
 
-	<!--============= PAGE-TITLE =============-->
+	{#============= PAGE-TITLE =============#}
 {% for product in product %}
 	<div class="page-title" style="background-image: url(img/bg-page.jpg);">
 		<div class="container">
@@ -12,25 +12,25 @@
 				<ul>
 					<li><a href="{% url 'home' %}">Home</a></li>
 					<li><a href="{% url 'product' %}">Product</a></li>
-					<li>{{product.name}}</li>
+					<li>{{ product.name }}</li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<!--=========== PAGE-TITLE END ===========-->
+	{#=========== PAGE-TITLE END ===========#}
 
-	<!--========= S-SINGLE-PRODUCT =========-->
+	{#========= S-SINGLE-PRODUCT =========#}
 	<section class="s-single-product">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-5">
-					<!--===== SLIDER-SINGLE-FOR =====-->
+					{#===== SLIDER-SINGLE-FOR =====#}
 					<div class="slider-single-for">
 
 						{% for image in images %}
 						<div class="slide-single-for">
-							<a href="{{image.image.url}}" class="single-for-img" data-fancybox="prod1">
-								<img src="{{image.image.url}}" alt="img">
+							<a href="{{ image.image.url }}" class="single-for-img" data-fancybox="prod1">
+								<img src="{{ image.image.url }}" alt="img">
 							</a>
 						</div>
 						{% endfor %}
@@ -40,7 +40,7 @@
 						{% for image in images %}
 						<div class="slide-single-nav">
 							<div class="single-nav-img">
-								<img src="{{image.image.url}}" alt="img">
+								<img src="{{ image.image.url }}" alt="img">
 							</div>
 						</div>
 
@@ -48,23 +48,23 @@
 						{% endfor %}
 
 					</div>
-					<!--=== SLIDER-SINGLE-FOR END ===-->
-					<!--===== SLIDER-SINGLE-NAV =====-->
+					{#=== SLIDER-SINGLE-FOR END ===#}
+					{#===== SLIDER-SINGLE-NAV =====#}
 
 				</div>
 				<div class="col-12 col-md-7 single-left">
-					<div class="single-price" id="pprice{{product.id}}">Rs-{{product.price}}</div>
 					<div class="single-text">
-						<p>{{product.description}}</p>
+						<p>{{ product.description }}</p><br>
+                        <div class="single-price" id="pprice{{ product.id }}">Rs-{{ product.price }}</div>
 					</div>
 					{% if user.is_authenticated %}
 						{% if cartItems %}
-						<button    class="btn btn-primary">Already In Cart</button>
+						<button class="btn btn-primary" onclick="location='{% url 'checkout' %}'">Already In Cart</button>
 						{% endif %}
 					{% endif %}
 					{% if user.is_authenticated %}
 					{% if not  cartItems %}
-					<button id="{{product.id}}" onclick="addToCart({{product.id}});"  class="btn btn-primary">Add To Cart</button>
+					<button id="{{ product.id }}" onclick="addToCart({{ product.id }});"  class="btn btn-primary">Add To Cart</button>
 					{% endif %}
 					{% endif %}
 					{% if not user.is_authenticated %}
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			{% endfor %}
-			<!--=========== SINGLE-TAB ===========-->
+			{#=========== SINGLE-TAB ===========#}
 			<div class="single-tab">
 				<div class="tab-wrap">
 					<ul class="tab-nav gallery-tabs">
@@ -125,12 +125,12 @@
 					</div>
 				</div>
 			</div>
-			<!--========= SINGLE-TAB END =========-->
+			{#========= SINGLE-TAB END =========#}
 		</div>
 	</section>
-	<!--======== S-SINGLE-PRODUCT END ========-->
+	{#======== S-SINGLE-PRODUCT END ========#}
 
-	<!--========= S-DISCOUNT-PROGRAM =========-->
+	{#========= S-DISCOUNT-PROGRAM =========#}
 	<section class="s-discount-program mask" style="background-image: url(img/bg-4.jpg);">
 		<div class="container">
 			<h2>Join our discount program </h2>
@@ -142,9 +142,9 @@
 			</div>
 		</div>
 	</section>
-	<!--======= S-DISCOUNT-PROGRAM END =======-->
+	{#======= S-DISCOUNT-PROGRAM END =======#}
 
-	<!--========= S-RELATED-PRODUCTS =========-->
+	{#========= S-RELATED-PRODUCTS =========#}
 	<section class="s-related-products">
 		<div class="container">
 			<h2>related products</h2>
@@ -153,7 +153,7 @@
 
 				{% for p in products %}
 
-				<!--=========== PROD-ITEM ===========-->
+				{#=========== PROD-ITEM ===========#}
 				<div class="col-12 col-sm-6 col-xl-3 prod-item">
 					<div class="prod-thumbnail">
 						<div class="prod-img">
@@ -176,33 +176,33 @@
 						<a  href="/shopsingle/{{p.id}}" class="btn">buy now</a>
 					</div>
 				</div>
-				<!--========= PROD-ITEM END =========-->
+				{#========= PROD-ITEM END =========#}
 				{% endfor %}
 			</div>
 		</div>
 	</section>
-	<!--======= S-RELATED-PRODUCTS END =======-->
+	{#======= S-RELATED-PRODUCTS END =======#}
 
-	<!--================= FOOTER =================-->
+	{#================= FOOTER =================#}
 
 
-	<!--================= TO TOP =================-->
+	{#================= TO TOP =================#}
 	<a class="to-top" href="#home">
 		<i class="fa fa-chevron-up" aria-hidden="true"></i>
 		<span>
 			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
 		</span>
 	</a>
-	<!--=============== TO TOP END ===============-->
+	{#=============== TO TOP END ===============#}
 
-	<!-- =============== STYLE =============== -->
+	{# =============== STYLE =============== #}
 	<link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-	<!--=============== TEMPLATE SCRIPT ===============-->
+	{#=============== TEMPLATE SCRIPT ===============#}
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>

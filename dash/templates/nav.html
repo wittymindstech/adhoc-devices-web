@@ -1,4 +1,3 @@
-
 {% block nav %}
 <!DOCTYPE html>
 
@@ -7,13 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <title>ad-hoc</title>
-    <!-- =============== META =============== -->
+    {# =============== META =============== #}
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{% static 'img1/icon/hhh.png' %}">
-    <!-- =============== STYLE =============== -->
+    {# =============== STYLE =============== #}
     <link rel="stylesheet" href="{% static 'css/critical.css' %}">
     <style>
 		.preloader-active .preloader-cover{
@@ -38,7 +37,7 @@
 </head>
 
 <body id="home" class="home preloader-active" style="background-image: url({% static 'img/bg-body.svg' %});">
-<!--=============== PRELOADER ===============-->
+{#=============== PRELOADER ===============#}
 <div class="preloader-cover">
     <div class="preloader">
         <div class="ajax-loader">
@@ -53,9 +52,9 @@
         </div>
     </div>
 </div>
-<!--============= PRELOADER END =============-->
+{#============= PRELOADER END =============#}
 
-<!--=============== HEADER ===============-->
+{#=============== HEADER ===============#}
 <header class="header">
     <div class="container">
         <a href="#" class="nav-btn">
@@ -64,13 +63,13 @@
             <span></span>
         </a>
         <div class="row align-items-center">
-            <!--=============== LOGO ===============-->
+            {#=============== LOGO ===============#}
             <div class="col-12 col-sm-6 col-lg-3 logo-item">
                 <a href="{% url 'home' %}" class="logo"><img src="{%  static 'img1/icon/logo1.svg' %}" alt="logo"></a>
             </div>
-            <!--============= LOGO END =============-->
+            {#============= LOGO END =============#}
             <div class="col-6 nav-menu-cover">
-                <!--============= NAV MENU =============-->
+                {#============= NAV MENU =============#}
                 <nav class="nav-menu">
                     <ul class="nav-list">
                         <li class="active">
@@ -94,20 +93,20 @@
                                 <li><a href="{% url 'devops' %}">Devops</a></li>
                                 <li><a href="{% url 'dataanalytics' %}">Data Analytics</a></li>
                             </ul>
-
-
                         </li>
-                        <li><a href="{% url 'product' %}">Product</a></li>
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% if categories %}
+                            {% block nav-tab %}
+                            {% endblock %}
+                        {% else %}
+                            <li><a href="{% url 'product' %}">Products</a></li>
                         {% endif %}
-                        <li><a href="{% url 'contact' %}">Contacts</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     </ul>
                 </nav>
-                <!--=========== NAV MENU END ===========-->
+                {#=========== NAV MENU END ===========#}
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
-                <!--============ HEADER ICON ============-->
+                {#============ HEADER ICON ============#}
                 <ul class="header-icon">
                     <li class="search">
                         <a class="icon" href="#">
@@ -118,19 +117,26 @@
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
                     </li>
-
+                    {% if not user.is_authenticated %}
                     <li>
                         <a class="icon" href="{% url 'login' %}">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i> &nbsp;Login
                         </a>
                     </li>
+                    {% else %}
+                    <li>
+                        <a class="icon" href="{% url 'logout' %}">
+                            Logout&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li>
                         <a class="icon"  href="{% url 'checkout' %}" >
                             <i id="cart" class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
-                <!--========== HEADER ICON END ==========-->
+                {#========== HEADER ICON END ==========#}
             </div>
         </div>
     </div>
@@ -204,7 +210,7 @@
                     </div>
                 </div>
             </footer>
-            <!--===================== FOOTER END =====================-->
+            {#===================== FOOTER END =====================#}
 <script>
 
 </script>

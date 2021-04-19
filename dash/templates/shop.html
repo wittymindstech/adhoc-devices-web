@@ -1,10 +1,18 @@
 {% extends 'nav.html' %}
 {% load static %}
+{% block nav-tab %}
+    <li class="dropdown">
+        <a href="#">Category <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'category' category.slug %}">{{ category.title }}</a></li>
+        {% endfor %}
+        </ul>
+    </li>
+{% endblock %}
 {%  block body %}
 
-
-
-	<!--============= PAGE-TITLE =============-->
+	{#============= PAGE-TITLE =============#}
 	<div class="page-title" style="background-image: url(/static/img1/back6.jpg);">
 		<div class="container">
 			<h1 class="title">Products</h1>
@@ -16,62 +24,48 @@
 			</div>
 		</div>
 	</div>
-	<!--=========== PAGE-TITLE END ===========-->
+	{#=========== PAGE-TITLE END ===========#}
 
-	<!--=========== NEW-PRODUCT ===========-->
+	{#=========== NEW-PRODUCT ===========#}
 	<section class="new-product">
 		<div class="container">
 			<h2>new products</h2>
 			<p class="slogan">We serve latest gadget in affordable prices as per Indian Coustomer demands ,These products make you future ready and brings finest technology in very affordable prices </p>
 			<div class="slider-new-product">
-				<!--========== SLIDE-NEW-PRODUCT ==========-->
-
-				<!--======== SLIDE-NEW-PRODUCT END ========-->
-				<!--========== SLIDE-NEW-PRODUCT ==========-->
-
-				<!--======== SLIDE-NEW-PRODUCT END ========-->
-				<!--========== SLIDE-NEW-PRODUCT ==========-->
 				{% for product in new_product %}
 				<div class="slide-new-product">
-
 					<div class="prod-item new">
 						<div class="prod-thumbnail">
 							<div class="prod-img">
 								<div class="lable lable-new">new</div>
 								<div class="lable lable-sale">sale</div>
-								<img src="{{product.image.url}}" alt="img">
+								<img src="{{ product.image.url }}" alt="img">
 								<ul class="prod-link-cover">
-									<li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+									<li><a href="/shopsingle/{{product.slug}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 								</ul>
 							</div>
 						</div>
 						<div class="prod-content">
-							<h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
+							<h5 class="title"><a href="{% url 'shopsingle' product.slug %}">{{ product.name }}</a></h5>
 							
 							<div class="price">
 								<span class="new-price">Rs-{{product.price}}/-</span>
 							</div>
-							<a href="/shopsingle/{{product.id}}" class="btn">MORE</a>
+							<a href="{% url 'shopsingle' product.slug %}" class="btn">MORE</a>
 						</div>
 					</div>
-					<!--=========== PROD-ITEM END ===========-->
-				</div>{% endfor %}
-				<!--======== SLIDE-NEW-PRODUCT END ========-->
-				<!--========== SLIDE-NEW-PRODUCT ==========-->
-
-
-				<!--======== SLIDE-NEW-PRODUCT END ========-->
-				<!--========== SLIDE-NEW-PRODUCT ==========-->
-
-				<!--======== SLIDE-NEW-PRODUCT END ========-->
+					{#=========== PROD-ITEM END ===========#}
+				</div>
+                {% endfor %}
+				{#======== SLIDE-NEW-PRODUCT END ========#}
 			</div>
 		</div>
 	</section>
-	<!--========= NEW-PRODUCT END =========-->
+	{#========= NEW-PRODUCT END =========#}
 
-	<!--============ S-BANNERS ============-->
+	{#============ S-BANNERS ============#}
 	<section class="s-banners">
 		<div class="container">
 			<div class="row">
@@ -106,96 +100,24 @@
 			</div>
 		</div>
 	</section>
-	<!--========== S-BANNERS END ==========-->
+    {#========== S-BANNERS END ==========#}
 
-	<!--============ S-PRODUCT ============-->
-	<section class="s-product">
-		<div class="container">
-			<h2>products</h2>
-			<p class="slogan">We serve latest gadget in affordable prices as per Indian Coustomer demands ,These products make you future ready and brings finest technology in very affordable prices </p>
-			<div class="row">
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-				{% for product in items %}
-				<div class="col-12 col-sm-6 col-md-4 col-xl-3 prod-item">
-					<div class="prod-thumbnail">
-						<div class="prod-img">
-							<div class="lable lable-new">new</div>
-							<div class="lable lable-sale">sale</div>
-							<img src="{{product.image.url}}" alt="img">
-							<ul class="prod-link-cover">
-								<li><a href="/shopsingle/{{product.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="prod-content">
-						<h5 class="title"><a href="/shopsingle/{{product.id}}">{{product.name}}</a></h5>
-						<p>{{product.description}}</p>
-						<div class="price">
-							<span class="new-price">Rs-{{product.price}}/-</span>
-						</div>
-						<a class="btn btn-primary" href="/shopsingle/{{product.id}}">Buy Now</a>
-					</div>
-				</div>
-				{% endfor %}
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-				<!--========= PROD-ITEM =========-->
-
-				<!--======= PROD-ITEM END =======-->
-			</div>
-			<div class="pagination-cover">
-				<ul class="pagination">
-					{% if items.has_previous %}
-					<li class="pagination-item item-prev"><a href="?page={{items.previous_page_number}}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-					{% endif %}
-					<li class="pagination-item active"><a href="#">{{items.number}}</a></li>
-
-					{% if items.has_next %}
-					<li class="pagination-item item-next"><a href="?page={{items.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-				{% endif %}
-				</ul>
-			</div>
-		</div>
-	</section>
-	<!--========== S-PRODUCT END ==========-->
-
-
-
-	<!--=============== TO TOP ===============-->
+	{#=============== TO TOP ===============#}
 	<a class="to-top" href="#home">
 		<i class="fa fa-chevron-up" aria-hidden="true"></i>
 		<span>
 			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
 		</span>
 	</a>
-	<!--============= TO TOP END =============-->
+	{#============= TO TOP END =============#}
 
-	<!-- =============== STYLE =============== -->
+	{# =============== STYLE =============== #}
 	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-	<!--=============== TEMPLATE SCRIPT ===============-->
+	{#=============== TEMPLATE SCRIPT ===============#}
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>

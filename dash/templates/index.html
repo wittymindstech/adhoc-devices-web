@@ -1,12 +1,27 @@
 {% extends 'nav.html' %}
 {% load static %}
+{% block nav-tab %}
+    <li class="dropdown">
+                            <a href="#">Services <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                            <ul>
+                                <li><a href="{% url 'ux' %}">UI/UX</a></li>
+                                <li><a href="{% url 'awscloudservice' %}">AWS Cloud Services</a></li>
+                                <li><a href="{% url 'azurecloudsupport' %}">Azure Cloud Support</a></li>
+                                <li><a href="{% url 'iotdevices' %}">Iot Devices</a></li>
+                                <li><a href="{% url 'webservices' %}">Web Services</a></li>
+                                <li><a href="{% url 'appsservices' %}">Apps Services</a></li>
+                                <li><a href="{% url 'digitaloceanhosting' %}">Digital Ocean Hosting</a></li>
+                                <li><a href="{% url 'awshosting' %}">AWS Hosting</a></li>
+                                <li><a href="{% url 'chatmessanger' %}">Chat Messanger</a></li>
+                                <li><a href="{% url 'devops' %}">Devops</a></li>
+                                <li><a href="{% url 'dataanalytics' %}">Data Analytics</a></li>
+                            </ul>
+                        </li>
+{% endblock %}
 {% block body %}
-
-	<!--============= HEADER END =============-->
-
-	<!--=============== MAIN CONTENT ===============-->
+	{#=============== MAIN CONTENT ===============#}
 	<main>
-		<!--=============== MAIN SLIDER ===============-->
+		{#=============== MAIN SLIDER ===============#}
 		<section class="main-slider-cover">
 			<div class="main-slider">
 				<div class="main-slider-for">
@@ -80,13 +95,9 @@
 				</div>
 			</div>
 		</section>
-		<!--=============== MAIN SLIDER END ===============-->
+		{#=============== MAIN SLIDER END ===============#}
 
-		<!--================= BEST PRICES =================-->
-
-		<!--=============== BEST PRICES AND ===============-->
-
-		<!--================ GALLERY BLOCK ================-->
+		{#================ GALLERY BLOCK ================#}
 		<section class="serv-block">
 			<a href="#" class="serv-block-item">
 				<span class="border-item"></span>
@@ -125,104 +136,35 @@
 				</div>
 			</a>
 		</section>
-		<!--============== GALLERY BLOCK END ==============-->
-
-		<!--==================== S-BLOG ====================-->
-
-		<!--================== S-BLOG END ==================-->
-
-		<!--=================== S-INFO-BG ===================-->
-
-		<!--================= S-INFO-BG END =================-->
-
-		<!--===================== S-SHOP =====================-->
-		<section class="s-shop">
+		{#============== GALLERY BLOCK END ==============#}
+		{#===================== S-SHOP =====================#}
+		<section id="products-categories" class="s-shop">
 			<div class="container s-anim">
 				<h2>our products</h2>
 				<p class="slogan">"The best way to predict the future is to invent it." </p>
-				<!--================== TAB-WRAP ==================-->
+				{#================== TAB-WRAP ==================#}
 				<div class="tab-wrap">
 					<ul class="tab-nav prod-tabs">
-<!--						category-->
+                    {# category #}
 						{% for category in cat %}
 						<li class="item" rel="tab1">
 							<div class="block-icon">
-								<a href="/category/{{category.pk}}"><img src="{{category.Image.url}}" alt="img">
+								<a href="{% url 'category' category.slug %}"><img src="{{ category.Image.url }}" alt="img">
 									<h6>{{category.title}}</h6></a>
 							</div>
 						</li>
 						{% endfor %}
-
-
 					</ul>
-					<div class="tabs-content">
-						<!--================== TAB1 ==================-->
-						<div class="tab tab1">
-							<div class="row prod-cover">
-								<!-- prod-item -->
-								{% for p in items %}
-								<div class="col-12 col-sm-6 col-md-4 prod-item">
-									<div class="prod-thumbnail">
-										<div class="prod-img">
-											<div class="lable lable-new">new</div>
-											<div class="lable lable-sale">sale</div>
-											<img class="lazy" src="{{p.image.url}}" data-src="{{p.image.url}}" alt="img">
-											<ul class="prod-link-cover">
-												<li><a href="/shopsingle/{{p.id}}"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="prod-content">
-										<h5 class="title"><a href="/shopsingle/{{p.id}}">{{p.name}}</a></h5>
-										<div class="price">
-											<span class="new-price">Rs-{{p.price}}/-</span>
-
-										</div>
-										<a href="/shopsingle/{{p.id}}" class="btn">Details</a>
-									</div>
-								</div>
-								{% endfor %}
-								<!-- prod-item end -->
-
-								<!-- prod-item -->
-
-								<!-- prod-item end -->
-							</div>
-						</div>
-						<!--================ TAB1 END ================-->
-						<!--================== TAB2 ==================-->
-
-						<!--================ TAB2 END ================-->
-						<!--================== TAB3 ==================-->
-
-						<!--================ TAB3 END ================-->
-						<!--================== TAB4================== -->
-
-						<!--================ TAB4 END ================-->
-						<!--================== TAB5 ==================-->
-
-						<!--================ TAB5 END ================-->
-						<!--================== TAB6 ==================-->
-
-						<!--================ TAB6 END ================-->
-					</div>
-				</div>
-				<!--================ TAB-WRAP END ================-->
-			</div>
-			<center>
+                </div>
+            </div>
+			<div style="text-align: center;">
 			<a href="{% url 'product' %}" class="btn btn-primary">More Products</a>
-			</center>
+			</div>
 		</section>
 
-		<!--=================== S-SHOP END ===================-->
+		{#=================== S-SHOP END ===================#}
 
-		<!--================= S-OPPORTUNITIES =================-->
-
-		<!--=============== S-OPPORTUNITIES END ===============-->
-
-		<!--================= S-TESTIMONIALS =================-->
+		{#================= S-TESTIMONIALS =================#}
 		<section class="s-testimonials">
 			<div class="container s-anim">
 				<h2>testimonials</h2>
@@ -256,9 +198,9 @@
 				</div>
 			</div>
 		</section>
-		<!--=============== S-TESTIMONIALS END ===============-->
+		{#=============== S-TESTIMONIALS END ===============#}
 
-		<!--=================== S-CONTACTS ===================-->
+		{#=================== S-CONTACTS ===================#}
 		<section class="s-contacts s-main-contacts">
 			<div class="container s-anim">
 				<h2>Contact us</h2>
@@ -284,8 +226,8 @@
 				<div id="message"></div>
 			</div>
 		</section>
-		<!--================= S-CONTACTS END =================-->
-		<!--=============== S-CLIENTS ===============-->
+		{#================= S-CONTACTS END =================#}
+		{#=============== S-CLIENTS ===============#}
 		<div class="s-clients s-clients-home">
 			<div class="container">
 				<div class="row align-items-center clients-cover">
@@ -310,30 +252,26 @@
 				</div>
 			</div>
 		</div>
-		<!--============= S-CLIENTS END =============-->
+		{#============= S-CLIENTS END =============#}
 	</main>
-	<!--================== MAIN CONTENT END ==================-->
-
-	<!--======================= FOOTER =======================-->
-
-	<!--======================= TO TOP =======================-->
+	{#================== MAIN CONTENT END ==================#}
+	{#======================= TO TOP =======================#}
 	<a class="to-top" href="#home">
 		<i class="fa fa-chevron-up" aria-hidden="true"></i>
 		<span>
 			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
 		</span>
 	</a>
+	{#===================== TO TOP END =====================#}
 
-	<!--===================== TO TOP END =====================-->
-
-	<!-- =============== STYLE =============== -->
+	{# =============== STYLE =============== #}
 	<link rel="stylesheet" href="{%  static 'css/slick.min.css' %}">
 	<link rel="stylesheet" href="{%  static 'css/bootstrap-grid.css' %}">
 	<link rel="stylesheet" href="{%  static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 	<link rel="stylesheet" href="{%  static 'css/style.css' %}">
 <script src="jquery-3.5.1.min.js"></script>
-	<!--=============== TEMPLATE SCRIPT ===============-->
+	{#=============== TEMPLATE SCRIPT ===============#}
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>

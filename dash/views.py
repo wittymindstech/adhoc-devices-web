@@ -1,308 +1,372 @@
-from django.shortcuts import render,redirect,get_object_or_404,reverse
-from django.http import HttpResponse,JsonResponse
-from .models import  Product,Category,ContactUs,Cart,OrderTable,Information,Reviews,FAQ,ProductImage
+from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.http import HttpResponse, JsonResponse
+from .models import (Product, Category,
+                     ContactUs, Cart,
+                     OrderTable, Information,
+                     Reviews, FAQ, ProductImage)
 from .models import SignUp
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User, auth
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from decimal import Decimal
 import json
-# Create your views here.
-def home(req):
+from django.views.generic import TemplateView
 
-    items=Product.objects.filter(cat=1)
-    product_list=[]
+
+# Create your views here.
+
+
+def home(request):
+    items = Product.objects.filter(cat=1)
+    product_list = []
     for item in items:
         # check if product is already purchase_or not
         if not item.purchase_or_not:
             product_list.append(item)
-# only 10 product show in home page
-    if len(product_list)>10:
-        items=product_list[:10]
-    d={'items':items,'cat':Category.objects.all()}
-    return render(req,'index.html' , d)
-def CategoryShow(req,pk):
-    # category wise filter the product
-    cat = Category.objects.get(pk=pk)
-    product=Product.objects.filter(cat=cat)
+    # only 10 product show in home page
+    if len(product_list) > 10:
+        items = product_list[:10]
+    d = {'items': items, 'cat': Category.objects.all()}
+    return render(request, 'index.html', d)
 
-    return render(req,'category.html',{'items':product,'cat':Category.objects.all()})
-def about(req):
-    return render(req,'about.html')
-def contact(req):
-    return render(req,'contacts.html')
+
+def CategoryShow(request, slug):
+    # category wise filter the product
+    cat = get_object_or_404(Category, slug=slug)
+    products = Product.objects.filter(cat=cat.id)
+    all_products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {'products': products,
+               'cat': cat,
+               'all_products': all_products,
+               'categories': categories}
+    return render(request, 'category.html', context)
+
+
 @login_required(login_url='/signupLogin/')
 @csrf_exempt
-def AddToCart(req):
+def AddToCart(request):
     print("inside add to cart")
-# add to cart
-    if req.method=='POST':
-        pid=req.POST.get('id')
+    # add to cart
+    if request.method == 'POST':
+        pid = request.POST.get('id')
         if pid is None:
-            return JsonResponse({'success':False})
-        pid=int(pid)
+            return JsonResponse({'success': False})
+        pid = int(pid)
         print("pid = {}".format(pid))
-        is_exist=Cart.objects.filter(product__id=pid,user__id=req.user.id,status=False)
+        is_exist = Cart.objects.filter(product__id=pid, user__id=request.user.id, status=False)
         # check if product is already exist in cart or not
-        if len(is_exist)>0:
-            return JsonResponse({'success':True})
+        if len(is_exist) > 0:
+            return JsonResponse({'success': True})
         else:
-            product=get_object_or_404(Product,id=pid)
-            user=get_object_or_404(User,id=req.user.id)
-            cart=Cart(user=user,product=product)
+            product = get_object_or_404(Product, id=pid)
+            user = get_object_or_404(User, id=request.user.id)
+            cart = Cart(user=user, product=product)
             cart.save()
-            return JsonResponse({'success':True})
-    return JsonResponse({'sucess':False})
+            total = 0
+            for item in cart:
+                if item.price:
+                    total += item.price
+            request.session['total'] = total
+            return JsonResponse({'success': True})
+    return JsonResponse({'sucess': False})
+
+
 @login_required(login_url='/signupLogin/')
-def checkout(req):
+def checkout(request):
     # list all items in cart and calculate total price
-    order_list=[]
-    cartItems=Cart.objects.filter(user__id=req.user.id)
+    order_list = []
+    cartItems = Cart.objects.filter(user__id=request.user.id)
     for product in cartItems:
         order_list.append(product.product)
-    total=0
+    total = 0
     for product in order_list:
-        total+=int(product.price)
-    if total!=0:
-        total+=50
-    return render(req,'checkout.html',{'products':order_list,'total':total})
-    #return render(req,'SignUp-login.html')
+        total += int(product.price)
+    if total != 0:
+        total += 50
+    request.session['total'] = total
+    return render(request, 'checkout.html', {'products': order_list, 'total': total})
+
+
 @csrf_exempt
 @login_required(login_url='/signupLogin/')
-def removecartItems(req):
+def removecartItems(request):
     # remove item from cart
     print("inside removecartItems")
-    if req.method=='POST':
-
-        if req.user.is_authenticated:
-            id=req.POST['id']
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            id = request.POST['id']
             print(id)
-            cart=get_object_or_404(Cart,product__id=id)
+            cart = get_object_or_404(Cart, product__id=id)
             print(cart)
             if cart is not None:
 
                 cart.delete()
                 print('object deleted')
-                order_list=[]
-                cartItems=Cart.objects.filter(user__id=req.user.id)
+                order_list = []
+                cartItems = Cart.objects.filter(user__id=request.user.id)
                 for product in cartItems:
                     order_list.append(product.product)
-                total=0
+                total = 0
                 for product in order_list:
-                    total+=int(product.price)
+                    total += int(product.price)
                 # add delivery charge
-                if total!=0:
-                    total+=50
-                return JsonResponse({'success':True,'total':total})
+                if total != 0:
+                    total += 50
+                request.session['total'] = total
+                return JsonResponse({'success': True, 'total': total})
+
+    return JsonResponse({'success': False})
 
 
-    return JsonResponse({'success':False})
 @login_required(login_url='/signupLogin/')
-def thankyou(req):
-    if req.method=='POST':
-        email=req.POST['email']
-        tel=req.POST['tel']
-        full_name=req.POST['name']
-        address=req.POST['address']
-        city=req.POST['city']
-        state=req.POST['state']
-        country=req.POST['country']
-        poster_code=req.POST['postal']
+def order_complete(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        tel = request.POST['tel']
+        full_name = request.POST['name']
+        address = request.POST['address']
+        city = request.POST['city']
+        state = request.POST['state']
+        country = request.POST['country']
+        poster_code = request.POST['postal']
 
-        items=Cart.objects.filter(user_id__id=req.user.id,status=False)
-        amount=0
-        products=""
-        inv="INV-"
-        cart_ids=''
-        product_ids=''
-        host=req.get_host()
+        items = Cart.objects.filter(user_id__id=request.user.id, status=False)
+        amount = 0
+        products = ""
+        inv = "INV-"
+        cart_ids = ''
+        product_ids = ''
+        host = request.get_host()
         for j in items:
-            products+=str(j.product.name)+"\n"
-            amount+=int(j.product.price)
-            product_ids+=str(j.product.id)+"\n"
-            inv+=str(j.product.id)
-            cart_ids+=str(j.id)+','
-        if amount!=0:
-            amount+=50 # add delivery charge
+            products += str(j.product.name) + "\n"
+            amount += int(j.product.price)
+            product_ids += str(j.product.id) + "\n"
+            inv += str(j.product.id)
+            cart_ids += str(j.id) + ','
+        if amount != 0:
+            amount += 50  # add delivery charge
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
             'amount': str(amount),
             'item_name': products,
             'invoice': inv,
 
-            'notify_url': 'http://{}{}'.format(host,reverse('paypal-ipn')),
+            'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
             'return_url': 'http://{}{}'.format(host,
                                                reverse('payment_done')),
             'cancel_return': 'http://{}{}'.format(host,
                                                   reverse('payment_cancelled')),
         }
-        print(email,tel,full_name,address,country,city,state,poster_code)
+        print(email, tel, full_name, address, country, city, state, poster_code)
 
-        user=User.objects.get(username=req.user.username)
-        order_table=OrderTable(customer_id=user,cart_ids=cart_ids,products_ids=product_ids,invoice_id=inv , email=email,tel=tel , full_name=full_name,address=address , country=country,city=city,state=state,poster_code=poster_code)
+        user = User.objects.get(username=request.user.username)
+        order_table = OrderTable(customer_id=user, cart_ids=cart_ids, products_ids=product_ids, invoice_id=inv,
+                                 email=email, tel=tel, full_name=full_name, address=address, country=country, city=city,
+                                 state=state, poster_code=poster_code)
         order_table.save()
-        order_table.invoice_id=str(order_table.id)+inv
+        order_table.invoice_id = str(order_table.id) + inv
         order_table.save()
-        req.session['order_id']=order_table.id
+        request.session['order_id'] = order_table.id
         form = PayPalPaymentsForm(initial=paypal_dict)
 
-        #return  redirect('https://www.sandbox.paypal.com/webapps/hermes?token=85794313UL176235D&useraction=commit&mfid=1617882715069_b0a4ab53e3ed6')
-        return render(req, 'ThankYou.html', { 'form': form})
+        # return  redirect('https://www.sandbox.paypal.com/webapps/hermes?token=85794313UL176235D&useraction=commit&mfid=1617882715069_b0a4ab53e3ed6')
+        return render(request, 'ThankYou.html', {'form': form})
 
     return redirect('home')
+
+
 @login_required(login_url='/signupLogin/')
-def payment_done(req):
-    if 'order_id' in req.session:
-        order_id=req.session['order_id']
-        order_obj=get_object_or_404(OrderTable,id=order_id)
-        order_obj.status=True
+def payment_done(request):
+    if 'order_id' in request.session:
+        order_id = request.session['order_id']
+        order_obj = get_object_or_404(OrderTable, id=order_id)
+        order_obj.status = True
         order_obj.save()
         for i in order_obj.cart_ids.split(',')[:-1]:
-            cart_object=Cart.objects.get(id=i)
-            cart_object.status=True
+            cart_object = Cart.objects.get(id=i)
+            cart_object.status = True
             cart_object.save()
-            product=Product.objects.filter(id=i)
-            product.purchase_or_not=True
+            product = Product.objects.filter(id=i)
+            product.purchase_or_not = True
             product.save()
-    return  HttpResponse("Payment Sucessfull")
-@login_required(login_url='/signupLogin/')
-def payment_cancelled(req):
-    return HttpResponse("Payment Cancel")
+    return HttpResponse("Payment Sucessfull")
+
 
 @csrf_exempt
-def contactUs(req):
-    if req.method=='POST':
-        name=req.POST.get('name')
-        phone=req.POST.get('phone')
-        message=req.POST.get('message')
-        email=req.POST.get('email')
-        print(name,email,phone,message)
+def contactUs(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        email = request.POST.get('email')
+        print(name, email, phone, message)
         if email is not None and message is not None and phone is not None and name is not None:
-
-            ContactUs(name=name,email=email,number=phone,message=message).save()
+            ContactUs(name=name, email=email, number=phone, message=message).save()
             print("inside contact us")
-            return JsonResponse({'success':True})
+            return JsonResponse({'success': True})
     print("else part")
 
-    return JsonResponse({'success':False})
-def SignUplogin(req):
-    if req.method=='POST':
-        if 'signup' in req.POST:
-            username=req.POST['username']
-            email=req.POST['email']
-            password=req.POST['password']
-            try:
-                print(email,username,password)
-                if email not in User.objects.filter(email__contains=email):
+    return JsonResponse({'success': False})
 
-                    user=User.objects.create_user(email=email,password=password,username=email)
+
+def SignUplogin(request):
+    if request.method == 'POST':
+        if 'signup' in request.POST:
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
+            try:
+                print(email, username, password)
+                if email not in User.objects.filter(email__contains=email):
+                    user = User.objects.create_user(email=email, password=password, username=email)
                     print('user created')
                     SignUp.objects.create(user=user)
-                    auth.login(req,user)
+                    auth.login(request, user)
                     return redirect('home')
-            except :
-
+            except:
                 print("something went wrong")
-                message='user alreday exists'
-            return render(req,'SignUp-login.html',{'message':message})
-        elif 'login' in req.POST:
+                message = 'user alreday exists'
+            return render(request, 'SignUp-login.html', {'message': message})
+        elif 'login' in request.POST:
             print('inside login')
-            username=req.POST['Username']
-            password=req.POST['Password']
-            user = auth.authenticate(username=username,password=password)
+            username = request.POST['Username']
+            password = request.POST['Password']
+            user = auth.authenticate(username=username, password=password)
             print(user)
             print('inside login')
             if user is not None:
-                auth.login(req, user)
+                auth.login(request, user)
                 return redirect('home')
-            message='invalid email or password'
-            return render(req,'SignUp-login.html',{'message':message})
+            message = 'invalid email or password'
+            return render(request, 'SignUp-login.html', {'message': message})
+
+    return render(request, 'SignUp-login.html')
 
 
-
-    return render(req,'SignUp-login.html')
-def ux(req):
-    return render(req,'ux.html')
-def webservices(req):
-    return render(req,'WebServices.html')
-def iotdevices(req):
-    return render(req,'IotDevices.html')
-def devops(req):
-    return render(req,'Devops.html')
-def dataanalytics(req):
-    return render(req,'DataAnalytics.html')
-def digitaloceanhosting(req):
-    return render(req,'DigitalOceanHosting.html')
-def appsservices(req):
-    return render(req,'AppsServices.html')
-def awshosting(req):
-    return render(req,'AwsHosting.html')
-def awscloudservice(req):
-    return render(req,'AwsCloudService.html')
-def chatmessanger(req):
-    return render(req,'ChatMessanger.html')
-def azurecloudsupport(req):
-    return render(req,'AzureCloudSupport.html')
-def search(req):
-    if req.method=='GET':
-        query=req.GET.get('search')
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('search')
         if query is None:
-            return  render(req,'index.html')
+            return render(request, 'index.html')
         # search the name in product
-        search_result=Product.objects.filter(name__contains=query,purchase_or_not=False)
+        search_result = Product.objects.filter(name__contains=query, purchase_or_not=False)
         # search by description
-        search_des=Product.objects.filter(description__contains=query,purchase_or_not=False)
+        search_des = Product.objects.filter(description__contains=query, purchase_or_not=False)
         # search by price
-        search_price=Product.objects.filter(price__contains=query,purchase_or_not=False)
+        search_price = Product.objects.filter(price__contains=query, purchase_or_not=False)
         # search in category description
-        search_cat_des=Category.objects.filter(description__contains=query)
-        return render(req,'search.html',{'search_result':search_result,'search_des':search_des,'search_price':search_price,'search_cat_des':search_cat_des})
-    return  render(req,'index.html')
+        search_cat_des = Category.objects.filter(description__contains=query)
+        return render(request, 'search.html',
+                      {'search_result': search_result, 'search_des': search_des, 'search_price': search_price,
+                       'search_cat_des': search_cat_des})
+    return render(request, 'index.html')
+
+
 @login_required(login_url='/signupLogin/')
-def shopSingle(req,pk):
+def shopSingle(request, slug):
+    product = Product.objects.filter(slug=slug, purchase_or_not=False)
+    items = Product.objects.all()
 
-
-    product=Product.objects.filter(pk=pk,purchase_or_not=False)
-    items=Product.objects.all()
-
-    cartItems=Cart.objects.filter(product__id=pk)
-    information=Information.objects.filter(product__id=pk)
-    faq=FAQ.objects.filter(product__id=pk)
-    reviews=Reviews.objects.filter(product__id=pk)
-    images=ProductImage.objects.filter(product__id=pk)
-    images=list(images)
-    image=Product.objects.filter(id=pk)
+    cartItems = Cart.objects.filter(product__slug=slug)
+    information = Information.objects.filter(product__slug=slug)
+    faq = FAQ.objects.filter(product__slug=slug)
+    reviews = Reviews.objects.filter(product__slug=slug)
+    images = ProductImage.objects.filter(product__slug=slug)
+    images = list(images)
+    image = Product.objects.filter(slug=slug)
     for i in image:
         print(i)
         images.append(i)
 
-    d = {'products': items , 'product': product,'cartItems':cartItems,'information':information,'faq':faq,'review':reviews,'images':images}
-    return render(req,'shop-single.html', d)
-    #return render(req,'SignUp-login.html')
-def product(req):
-    items=Product.objects.filter(purchase_or_not=False).order_by('id')
-    l=list(items)
+    context = {'products': items, 'product': product, 'cartItems': cartItems, 'information': information, 'faq': faq,
+               'review': reviews, 'images': images}
+    return render(request, 'shop-single.html', context)
+
+
+def product(request):
+    items = Product.objects.filter(purchase_or_not=False).order_by('id')
+    l = list(items)
     # date wise sort the product
-    date_wise_sorted_list=sorted(l,key=lambda x:x.date,reverse=True)
+    date_wise_sorted_list = sorted(l, key=lambda x: x.date, reverse=True)
     print(date_wise_sorted_list)
     # Pagination code only 4 item per page
-    paginator=Paginator(items,4)
-    page_number=req.GET.get('page')
-    page_obj=paginator.get_page(page_number)
+    paginator = Paginator(items, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    d={'items':page_obj,'new_product':date_wise_sorted_list}
-    return render(req,'shop.html',d)
+    context = {'items': page_obj,
+               'categories': Category.objects.all(),
+               'new_product': date_wise_sorted_list}
+    return render(request, 'shop.html', context)
+
 
 @login_required(login_url='/signupLogin/')
-def logout(req):
-    auth.logout(req)
+def logout(request):
+    auth.logout(request)
     return redirect('home')
 
 
+@login_required(login_url='/signupLogin/')
+def payment_cancelled(request):
+    return HttpResponse("Payment Cancel")
 
-def privacyPolicy(req):
-    return render(req,'pravicy-policy.html')
 
+class PrivacyPolicyView(TemplateView):
+    template_name = 'pravicy-policy.html'
+
+
+class AboutView(TemplateView):
+    template_name = 'about.html'
+
+
+class ContactView(TemplateView):
+    template_name = 'contacts.html'
+
+
+class UxCategoryView(TemplateView):
+    template_name = 'ux.html'
+
+
+class WebservicesView(TemplateView):
+    template_name = 'WebServices.html'
+
+
+class IotdevicesView(TemplateView):
+    template_name = 'IotDevices.html'
+
+
+class DevopsView(TemplateView):
+    template_name = 'Devops.html'
+
+
+class DataanalyticsView(TemplateView):
+    template_name = 'DataAnalytics.html'
+
+
+class DigitaloceanhostingView(TemplateView):
+    template_name = 'DigitalOceanHosting.html'
+
+
+class AppsservicesView(TemplateView):
+    template_name = 'AppsServices.html'
+
+
+class AwshostingView(TemplateView):
+    template_name = 'AwsHosting.html'
+
+
+class AwscloudserviceView(TemplateView):
+    template_name = 'AwsCloudService.html'
+
+
+class ChatmessangerView(TemplateView):
+    template_name = 'ChatMessanger.html'
+
+
+class AzurecloudsupportView(TemplateView):
+    template_name = 'AzureCloudSupport.html'
