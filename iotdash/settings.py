@@ -130,8 +130,8 @@ PAYPAL_RECEIVER_EMAIL = 'XXXXX@gmail.com'
 
 PAYPAL_TEST = True
 
-# AWS_ACCESS_KEY_ID = 'AKIA2QMUNTD5CMPQZR5R'  # Your AWS Access Key ID
-# AWS_SECRET_ACCESS_KEY = 'HNt9S6UQTiajAIb9Njx7vV6b5x3y1mEEFWrZ4rII'  # Your AWS Secret Access Key
+# AWS_ACCESS_KEY_ID = ''  # Your AWS Access Key ID
+# AWS_SECRET_ACCESS_KEY = ''  # Your AWS Secret Access Key
 # AWS_STORAGE_BUCKET_NAME = 'adhoc-devices'  # Your AWS Bucket name
 #
 # DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
