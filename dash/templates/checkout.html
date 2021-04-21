@@ -92,8 +92,7 @@ function RemoveCart(id){
             console.log(data);
             console.log("success");
             $("#product"+id).hide();
-            {#document.getElementById('total').innerHTML=data['total'];#}
-            document.getElementById('total').innerHTML= {{ session.total }}];
+            document.getElementById('total').innerHTML=data['total'];
             },
         }
     );

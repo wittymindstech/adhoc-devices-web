@@ -95,10 +95,13 @@ class OrderTable(models.Model):
 
 
 class SignUp(models.Model):
-    user = models.ForeignKey(to=User, on_delete=CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    auth_token = models.CharField(max_length=100)
+    is_verified = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Information(models.Model):

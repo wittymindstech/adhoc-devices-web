@@ -3,6 +3,7 @@ from . import views
 
 
 
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('category/<slug:slug>/', views.CategoryShow, name='category'),
@@ -10,7 +11,6 @@ urlpatterns = [
     path('shopsingle/<slug:slug>', views.shopSingle, name='shopsingle'),
     # path('singleblog/',views.blogSingle,name='singleblog'),
     # path('service/',views.services,name='service'),
-    path('signupLogin/', views.SignUplogin, name='login'),
     path('logout/', views.logout, name='logout'),
     path('search/', views.search, name='search'),
     path('contactUs/', views.contactUs, name='contactUs'),
@@ -21,6 +21,8 @@ urlpatterns = [
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('payment_done', views.payment_done, name='payment_done'),
     path('payment_cancelled', views.payment_cancelled, name='payment_cancelled'),
+    path('verify-email/<auth_token>', views.verify, name="verify"),
+    path('signupLogin/', views.SignUplogin, name='login'),
 
     # Generic Class Based Views
     path('about/', views.AboutView.as_view(), name='about'),

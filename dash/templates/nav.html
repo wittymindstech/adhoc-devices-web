@@ -34,6 +34,14 @@
 			will-change: top, left;
 		}
 	</style>
+    {# For any messages from backend #}
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert(" {{ message }}" );
+            {% endfor %}
+        {% endif %}
+    </script>
 </head>
 
 <body id="home" class="home preloader-active" style="background-image: url({% static 'img/bg-body.svg' %});">

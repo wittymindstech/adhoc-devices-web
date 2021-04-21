@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+
 from django.http import HttpResponse, JsonResponse
 from .models import (Product, Category,
                      ContactUs, Cart,
@@ -14,11 +15,13 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from decimal import Decimal
 import json
+import uuid
 from django.views.generic import TemplateView
 from django.core.mail import send_mail
+from django.contrib import messages
+
 
 # Create your views here.
-
 
 def home(request):
     d = {'cat': Category.objects.all()[0:6]}
@@ -210,40 +213,6 @@ def contactUs(request):
     return JsonResponse({'success': False})
 
 
-def SignUplogin(request):
-    if request.method == 'POST':
-        if 'signup' in request.POST:
-            username = request.POST['username']
-            email = request.POST['email']
-            password = request.POST['password']
-            try:
-                print(email, username, password)
-                if email not in User.objects.filter(email__contains=email):
-                    user = User.objects.create_user(email=email, password=password, username=email)
-                    print('user created')
-                    SignUp.objects.create(user=user)
-                    auth.login(request, user)
-                    return redirect('home')
-            except:
-                print("something went wrong")
-                message = 'user alreday exists'
-            return render(request, 'SignUp-login.html', {'message': message})
-        elif 'login' in request.POST:
-            print('inside login')
-            username = request.POST['Username']
-            password = request.POST['Password']
-            user = auth.authenticate(username=username, password=password)
-            print(user)
-            print('inside login')
-            if user is not None:
-                auth.login(request, user)
-                return redirect('home')
-            message = 'invalid email or password'
-            return render(request, 'SignUp-login.html', {'message': message})
-
-    return render(request, 'SignUp-login.html')
-
-
 def search(request):
     if request.method == 'GET':
         query = request.GET.get('search')
@@ -310,6 +279,90 @@ def logout(request):
 @login_required(login_url='/signupLogin/')
 def payment_cancelled(request):
     return HttpResponse("Payment Cancel")
+
+
+def SignUplogin(request):
+    if request.method == 'POST':
+        if 'signup' in request.POST:
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
+            try:
+                print(email, username, password)
+                if User.objects.filter(username=username).first():
+                    messages.success(request, 'Username is taken.')
+                    return redirect('login')
+
+                if User.objects.filter(email=email).first():
+                    messages.success(request, 'Email is taken.')
+                    return redirect('login')
+
+                user_obj = User(username=username, email=email)
+                user_obj.set_password(password)
+                user_obj.save()
+                auth_token = str(uuid.uuid4())
+                profile_obj = SignUp.objects.create(user=user_obj, auth_token=auth_token)
+                send_mail_after_registration(email, auth_token)
+                # To avoid any issue occur Before creating new user
+                profile_obj.save()
+                return redirect('home')
+            except Exception as e:
+                print(f"\nsomething went wrong\n{e}\n\n")
+                messages.error(request, 'Something Went Wrong, Please Try again!')
+            return render(request, 'SignUp-login.html')
+        elif 'login' in request.POST:
+            print('inside login')
+            username = request.POST['Username']
+            password = request.POST['Password']
+            user_obj = User.objects.filter(username=username).first()
+            if user_obj is None:
+                messages.success(request, 'User not found.')
+                return redirect('login')
+
+            profile_obj = SignUp.objects.filter(user=user_obj).first()
+
+            try:
+                if not profile_obj.is_verified:
+                    # messages.success(request, 'Profile is not verified check your mail.')
+                    return redirect('login')
+            except:
+                user = auth.authenticate(username=username, password=password)
+                if user is None:
+                    # messages.success(request, 'Wrong password.')
+                    return redirect('login')
+                auth.login(request, user)
+                return redirect('home')
+    return render(request, 'SignUp-login.html')
+
+
+def verify(request, auth_token):
+    try:
+        profile_obj = SignUp.objects.filter(auth_token=auth_token).first()
+
+        if profile_obj:
+            if profile_obj.is_verified:
+                messages.success(request, 'Your account is already verified.')
+                auth.login(request, user=profile_obj.user)
+                return redirect('home')
+            profile_obj.is_verified = True
+            profile_obj.save()
+            messages.success(request, 'Your account has been verified.')
+            auth.login(request, user=profile_obj.user)
+            return redirect('home', messages)
+        else:
+            messages.add_message(request, 'Something went wrong')
+            return redirect('home')
+    except Exception as e:
+        print(e)
+        return redirect('home')
+
+
+def send_mail_after_registration(email, token):
+    subject = 'Your accounts need to be verified'
+    message = f'Hi paste the link to verify your account http://127.0.0.1:8000/verify-email/{token}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, email_from, recipient_list)
 
 
 class PrivacyPolicyView(TemplateView):
