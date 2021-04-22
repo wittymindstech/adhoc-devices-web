@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-
 from django.http import HttpResponse, JsonResponse
 from .models import (Product, Category,
                      ContactUs, Cart,
@@ -16,10 +15,11 @@ from django.conf import settings
 from decimal import Decimal
 import json
 import uuid
+import re
 from django.views.generic import TemplateView
 from django.core.mail import send_mail
 from django.contrib import messages
-
+from django.contrib.sites.shortcuts import get_current_site
 
 # Create your views here.
 
@@ -168,7 +168,6 @@ def order_complete(request):
         request.session['order_id'] = order_table.id
         form = PayPalPaymentsForm(initial=paypal_dict)
 
-        # return  redirect('https://www.sandbox.paypal.com/webapps/hermes?token=85794313UL176235D&useraction=commit&mfid=1617882715069_b0a4ab53e3ed6')
         return render(request, 'ThankYou.html', {'form': form})
 
     return redirect('home')
@@ -198,15 +197,15 @@ def contactUs(request):
         message = request.POST.get('message')
         email = request.POST.get('email')
         subject = "Adhoc Devices Customer Request"
-        print(name, email, phone, message)
-        email_template = f"Hello,\n{message}\n From"
+        cleaned_message = re.sub("[^a-zA-Z0-9\n\.\"\&]", '', message)  # Just to be extra cautious
+        email_template = f"Hello,\n{cleaned_message}\n\nFrom: {name}\nEmail: {email}\nContact: {phone}"
         if name != '' and phone != '' \
                 and message != '' and email != '' \
                 and message != '':
             ContactUs(name=name, email=email, number=phone, message=message).save()
             # todo  "Add Email Sending"
             email_from = settings.EMAIL_HOST_USER
-            send_mail(subject, message, email_from, [email])
+            send_mail(subject, email_template, email_from, [email])
             return JsonResponse({'success': True})
     print("else part")
 
@@ -227,14 +226,15 @@ def search(request):
         # search in category description
         search_cat_des = Category.objects.filter(description__contains=query)
         return render(request, 'search.html',
-                      {'search_result': search_result, 'search_des': search_des, 'search_price': search_price,
+                      {'search_result': search_result, 'search_des': search_des,
+                       'search_price': search_price,
                        'search_cat_des': search_cat_des})
     return render(request, 'index.html')
 
 
 @login_required(login_url='/signupLogin/')
 def shopSingle(request, slug):
-    product = Product.objects.filter(slug=slug, purchase_or_not=False)
+    current_product = Product.objects.filter(slug=slug, purchase_or_not=False)
     items = Product.objects.all()
 
     cartItems = Cart.objects.filter(product__slug=slug)
@@ -248,8 +248,9 @@ def shopSingle(request, slug):
         print(i)
         images.append(i)
 
-    context = {'products': items, 'product': product, 'cartItems': cartItems, 'information': information, 'faq': faq,
-               'review': reviews, 'images': images}
+    context = {'products': items, 'product': current_product,
+               'cartItems': cartItems, 'information': information,
+               'faq': faq, 'review': reviews, 'images': images}
     return render(request, 'shop-single.html', context)
 
 
@@ -290,25 +291,30 @@ def SignUplogin(request):
             try:
                 print(email, username, password)
                 if User.objects.filter(username=username).first():
-                    messages.success(request, 'Username is taken.')
+                    messages.warning(request, 'Username is taken.')
+                    print("test one")
                     return redirect('login')
 
                 if User.objects.filter(email=email).first():
-                    messages.success(request, 'Email is taken.')
+                    messages.warning(request, 'Email is taken.')
+                    print("test two")
                     return redirect('login')
 
                 user_obj = User(username=username, email=email)
                 user_obj.set_password(password)
+                print("I am here!")
                 user_obj.save()
                 auth_token = str(uuid.uuid4())
                 profile_obj = SignUp.objects.create(user=user_obj, auth_token=auth_token)
-                send_mail_after_registration(email, auth_token)
+                send_mail_after_registration(request, email, auth_token)
                 # To avoid any issue occur Before creating new user
+                print("mail sent")
                 profile_obj.save()
                 return redirect('home')
             except Exception as e:
                 print(f"\nsomething went wrong\n{e}\n\n")
                 messages.error(request, 'Something Went Wrong, Please Try again!')
+            print("its a get request")
             return render(request, 'SignUp-login.html')
         elif 'login' in request.POST:
             print('inside login')
@@ -357,9 +363,9 @@ def verify(request, auth_token):
         return redirect('home')
 
 
-def send_mail_after_registration(email, token):
+def send_mail_after_registration(request, email, token):
     subject = 'Your accounts need to be verified'
-    message = f'Hi paste the link to verify your account http://127.0.0.1:8000/verify-email/{token}'
+    message = f'Hi paste the link to verify your account: https://{get_current_site(request)}/verify-email/{token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)
