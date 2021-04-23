@@ -157,31 +157,19 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'YOUR-EMAIL'
 EMAIL_HOST_PASSWORD = 'YOUR-EMAIL-PASSWORD'
-# "eab641ca2b95dad47986451dcf0f940796f3d140"
 
 # AWS Configuration
-# AWS_ACCESS_KEY_ID = ''  # Your AWS Access Key ID
-# AWS_SECRET_ACCESS_KEY = ''  # Your AWS Secret Access Key
-# AWS_STORAGE_BUCKET_NAME = 'adhoc-devices'  # Your AWS Bucket name
-#
-# DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-# #
-# #
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-# AWS_S3_CLOUDFRONT_DOMAIN = 'd5t9gpjcr1j5s.cloudfront.net'
-# AWS_S3_OBJECT_PARAMETERS = {
-#      'CacheControl': 'max-age=86400',
-# }
-# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-#
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-#
-# STATICFILES_LOCATION = 'static'
-# STATIC_ROOT = '/%s/' % STATICFILES_LOCATION
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CLOUDFRONT_DOMAIN, STATICFILES_LOCATION)
-# # STATIC_URL = 'https://%s/static/' % AWS_S3_CLOUDFRONT_DOMAIN
-#
-# MEDIAFILES_LOCATION = '/media/static/img1'
-# MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CLOUDFRONT_DOMAIN, MEDIAFILES_LOCATION)
-# MEDIA_ROOT = MEDIA_URL
-# # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+AWS_ACCESS_KEY_ID = ''  # Your AWS Access Key ID
+AWS_SECRET_ACCESS_KEY = ''  # Your AWS Secret Access Key
+AWS_STORAGE_BUCKET_NAME = 'adhoc-devices-ad'  # Your AWS Bucket name
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = False
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+     'CacheControl': 'max-age=86400',
+}
