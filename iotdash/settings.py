@@ -1,5 +1,5 @@
 
-import  os
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -15,7 +15,7 @@ SECRET_KEY = 'fsfs@4%mskd%s9sec1qf1$v*ix1_6lo-1iyapjahausdh3n2a3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['206.189.128.29','adhocdevices.com','127.0.0.1']
+ALLOWED_HOSTS = ['206.189.128.29', 'adhocdevices.com', '127.0.0.1']
 
 
 # Application definition
@@ -92,10 +92,9 @@ DATABASES = {
     }
 }
 
-# LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
-
+LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = '/'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -129,8 +128,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-LOGIN_URL = '/signupLogin/'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -144,9 +141,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-PAYPAL_RECEIVER_EMAIL = 'XXXXX@gmail.com'
 
-PAYPAL_TEST = True
 
 # Email Configuration
 
@@ -166,7 +161,8 @@ AWS_STORAGE_BUCKET_NAME = 'adhoc-devices-ad'  # Your AWS Bucket name
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = False
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# To enforce AWS static files explicitly
+# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME

@@ -1,31 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponse, JsonResponse
 from .models import (Product, Category,
-                     ContactUs, Cart,
+                     ContactUs, Cart, SignUp,
                      OrderTable, Information,
                      Reviews, FAQ, ProductImage)
-from .models import SignUp
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required  # For Function Based Views
+from django.contrib.auth.mixins import LoginRequiredMixin  # For Class BAsed Views
 from django.contrib.auth.models import User, auth
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.paginator import Paginator
-from paypal.standard.forms import PayPalPaymentsForm
+from django.core.mail import send_mail
 from django.conf import settings
-from decimal import Decimal
-import json
+from django.views.generic import TemplateView, ListView
 import uuid
 import re
-from django.views.generic import TemplateView
-from django.core.mail import send_mail
-from django.contrib import messages
-from django.contrib.sites.shortcuts import get_current_site
 
 # Create your views here.
-
-def home(request):
-    d = {'cat': Category.objects.all()[0:6]}
-    return render(request, 'index.html', d)
 
 
 def CategoryShow(request, slug):
@@ -57,9 +49,9 @@ def AddToCart(request):
         if len(is_exist) > 0:
             return JsonResponse({'success': True})
         else:
-            product = get_object_or_404(Product, id=pid)
+            products = get_object_or_404(Product, id=pid)
             user = get_object_or_404(User, id=request.user.id)
-            cart = Cart(user=user, product=product)
+            cart = Cart(user=user, product=products)
             cart.save()
             total = 0
             for item in cart:
@@ -75,11 +67,11 @@ def checkout(request):
     # list all items in cart and calculate total price
     order_list = []
     cartItems = Cart.objects.filter(user__id=request.user.id)
-    for product in cartItems:
-        order_list.append(product.product)
+    for products in cartItems:
+        order_list.append(products.product)
     total = 0
-    for product in order_list:
-        total += int(product.price)
+    for products in order_list:
+        total += int(products.price)
     if total != 0:
         total += 50
     request.session['total'] = total
@@ -93,9 +85,9 @@ def removecartItems(request):
     print("inside removecartItems")
     if request.method == 'POST':
         if request.user.is_authenticated:
-            id = request.POST['id']
-            print(id)
-            cart = get_object_or_404(Cart, product__id=id)
+            product_id = request.POST['id']
+            print(product_id)
+            cart = get_object_or_404(Cart, product__id=product_id)
             print(cart)
             if cart is not None:
 
@@ -103,11 +95,11 @@ def removecartItems(request):
                 print('object deleted')
                 order_list = []
                 cartItems = Cart.objects.filter(user__id=request.user.id)
-                for product in cartItems:
-                    order_list.append(product.product)
+                for products in cartItems:
+                    order_list.append(products.product)
                 total = 0
-                for product in order_list:
-                    total += int(product.price)
+                for products in order_list:
+                    total += int(products.price)
                 # add delivery charge
                 if total != 0:
                     total += 50
@@ -135,7 +127,6 @@ def order_complete(request):
         inv = "INV-"
         cart_ids = ''
         product_ids = ''
-        host = request.get_host()
         for j in items:
             products += str(j.product.name) + "\n"
             amount += int(j.product.price)
@@ -144,18 +135,7 @@ def order_complete(request):
             cart_ids += str(j.id) + ','
         if amount != 0:
             amount += 50  # add delivery charge
-        paypal_dict = {
-            'business': settings.PAYPAL_RECEIVER_EMAIL,
-            'amount': str(amount),
-            'item_name': products,
-            'invoice': inv,
-
-            'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
-            'return_url': 'http://{}{}'.format(host,
-                                               reverse('payment_done')),
-            'cancel_return': 'http://{}{}'.format(host,
-                                                  reverse('payment_cancelled')),
-        }
+            # todo Create Razorpay charge here
         print(email, tel, full_name, address, country, city, state, poster_code)
 
         user = User.objects.get(username=request.user.username)
@@ -184,9 +164,9 @@ def payment_done(request):
             cart_object = Cart.objects.get(id=i)
             cart_object.status = True
             cart_object.save()
-            product = Product.objects.filter(id=i)
-            product.purchase_or_not = True
-            product.save()
+            products = Product.objects.filter(id=i)
+            products.purchase_or_not = True
+            products.save()
     return HttpResponse("Payment Sucessfull")
 
 
@@ -203,7 +183,6 @@ def contactUs(request):
                 and message != '' and email != '' \
                 and message != '':
             ContactUs(name=name, email=email, number=phone, message=message).save()
-            # todo  "Add Email Sending"
             email_from = settings.EMAIL_HOST_USER
             send_mail(subject, email_template, email_from, [email])
             return JsonResponse({'success': True})
@@ -256,9 +235,8 @@ def shopSingle(request, slug):
 
 def product(request):
     items = Product.objects.filter(purchase_or_not=False).order_by('id')
-    l = list(items)
     # date wise sort the product
-    date_wise_sorted_list = sorted(l, key=lambda x: x.date, reverse=True)
+    date_wise_sorted_list = sorted(list(items), key=lambda x: x.date, reverse=True)
     print(date_wise_sorted_list)
     # Pagination code only 4 item per page
     paginator = Paginator(items, 4)
@@ -327,6 +305,7 @@ def SignUplogin(request):
 
             profile_obj = SignUp.objects.filter(user=user_obj).first()
 
+            # noinspection PyBroadException
             try:
                 if not profile_obj.is_verified:
                     # messages.success(request, 'Profile is not verified check your mail.')
@@ -341,6 +320,7 @@ def SignUplogin(request):
     return render(request, 'SignUp-login.html')
 
 
+# noinspection PyArgumentList
 def verify(request, auth_token):
     try:
         profile_obj = SignUp.objects.filter(auth_token=auth_token).first()
@@ -369,6 +349,12 @@ def send_mail_after_registration(request, email, token):
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)
+
+
+class HomeView(ListView):
+    template_name = 'index.html'
+    queryset = Category.objects.all()[0:6]
+    context_object_name = 'cat'
 
 
 class PrivacyPolicyView(TemplateView):

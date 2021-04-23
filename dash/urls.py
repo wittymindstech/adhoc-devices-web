@@ -4,8 +4,10 @@ from . import views
 
 
 
+
+
+
 urlpatterns = [
-    path('', views.home, name='home'),
     path('category/<slug:slug>/', views.CategoryShow, name='category'),
     path('products/', views.product, name='product'),
     path('shopsingle/<slug:slug>', views.shopSingle, name='shopsingle'),
@@ -25,6 +27,7 @@ urlpatterns = [
     path('signupLogin/', views.SignUplogin, name='login'),
 
     # Generic Class Based Views
+    path('', views.HomeView.as_view(), name='home'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('contact/', views.ContactView.as_view(), name='contact'),
     path('privacypolicy/', views.PrivacyPolicyView.as_view(), name='privacypolicy'),
