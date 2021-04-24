@@ -149,7 +149,7 @@ class Cart(models.Model):
 
     class Meta:
         verbose_name = "Cart"
-        verbose_name_plural = "Order Carts"
+        verbose_name_plural = "User Carts"
 
     def __str__(self):
         return self.user.username
