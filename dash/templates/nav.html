@@ -1,4 +1,3 @@
-
 {% block nav %}
 <!DOCTYPE html>
 
@@ -7,13 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <title>ad-hoc</title>
-    <!-- =============== META =============== -->
+    {# =============== META =============== #}
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{% static 'img1/icon/hhh.png' %}">
-    <!-- =============== STYLE =============== -->
+    {# =============== STYLE =============== #}
     <link rel="stylesheet" href="{% static 'css/critical.css' %}">
     <style>
 		.preloader-active .preloader-cover{
@@ -35,17 +34,25 @@
 			will-change: top, left;
 		}
 	</style>
+    {# For any messages from backend #}
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert(" {{ message }}" );
+            {% endfor %}
+        {% endif %}
+    </script>
 </head>
 
 <body id="home" class="home preloader-active" style="background-image: url({% static 'img/bg-body.svg' %});">
-<!--=============== PRELOADER ===============-->
+{#=============== PRELOADER ===============#}
 <div class="preloader-cover">
     <div class="preloader">
         <div class="ajax-loader">
             <div class="ajax-loader-logo">
                 <div class="ajax-loader-circle">
                     <svg class="ajax-loader-circle-spinner" viewBox="0 0 500 500" xml:space="preserve">
-							<circle cx="250" cy="250" r="239" />
+							<circle cx="250" cy="250" r="239"></circle>
 						</svg>
                 </div>
                 <div class="ajax-loader-letters">a-h</div>
@@ -53,9 +60,9 @@
         </div>
     </div>
 </div>
-<!--============= PRELOADER END =============-->
+{#============= PRELOADER END =============#}
 
-<!--=============== HEADER ===============-->
+{#=============== HEADER ===============#}
 <header class="header">
     <div class="container">
         <a href="#" class="nav-btn">
@@ -64,16 +71,16 @@
             <span></span>
         </a>
         <div class="row align-items-center">
-            <!--=============== LOGO ===============-->
+            {#=============== LOGO ===============#}
             <div class="col-12 col-sm-6 col-lg-3 logo-item">
                 <a href="{% url 'home' %}" class="logo"><img src="{%  static 'img1/icon/logo1.svg' %}" alt="logo"></a>
             </div>
-            <!--============= LOGO END =============-->
+            {#============= LOGO END =============#}
             <div class="col-6 nav-menu-cover">
-                <!--============= NAV MENU =============-->
+                {#============= NAV MENU =============#}
                 <nav class="nav-menu">
                     <ul class="nav-list">
-                        <li class="active">
+                        <li>
                             <a href="{% url 'home' %}">Home</a>
                         </li>
                         <li>
@@ -94,43 +101,47 @@
                                 <li><a href="{% url 'devops' %}">Devops</a></li>
                                 <li><a href="{% url 'dataanalytics' %}">Data Analytics</a></li>
                             </ul>
-
-
                         </li>
-                        <li><a href="{% url 'product' %}">Product</a></li>
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% if categories %}
+                            {% block nav-tab %}
+                            {% endblock %}
+                        {% else %}
+                            <li><a href="{% url 'product' %}">Products</a></li>
                         {% endif %}
-                        <li><a href="{% url 'contact' %}">Contacts</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     </ul>
                 </nav>
-                <!--=========== NAV MENU END ===========-->
+                {#=========== NAV MENU END ===========#}
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
-                <!--============ HEADER ICON ============-->
+                {#============ HEADER ICON ============#}
                 <ul class="header-icon">
                     <li class="search">
-                        <a class="icon" href="#">
-                            <i  class="fa fa-search" aria-hidden="true"></i>
-                        </a>
                         <form action="{% url 'search' %}" method="get">
                             <input type="search" name="search" placeholder="Search">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
                     </li>
-
+                    {% if not user.is_authenticated %}
                     <li>
                         <a class="icon" href="{% url 'login' %}">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                     </li>
+                    {% else %}
+                    <li>
+                        <a class="icon" href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li>
                         <a class="icon"  href="{% url 'checkout' %}" >
                             <i id="cart" class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
-                <!--========== HEADER ICON END ==========-->
+                {#========== HEADER ICON END ==========#}
             </div>
         </div>
     </div>
@@ -144,7 +155,8 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-3 footer-info">
                             <h5>about us</h5>
-                            <p>“The IoT is big news because it ups the ante: ‘Reach out and touch somebody’ is becoming ‘reach out and touch everything’.” — Parker Trewin, Senior Director of Content and Communications, Aria Systems</p>
+                            <p>We believe that technology plays a vital role in making the earth a better place. If implemented correctly it makes people healthier, safer and our environment less polluted. Smart devices and apps are one of the key technological advancements towards this vision and we want to play our role in helping achieve this vision.
+                                <br>At ad-hoc, our goal is therefore to provide an  ecosystem which will make everyone's life smoother.</p>
                         </div>
                         <div class="col-6 col-sm-4 col-lg-2 blok-link">
                             <h5>Shop</h5>
@@ -175,36 +187,22 @@
 
                     </div>
                     <div class="footer-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-3">
-                                <a href="{% url 'home' %}" class="logo footer-logo"><img src="{%  static 'img1/icon/logo1.svg' %}" alt="logo"></a>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <ul class="footer-menu">
-                                    <li><a href="{% url 'home' %}">Home</a></li>
-                                    <li><a href="{% url 'about' %}">About Us</a></li>
-                                    <li><a href="#">Sevices</a></li>
-                                    <li><a href="{% url 'product' %}">Shop</a></li>
-
-                                    <li><a href="{% url 'contact' %}">Contacts</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-md-3">
+                        <div class="row align-items-center justify-content-center">
                                 <ul class="soc-link">
-                                    <li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a target="_blank" href="https://www.instagram.com/rovadex"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                                    <li><a target="_blank" href="https://vimeo.com/"><i class="fa fa-vimeo-square" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.facebook.com/adhocdevices"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com/adhoc_devices"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.youtube.com/channel/UC_qT_w4AFnK6oQvcpqU_N6w"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://www.linkedin.com/company/adhoc-devices/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                                    <li><a target="_blank" href="https://github.com/wittymindstech/"><i class="fa fa-github-alt" aria-hidden="true"></i></a></li>
                                 </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="copyright">
-                        <p><a class="rovadex" href="https://ad-hoc.com" target="_blank">ad-hoc</a> © 2021. <a href="pravicy-policy.html" target="_blank">All Rights Reserved.</a></p>
+                        <p><a class="rovadex" href="https://adhocdevices.com" target="_blank">Adhoc Devices</a> © 2021. Powered by wiTTyMinds Technologies  <a href="pravicy-policy.html" target="_blank">All Rights Reserved.</a></p>
                     </div>
                 </div>
             </footer>
-            <!--===================== FOOTER END =====================-->
+            {#===================== FOOTER END =====================#}
 <script>
 
 </script>

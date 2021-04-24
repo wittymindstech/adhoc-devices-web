@@ -58,7 +58,7 @@ main{
     outline: none;
 }
 .RemoveProduct{
-    text-align: right;
+    text-align: center;
     padding: 1px 5px;
     border-radius: 20px;
     background-color: #99E600;

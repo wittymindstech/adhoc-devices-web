@@ -1,13 +1,18 @@
 <!DOCTYPE html>
+{% load socialaccount %}
 {% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  {# Firebase App (the core Firebase SDK) is always required and must be listed first #}
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  {# If you enabled Analytics in your project, add the Firebase SDK for Analytics #}
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+  {# Add Firebase products that you want to use #}
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
     <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}" />
     <title>Sign in & Sign up Form</title>
   </head>
@@ -39,9 +44,9 @@
               <a href="#" class="social-icon">
                 <i class="fab fa-twitter"></i>
               </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-google"></i>
-              </a>
+                <a href="{% provider_login_url 'google' %}" class="social-icon" >
+                    <i class="fab fa-google"></i>
+                </a>
               <a href="#" class="social-icon">
                 <i class="fab fa-linkedin-in"></i>
               </a>
@@ -57,14 +62,15 @@
             <div class="input-field">
               <i class="fas fa-envelope"></i>
               <input type="email" name="email" required placeholder="Email" />
-            </div>
-            <div class="input-field">
+            </div><div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" name="password" required placeholder="Password" />
             </div>
             <input type="submit" name="signup" class="btn" value="Sign up" />
             {%  if message is not None %}
-            <p style="color:red">{{message}}</p>
+                {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
             {% endif %}
             <p class="social-text">Or Sign up with social platforms</p>
             <div class="social-media">
@@ -74,7 +80,7 @@
               <a href="#" class="social-icon">
                 <i class="fab fa-twitter"></i>
               </a>
-              <a href="#" class="social-icon">
+              <a href="{% provider_login_url 'google' %}" class="social-icon">
                 <i class="fab fa-google"></i>
               </a>
               <a href="#" class="social-icon">

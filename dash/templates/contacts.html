@@ -3,7 +3,7 @@
 {% block body %}
 
 
-	<!--============== PAGE-TITLE ==============-->
+	{#============== PAGE-TITLE ==============#}
 	<div class="page-title" style="background-image: url(/static/img1/back2.webp);">
 		<div class="container">
 			<h1 class="title">Contacts</h1>
@@ -15,9 +15,9 @@
 			</div>
 		</div>
 	</div>
-	<!--============ PAGE-TITLE END ============-->
+	{#============ PAGE-TITLE END ============#}
 
-	<!--============ CONTACTS-TOP ============-->
+	{#============ CONTACTS-TOP ============#}
 	<section class="contacts-top about-top">
 		<div class="container">
 			<div class="row about-top-cover">
@@ -32,25 +32,25 @@
 						<li>
 							<a href="tel:18004886040">
 								<i class="fa fa-phone" aria-hidden="true"></i>
-								<span>095355 94891</span>
+								<span>+91-9535594891</span>
 							</a>
 						</li>
 						<li>
 							<a href="mailto:dronebay@gmail.com">
 								<i class="fa fa-envelope" aria-hidden="true"></i>
-								<span>wittytechminds@gmail.com </span>
+								<span>info@adhocdevices.com </span>
 							</a>
 						</li>
 					</ul>
 					<ul class="soc-link">
-						<li><a target="_blank" href="https://www.facebook.com/rovadex"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a target="_blank" href="https://www.instagram.com/rovadex"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-						<li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-						<li><a target="_blank" href="https://vimeo.com/"><i class="fa fa-vimeo-square" aria-hidden="true"></i></a></li>
+						<li><a target="_blank" href="https://www.facebook.com/adhocdevices"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a target="_blank" href="https://www.instagram.com/adhoc_devices"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						<li><a target="_blank" href="https://www.youtube.com/channel/UC_qT_w4AFnK6oQvcpqU_N6w"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="https://www.linkedin.com/company/adhoc-devices/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 			</div>
-			<!--============= ABOUT-TOP-BLOCK =============-->
+			{#============= ABOUT-TOP-BLOCK =============#}
 			<div class="about-top-block">
 				<div class="row">
 					<div class="col-12 col-md-4">
@@ -107,62 +107,35 @@
 					</div>
 				</div>
 			</div>
-			<!--=========== ABOUT-TOP-BLOCK END ===========-->
+			{#=========== ABOUT-TOP-BLOCK END ===========#}
 		</div>
 	</section>
-	<!--========== CONTACTS-TOP END ==========-->
+	{#========== CONTACTS-TOP END ==========#}
 
-	<!--============= S-CONTACTS =============-->
-<section class="s-contacts s-main-contacts">
-	<div class="container s-anim">
-		<h2>Contact us</h2>
-		<p class="slogan">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-		<form id="contactform" method="post" onsubmit="return false"  name="contactform">
-			{% csrf_token %}
-			<ul class="form-cover">
-				<li class="inp-name"><input id="name" required  type="text" name="your-name" placeholder="Name"></li>
-				<li class="inp-phone"><input id="phone" required  type="tel" name="your-phone" placeholder="Phone"></li>
-				<li class="inp-email"><input id="email" type="email" required name="your-email" placeholder="E-mail"></li>
-				<li class="inp-text"><textarea id="comments" name="your-text" required placeholder="Message"></textarea></li>
-			</ul>
-			<div class="checkbox-wrap">
-				<div class="checkbox-cover">
-					<input type="checkbox" required>
-					<p>By using this form you agree with the storage and handling of your data by this website.</p>
-				</div>
-			</div>
-			<div class="btn-form-cover">
-				<button id="#submit" type="submit" onclick="ContactUsFormData();" class="btn">submit comment</button>
-			</div>
-		</form>
-		<div id="message"></div>
-	</div>
-</section>
-	<!--=========== S-CONTACTS END ===========-->
+	{#============= S-CONTACTS =============#}
+{% include 'contactform.html' %}	{#=========== S-CONTACTS END ===========#}
 
-	<!--================ S-MAP ================-->
+	{#================ S-MAP ================#}
 	<section class="s-map">
 		<div id="map" class="cont-map google-map"></div>
 	</section>
-	<!--============== S-MAP END ==============-->
+	{#============== S-MAP END ==============#}
 
-
-
-	<!--================ TO TOP ================-->
+	{#================ TO TOP ================#}
 	<a class="to-top" href="#home">
 		<i class="fa fa-chevron-up" aria-hidden="true"></i>
 		<span>
 			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
 		</span>
 	</a>
-	<!--============== TO TOP END ==============-->
+	{#============== TO TOP END ==============#}
 
-	<!-- =============== STYLE =============== -->
+	{# =============== STYLE =============== #}
 	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-	<!--=============== TEMPLATE SCRIPT ===============-->
+	{#=============== TEMPLATE SCRIPT ===============#}
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4fusEY9kSwNHgtK8KOgyoTsyP5Tb2NXo"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>

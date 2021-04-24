@@ -3,7 +3,7 @@
 {%  block body %}
 
 
-	<!--============== PAGE-TITLE ==============-->
+	{#============== PAGE-TITLE ==============#}
 	<div class="page-title" style="background-image: url(img/bg-page.jpg);">
 		<div class="container">
 			<h1 class="title">News</h1>
@@ -17,9 +17,9 @@
 		</div>
 	</div>
 
-	<!--============ PAGE-TITLE END ============-->
+	{#============ PAGE-TITLE END ============#}
 
-	<!--================ S-NEWS ================-->
+	{#================ S-NEWS ================#}
 	<section class="s-news">
 		<div class="container">
 			<div class="row">
@@ -55,7 +55,7 @@
 							</div>
 						</div>
 					</div>
-					<!--=============== AUTOR-COVER ===============-->
+					{#=============== AUTOR-COVER ===============#}
 					<div class="autor-cover">
 						<img src="{% static 'img/autor-img.png' %}" alt="img">
 						<div class="autor-content">
@@ -63,8 +63,8 @@
 							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
 						</div>
 					</div>
-					<!--============= AUTOR-COVER END =============-->
-					<!--================ NAVIGATION ================-->
+					{#============= AUTOR-COVER END =============#}
+					{#================ NAVIGATION ================#}
 					<div class="navigation">
 						<a href="#" class="navigation-item navigation-left">
 							<span>previous</span>
@@ -75,7 +75,7 @@
 							<div class="title">Sed ut perspiciatis unde</div>
 						</a>
 					</div>
-					<!--============== NAVIGATION END ==============-->
+					{#============== NAVIGATION END ==============#}
 					<div class="reviews">
 						<h4 class="title">Comments</h4>
 						<ul class="reviews-list">
@@ -125,10 +125,10 @@
 						</div>
 					</div>
 				</div>
-				<!--============== SIDEBAR ==============-->
+				{#============== SIDEBAR ==============#}
 				<div class="col-12 col-lg-4 sidebar">
 					<ul class="widgets">
-						<!--=========== WIDGET-SUPPORT ===========-->
+						{#=========== WIDGET-SUPPORT ===========#}
 						<li class="widget widget-support">
 							<div class="support">
 								<img src="{% static 'img/suport-img.png' %}" alt="support">
@@ -138,8 +138,8 @@
 								<a href="{% url 'contact' %}" class="btn">contact us</a>
 							</div>
 						</li>
-						<!--========= WIDGET-SUPPORT END =========-->
-						<!--=========== WIDGET-SEARCH ===========-->
+						{#========= WIDGET-SUPPORT END =========#}
+						{#=========== WIDGET-SEARCH ===========#}
 						<li class="widget widget-search">
 							<h4 class="title">search</h4>
 							<form action="/" class="search-form">
@@ -147,8 +147,8 @@
 								<input type="submit" value="Submit">
 							</form>
 						</li>
-						<!--========= WIDGET-SEARCH END =========-->
-						<!--=========== WIDGET-TAGS ===========-->
+						{#========= WIDGET-SEARCH END =========#}
+						{#=========== WIDGET-TAGS ===========#}
 						<li class="widget widget-tags">
 							<h4 class="title">Tags</h4>
 							<ul>
@@ -162,8 +162,8 @@
 								<li><a href="#">Sitiamet</a></li>
 							</ul>
 						</li>
-						<!--========== WIDGET-TAGS END ==========-->
-						<!--=========== WIDGET-CATEGORIES ===========-->
+						{#========== WIDGET-TAGS END ==========#}
+						{#=========== WIDGET-CATEGORIES ===========#}
 						<li class="widget widget-categories">
 							<h4 class="title">categories</h4>
 							<ul>
@@ -174,8 +174,8 @@
 								<li><a href="#">UI/UX Designer</a></li>
 							</ul>
 						</li>
-						<!--========== WIDGET-CATEGORIES END ==========-->
-						<!--=========== WIDGET-RECENT-POSTS ===========-->
+						{#========== WIDGET-CATEGORIES END ==========#}
+						{#=========== WIDGET-RECENT-POSTS ===========#}
 						<li class="widget widget-recent-posts">
 							<h4 class="title">recent blog posts</h4>
 							<ul>
@@ -193,8 +193,8 @@
 								</li>
 							</ul>
 						</li>
-						<!--========== WIDGET-RECENT-POSTS END ==========-->
-						<!--=========== WIDGET-INSTAGRAM ===========-->
+						{#========== WIDGET-RECENT-POSTS END ==========#}
+						{#=========== WIDGET-INSTAGRAM ===========#}
 						<li class="widget widget-instagram">
 							<h4 class="title">recent blog posts</h4>
 							<ul>
@@ -218,8 +218,8 @@
 								</li>
 							</ul>
 						</li>
-						<!--=========== WIDGET-INSTAGRAM END ===========-->
-						<!--=========== WIDGET-NEWSLETTER ===========-->
+						{#=========== WIDGET-INSTAGRAM END ===========#}
+						{#=========== WIDGET-NEWSLETTER ===========#}
 						<li class="widget widget-newsletter">
 							<h4 class="title">newsletter</h4>
 							<form action="/" class="subscribe-form">
@@ -237,32 +237,32 @@
 								<li><a href="#">May 2018</a></li>
 							</ul>
 						</li>
-						<!--=========== WIDGET-NEWSLETTER END ===========-->
+						{#=========== WIDGET-NEWSLETTER END ===========#}
 					</ul>
 				</div>
-				<!--============ SIDEBAR END ============-->
+				{#============ SIDEBAR END ============#}
 			</div>
 		</div>
 	</section>
-	<!--============== S-NEWS END ==============-->
+	{#============== S-NEWS END ==============#}
 
 
 
-	<!--================= TO TOP =================-->
+	{#================= TO TOP =================#}
 	<a class="to-top" href="#home">
 		<i class="fa fa-chevron-up" aria-hidden="true"></i>
 		<span>
 			<img src="{% static 'img/icon-tab-1.svg' %}" alt="">
 		</span>
 	</a>
-	<!--=============== TO TOP END ===============-->
+	{#=============== TO TOP END ===============#}
 
-	<!-- =============== STYLE =============== -->
+	{# =============== STYLE =============== #}
 	<link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-	<!--=============== TEMPLATE SCRIPT ===============-->
+	{#=============== TEMPLATE SCRIPT ===============#}
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="{% static 'js/scripts.js' %}"></script>
 {% endblock %}
